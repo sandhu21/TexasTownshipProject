@@ -1,9 +1,11 @@
+Here's the updated HTML document with the new content included:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Texas Township</title>
+    <title>Texas Corners</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom Fonts -->
@@ -11,25 +13,25 @@
     <!-- Custom CSS -->
     <style>
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: New Century Schoolbook, TeX Gyre Schola, serif;
             color: #333;
         }
 
         .navbar-custom {
-            background-color: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
+            background-color: rgba(255, 1, 1, 0.459);
+            backdrop-filter: blur(5px);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .navbar-custom .navbar-brand,
         .navbar-custom .nav-link {
-            color: #333;
+            color: #1a1919;
             font-weight: 600;
             transition: color 0.3s;
         }
 
         .navbar-custom .nav-link:hover {
-            color: #007bff;
+            color: #ffffff;
         }
 
         .banner-image {
@@ -50,7 +52,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
             z-index: 1;
         }
 
@@ -112,6 +113,7 @@
             padding: 40px;
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
+             /* Changes the cursor to indicate it's clickable */
         }
 
         .business-card:hover {
@@ -130,19 +132,62 @@
             color: #777;
         }
 
+        .business-card-link {
+            text-decoration: none; /* Removes underline from links */
+            color: inherit; /* Inherits text color from parent elements */
+        }
+
         footer {
             background-color: #f8f9fa;
             padding: 40px 0;
             text-align: center;
             font-size: 1rem;
-            color: #777;
+            font-size: 20px;
         }
+
+        .large-text {
+            font-size: 38px; 
+            font-family: New Century Schoolbook, TeX Gyre Schola, serif;
+        }
+
+        .nav-link {
+            color: #333;
+            font-size: 18px; 
+            font-family: New Century Schoolbook, TeX Gyre Schola, serif;
+        }
+
+        .navbar-nav .nav-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar-nav .nav-item:not(:last-child) {
+            border-right: 2px solid #333; /* Adjust color and size as necessary */
+            padding-right: 15px; /* Padding on the right of each item */
+            margin-right: 15px; /* Space after border */
+        }
+        
+        .email{
+            text-align: center;
+        }
+
+        .texas_drive_park{
+            background: url('texas_drive_park.jpg') no-repeat center center;
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Texas Township</a>
+            <a class="navbar-brand large-text" href="#">Texas Corners</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -153,16 +198,13 @@
                         <a class="nav-link" href="#home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="#parks-and-facilities">Parks and Facilities</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#community">Community</a>
+                        <a class="nav-link" href="#food">Food</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#business">Business</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="#business">Businesses</a>
                     </li>
                 </ul>
             </div>
@@ -171,50 +213,162 @@
 
     <div class="banner-image" id="home">
         <div class="banner-content">
-            <h1>Welcome to Texas Township</h1>
+            <h1>Welcome to Texas Corners, Kalamazoo, MI</h1>
             <p>Discover the vibrant community in Kalamazoo, Michigan</p>
         </div>
     </div>
 
-    <div class="container section-padding" id="about">
+
+    <div class="container section-padding" id="parks-and-facilities">
         <div class="section-title">
-            <h2>About Texas Township</h2>
-            <p>Learn more about our thriving community</p>
+            <h2>Parks and Facilities</h2>
+            <p>Explore the best outdoor spaces and facilities in Texas Corners</p>
         </div>
         <div class="row">
-            <div class="col-lg-6">
-                <h3>A Brief History</h3>
-                <p>Texas Township was founded in the late 19th century by a group of settlers who were drawn to the area's fertile land and scenic landscapes. Over the decades, the township has grown into a vibrant and diverse community, known for its rich cultural heritage and strong sense of community spirit.</p>
+            <div class="col-lg-4">
+                <div class="business-card texas_drive_park">
+                    <h3>Texas Drive Park</h3>
+                </div>
             </div>
-            <div class="col-lg-6">
-                <h3>Our Vision</h3>
-                <p>At the heart of Texas Township's vision is a commitment to sustainable growth, community engagement, and the preservation of our natural resources. We strive to create a thriving environment where residents can live, work, and play, while also fostering a strong, locally-oriented economy.</p>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Maple Hill Splash Pad</h3>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>6th Street Park</h3>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Pocket Park</h3>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Texas Township Trailway</h3>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Farmers Market Pavilion</h3>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Al Sabo Land Preserve</h3>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Woollam Nature Preserve</h3>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="container section-padding" id="community">
+    <div class="container section-padding" id="food">
         <div class="section-title">
-            <h2>Discover Our Community</h2>
-            <p>Explore the best of Texas Township</p>
+            <h2>Food</h2>
+            <p>Discover the best places to eat in Texas Corners</p>
         </div>
         <div class="row">
             <div class="col-lg-4">
+                <!-- Link to Zeb's Trading Company information page -->
+                <a href="zebs_trading_company.html" class="buissness-card-link">
+                    <div class="business-card">
+                        <h3>Zeb's Trading Company</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+            <div class="col-lg-4">
                 <div class="business-card">
-                    <h3>Parks & Recreation</h3>
-                    <p>From scenic hiking trails to well-maintained sports facilities, Texas Township offers a wealth of opportunities for outdoor enthusiasts and nature lovers alike. Enjoy the great outdoors and connect with your community.</p>
+                    <h3>Bold</h3>
+                    <p>Address: 6915 W Q Ave, Kalamazoo, MI 49009-8942</p>
+                    <p>Phone: 269-375-8551</p>
+                    <p>Hours: Mon-Thu 5:00 PM - 10:00 PM, Fri-Sat 5:00 PM - 11:00 PM</p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="business-card">
-                    <h3>Local Events</h3>
-                    <p>Throughout the year, Texas Township hosts a variety of community events that bring residents together, celebrate our rich heritage, and showcase the talents of local artists and performers. Join us for festivals, concerts, and more!</p>
+                    <h3>Sura</h3>
+                    <p>Address: 6909 W Q Ave, Portage, MI 49009-8942</p>
+                    <p>Phone: 269-870-7766</p>
+                    <p>Hours: Mon-Fri 11:00 AM - 2:00 PM, Sat 11:30 AM - 9:30 PM</p>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="business-card">
-                    <h3>Civic Engagement</h3>
-                    <p>Texas Township is proud to have a highly engaged and civic-minded population. Residents are actively involved in local government, volunteer organizations, and community initiatives that shape the future of our township.</p>
+                    <h3>Fletchers Pub</h3>
+                    <p>Address: 7177 W Q Ave, Kalamazoo, MI 49009-5951</p>
+                    <p>Phone: 269-544-2927</p>
+                    <p>Hours: Sun-Thu 11:00 AM - 12:00 AM, Fri-Sat 11:00 AM - 02:00 AM</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Hunan Gardens</h3>
+                    <p>Address: 7157 W Q Ave., Kalamazoo, MI 49009</p>
+                    <p>Phone: 269-353-5900</p>
+                    <p>Hours: Mon-Thu 11:00 AM - 9:00 PM, Fri 11:00 AM - 10:00 PM, Sat 12:00 PM - 10:00 PM, Sun 11:30 AM - 9:00 PM</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Louies Corner Bar</h3>
+                    <p>Address: 7177 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: 269-743-7722</p>
+                    <p>Hours: Mon-Thu 11:00 AM - 12:00 AM, Fri-Sat 11:00 AM - 2:00 AM, Sun 11:00 AM - 11:00 PM</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Rykse & Co</h3>
+                    <p>Address: 7141 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +269-978-8600</p>
+                    <p>Hours: Mon-Fri 7:30 AM - 6:00 PM, Sat 7:30 AM - 1:00 PM, Sun Closed</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Gusto</h3>
+                    <p>Address: 6997 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12693752110</p>
+                    <p>Hours: Wed-Fri 5:00 PM - 9:00 PM, Mon-Tue & Sat-Sun Closed</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Biggby Coffee</h3>
+                    <p>Address: 8016 Vineyard Pkwy, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12694472129</p>
+                    <p>Hours: Mon-Fri 6:00 AM - 8:00 PM, Sat 6:00 AM - 7:00 PM, Sun 7:00 AM - 7:00 PM</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Holy Taco</h3>
+                    <p>Address: 6942 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12693667566</p>
+                    <p>Hours: Mon-Sat 4:00 PM - 10:00 PM, Sun Closed</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Hungry Howies Pizza</h3>
+                    <p>Address: 7949 S 8th St, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12693757970</p>
+                    <p>Hours: Mon-Thu & Sun 10:00 AM - 10:00 PM, Fri-Sat 10:00 AM - 12:00 AM</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Texas Corners Brewing</h3>
+                    <p>Address: 6970 Texas Dr, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12698707724</p>
+                    <p>Hours: Mon-Thu 4:00 PM - 9:00 PM, Fri-Sat 12:00 PM - 10:00 PM, Sun Closed</p>
                 </div>
             </div>
         </div>
@@ -222,56 +376,102 @@
 
     <div class="container section-padding" id="business">
         <div class="section-title">
-            <h2>Business in Texas Township</h2>
-            <p>Discover why Texas Township is the ideal place to grow your business</p>
+            <h2>Business in Texas Corners</h2>
         </div>
         <div class="row">
             <div class="col-lg-4">
-                <a href="manufacturing-business.html" class="business-card">
-                    <h3>Manufacturing</h3>
-                    <p>Thriving industrial sector</p>
-                </a>
+                <div class="business-card">
+                    <h3>V's Bogeys and Stogies</h3>
+                    <p>Address: 7117 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12697437534</p>
+                    <p>Hours: Mon-Tue 3:00 PM - 10:00 PM, Wed-Fri 12:00 PM - 10:00 PM, Sat 12:00 PM - 10:00 PM, Sun 12:00 PM - 8:00 PM</p>
+                </div>
             </div>
             <div class="col-lg-4">
-                <a href="tech-business.html" class="business-card">
-                    <h3>Technology</h3>
-                    <p>Growing tech hub</p>
-                </a>
+                <div class="business-card">
+                    <h3>Texas Corners Ace Hardware</h3>
+                    <p>Address: 7129 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12693762000</p>
+                    <p>Hours: Mon-Fri 8:00 AM - 8:00 PM, Sat 8:00 AM - 6:00 PM, Sun 11:00 AM - 5:00 PM</p>
+                </div>
             </div>
             <div class="col-lg-4">
-                <a href="agriculture-business.html" class="business-card">
-                    <h3>Agriculture</h3>
-                    <p>Fertile farmland and produce</p>
-                </a>
+                <div class="business-card">
+                    <h3>Daves Glass Service</h3>
+                    <p>Address: Corners Ace Hardware, 8136 Shooting Star Lane Behind Texas, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12693752036</p>
+                    <p>Hours: Mon-Fri 8:00 AM - 5:30 PM, Sat 9:00 AM - 12:30 PM, Sun Closed</p>
+                </div>
             </div>
             <div class="col-lg-4">
-                <a href="daves_glass.html" class="business-card">
-                    <h3>Dave's Glass</h3>
-                    <p>Quality glass services</p>
-                </a>
+                <div class="business-card">
+                    <h3>VCA Texas Corners Animal Hospital</h3>
+                    <p>Address: 7075 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12693753400</p>
+                    <p>Hours: Mon-Fri 7:30 AM - 6:00 PM, Sat 8:00 AM - 12:00 PM, Sun Closed</p>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <div class="container section-padding" id="contact">
-        <div class="section-title">
-            <h2>Contact Us</h2>
-            <p>Get in touch with the Texas Township team</p>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <h3>Address</h3>
-                <p>123 Main Street<br>Texas Township, MI 49009</p>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Allure Skin & Beauty</h3>
+                    <p>Address: 7067 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12693890982</p>
+                    <p>Hours: Mon-Tue 1:00 PM - 8:00 PM, Wed & Fri 10:00 AM - 5:00 PM, Sat 11:00 AM - 4:00 PM, Thu & Sun Closed</p>
+                </div>
             </div>
-            <div class="col-lg-6">
-                <h3>Phone & Email</h3>
-                <p>Phone: (269) 555-1234<br>Email: info@texastownship.gov</p>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Lee & Birch Kalamazoo</h3>
+                    <p>Address: 7047 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12698707740</p>
+                    <p>Hours: Mon-Fri 10:00 AM - 7:00 PM, Sat 10:00 AM - 6:00 PM, Sun 12:00 PM - 5:00 PM</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Pink Lemonade</h3>
+                    <p>Address: 7039 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12694472168</p>
+                    <p>Hours: Mon-Fri 10:00 AM - 6:00 PM, Sat 9:00 AM - 5:00 PM, Sun 12:00 PM - 5:00 PM</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>The Cheese Lady</h3>
+                    <p>Address: 7035 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12693533050</p>
+                    <p>Hours: Tue-Fri 10:00 AM - 6:00 PM, Sat 9:00 AM - 3:00 PM, Mon & Sun Closed</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>CITGO</h3>
+                    <p>Address: 7019 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12693753377</p>
+                    <p>Hours: Mon-Fri 6:00 AM - 11:00 PM, Sat 6:30 AM - 11:00 PM, Sun 8:00 AM - 10:00 PM</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>KLH Custom Homes</h3>
+                    <p>Address: 7058 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12692498425</p>
+                    <p>Hours: Mon-Fri 8:00 AM - 5:00 PM, Sat & Sun Closed</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Refined Men's Grooming</h3>
+                    <p>Address: 6997 W Q Ave, Kalamazoo, MI 49009</p>
+                    <p>Phone: +12698707783</p>
+                    <p>Hours information not available</p>
+                </div>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 Texas Township. All rights reserved.</p>
+        <p>Email: info@texastownship.gov</p>
     </footer>
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
