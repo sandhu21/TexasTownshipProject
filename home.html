@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texas Township</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+        }
+
+        .navbar-custom {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: #333;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #007bff;
+        }
+
+        .banner-image {
+            background: url('image1.jpg') no-repeat center center;
+            background-size: cover;
+            height: 800px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .banner-content {
+            text-align: center;
+            color: #fff;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .banner-content h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .banner-content p {
+            font-size: 1.8rem;
+            animation: fadeInUp 1.2s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-padding {
+            padding: 120px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .section-title p {
+            font-size: 1.4rem;
+            color: #777;
+        }
+
+        .business-card {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .business-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .business-card h3 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .business-card p {
+            font-size: 1.2rem;
+            color: #777;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 1rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Texas Township</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#community">Community</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#business">Business</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="banner-image" id="home">
+        <div class="banner-content">
+            <h1>Welcome to Texas Township</h1>
+            <p>Discover the vibrant community in Kalamazoo, Michigan</p>
+        </div>
+    </div>
+
+    <div class="container section-padding" id="about">
+        <div class="section-title">
+            <h2>About Texas Township</h2>
+            <p>Learn more about our thriving community</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>A Brief History</h3>
+                <p>Texas Township was founded in the late 19th century by a group of settlers who were drawn to the area's fertile land and scenic landscapes. Over the decades, the township has grown into a vibrant and diverse community, known for its rich cultural heritage and strong sense of community spirit.</p>
+            </div>
+            <div class="col-lg-6">
+                <h3>Our Vision</h3>
+                <p>At the heart of Texas Township's vision is a commitment to sustainable growth, community engagement, and the preservation of our natural resources. We strive to create a thriving environment where residents can live, work, and play, while also fostering a strong, locally-oriented economy.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container section-padding" id="community">
+        <div class="section-title">
+            <h2>Discover Our Community</h2>
+            <p>Explore the best of Texas Township</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Parks & Recreation</h3>
+                    <p>From scenic hiking trails to well-maintained sports facilities, Texas Township offers a wealth of opportunities for outdoor enthusiasts and nature lovers alike. Enjoy the great outdoors and connect with your community.</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Local Events</h3>
+                    <p>Throughout the year, Texas Township hosts a variety of community events that bring residents together, celebrate our rich heritage, and showcase the talents of local artists and performers. Join us for festivals, concerts, and more!</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="business-card">
+                    <h3>Civic Engagement</h3>
+                    <p>Texas Township is proud to have a highly engaged and civic-minded population. Residents are actively involved in local government, volunteer organizations, and community initiatives that shape the future of our township.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container section-padding" id="business">
+        <div class="section-title">
+            <h2>Business in Texas Township</h2>
+            <p>Discover why Texas Township is the ideal place to grow your business</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <a href="manufacturing-business.html" class="business-card">
+                    <h3>Manufacturing</h3>
+                    <p>Thriving industrial sector</p>
+                </a>
+            </div>
+            <div class="col-lg-4">
+                <a href="tech-business.html" class="business-card">
+                    <h3>Technology</h3>
+                    <p>Growing tech hub</p>
+                </a>
+            </div>
+            <div class="col-lg-4">
+                <a href="agriculture-business.html" class="business-card">
+                    <h3>Agriculture</h3>
+                    <p>Fertile farmland and produce</p>
+                </a>
+            </div>
+            <div class="col-lg-4">
+                <a href="daves_glass.html" class="business-card">
+                    <h3>Dave's Glass</h3>
+                    <p>Quality glass services</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container section-padding" id="contact">
+        <div class="section-title">
+            <h2>Contact Us</h2>
+            <p>Get in touch with the Texas Township team</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Address</h3>
+                <p>123 Main Street<br>Texas Township, MI 49009</p>
+            </div>
+            <div class="col-lg-6">
+                <h3>Phone & Email</h3>
+                <p>Phone: (269) 555-1234<br>Email: info@texastownship.gov</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Texas Township. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
