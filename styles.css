@@ -1,0 +1,214 @@
+body {
+    font-family: New Century Schoolbook, TeX Gyre Schola, serif;
+    color: #ffffff;
+    background-color: #444343;  /* Add this line */
+}
+
+.navbar-custom {
+    background-color: rgba(255, 1, 1, 0.459);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: #1a1919;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.navbar-custom .nav-link:hover {
+    color: #ffffff;
+}
+
+.banner-image {
+    background: url('image1.jpg') no-repeat center center;
+    background-size: cover;
+    height: 800px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.banner-content {
+    text-align: center;
+    color: #fff;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.banner-content h1 {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.banner-content p {
+    font-size: 1.8rem;
+    animation: fadeInUp 1.2s ease-in-out;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-padding {
+    padding: 120px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title h2 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #ffffff;  /* Change the color to white */
+}
+
+.section-title p {
+    font-size: 1.4rem;
+    color: #ffffff;  /* Change the color to white */
+}
+
+.business-card {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.business-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.business-card h3 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.business-card p {
+    font-size: 1.2rem;
+    color: #777777;
+}
+
+.business-card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+footer {
+    background-color: #3e4246;
+    padding: 40px 0;
+    text-align: center;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.large-text {
+    font-size: 38px;
+    font-family: New Century Schoolbook, TeX Gyre Schola, serif;
+}
+
+.nav-link {
+    color: #333333;
+    font-size: 18px;
+    font-family: New Century Schoolbook, TeX Gyre Schola, serif;
+}
+
+.navbar-nav .nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-nav .nav-item:not(:last-child) {
+    border-right: 2px solid #333333;
+    padding-right: 15px;
+    margin-right: 15px;
+}
+
+.email {
+    text-align: center;
+}
+
+.texas_drive_park,
+.maple_hill_splash_pad,
+.sixth_street_park,
+.pocket_park,
+.texas_township_trailway,
+.farmers_market_provilion,
+.al_sabo_land_preserve,
+.woollam_nature_preserve {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+}
+
+.texas_drive_park {
+    background-image: url('Pictures/texas_drive_park.jpg');
+}
+
+.maple_hill_splash_pad {
+    background-image: url('Pictures/maple_hill_splash_pad.jpg');
+}
+
+.sixth_street_park {
+    background-image: url('Pictures/6th_street_park.jpg');
+}
+
+.pocket_park {
+    background-image: url('Pictures/pocket_park.jpg');
+}
+
+.texas_township_trailway {
+    background-image: url('Pictures/texas_township_trailway.jpg');
+}
+
+.farmers_market_provilion {
+    background-image: url('Pictures/farmers_market_provilion.jpg');
+}
+
+.al_sabo_land_preserve {
+    background-image: url('Pictures/al_sabo_land_preserve.jpg');
+}
+
+.woollam_nature_preserve {
+    background-image: url('Pictures/woollam_nature_preserve.jpg');
+}

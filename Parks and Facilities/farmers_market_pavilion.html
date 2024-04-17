@@ -1,9 +1,155 @@
-<section style="background-color: #f5f5f5; border-radius: 5px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
-    <h3 style="color: #333; font-size: 24px; margin-bottom: 10px;">Farmers Market Pavilion</h3>
-    <p style="color: #666; margin-bottom: 5px;"><strong>Constructed:</strong> 2009</p>
-    <h4>Features:</h4>
-    <ul style="margin-left: 20px; margin-bottom: 10px;">
-        <li style="color: #666;">Hosts the Fresh on Q! Farmers' Market during summer</li>
-    </ul>
-    <p style="color: #888;"><em>Description: A bustling hub of local produce and goods, fostering community spirit.</em></p>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmers Market Pavilion - Texas Corners</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Custom Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: New Century Schoolbook, TeX Gyre Schola, serif;
+            color: #333;
+        }
+
+        .navbar-custom {
+            background-color: rgba(255, 1, 1, 0.459);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link {
+            color: #1a1919;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: #ffffff;
+        }
+
+        .park-section {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .park-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .park-section h3 {
+            color: #333333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .park-section p {
+            color: #555555;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .park-section h4 {
+            color: #333333;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .park-section ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .park-section li {
+            color: #555555;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .park-section li i {
+            color: #4caf50;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        .park-section em {
+            color: #888888;
+            font-size: 16px;
+            font-style: italic;
+            margin-bottom: 0;
+        }
+
+        .btn-custom {
+            background-color: #ff0101;
+            color: #ffffff;
+            transition: background-color 0.3s;
+        }
+
+        .btn-custom:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">Texas Corners</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html#parks-and-facilities">Parks and Facilities</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html#food">Food</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html#business">Businesses</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="park-section">
+            <h3>Farmers Market Pavilion</h3>
+            <p><strong>Location:</strong> 7110 West Q Ave, Kalamazoo, MI 49009</p>
+            <h4>Features:</h4>
+            <ul>
+                <li><i class="fas fa-shopping-basket"></i> Local farmers and vendors</li>
+                <li><i class="fas fa-apple-alt"></i> Fresh produce, meats, and dairy</li>
+                <li><i class="fas fa-bread-slice"></i> Baked goods and artisanal products</li>
+                <li><i class="fas fa-handshake"></i> Community gathering space</li>
+                <li><i class="fas fa-calendar-alt"></i> Open seasonally (May - October)</li>
+            </ul>
+            <p><em>Description: A vibrant community hub where locals can access fresh, locally-sourced products and support small businesses.</em></p>
+            <a href="../index.html" class="btn btn-custom mt-3">Go to Homepage</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
