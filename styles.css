@@ -22,7 +22,7 @@ body {
 }
 
 .banner-image {
-    background: url('image1.jpg') no-repeat center center;
+    background: url('TownshipPicture/image1.jpg') no-repeat center center;
     background-size: cover;
     height: 800px;
     position: relative;
@@ -95,14 +95,17 @@ body {
 }
 
 .business-card {
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-    margin-bottom: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
 }
 
 .business-card:hover {
@@ -110,17 +113,27 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
 }
 
+.container#food .business-card {
+    background-size: 100%;
+}
+
 .business-card h3 {
     font-size: 2.2rem;
     font-weight: 600;
-    margin-bottom: 20px;
-    color: #ffffff;
+    margin-bottom: 0;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .business-card p {
     font-size: 1.2rem;
     color: #777777;
 }
+
+.container#parks-and-facilities .business-card h3 {
+    color: #fff; /* Set the text color to black */
+  }
+
 
 .business-card-link {
     text-decoration: none;
@@ -211,4 +224,52 @@ footer {
 
 .woollam_nature_preserve {
     background-image: url('Pictures/woollam_nature_preserve.jpg');
+}
+
+.zebs-trading-company {
+    background-image: url('Pictures/zebs-trading-co.jpg');
+}
+
+.bold {
+    background-image: url('Pictures/bold.jpg');
+}
+
+.sura {
+    background-image: url('Pictures/sura.jpg');
+}
+
+.fletchers_pub {
+    background-image: url('Pictures/fletchers_pub.jpg');
+}
+
+.hunan_gardens {
+    background-image: url('Pictures/hunan_gardens.jpg');
+}
+
+.louies_corner_bar {
+    background-image: url('Pictures/louies_corner_bar.webp');
+}
+
+.rykse_and_co {
+    background-image: url('Pictures/rykse_and_co.webp');
+}
+
+.gusto {
+    background-image: url('Pictures/gusto.jpg');
+}
+
+.biggby_coffee {
+    background-image: url('Pictures/biggby_coffee.jpg');
+}
+
+.holy_taco {
+    background-image: url('Pictures/holy_taco.jpg');
+}
+
+.hungry_howies_pizza {
+    background-image: url('Pictures/hungry_howies_pizza.jpg');
+}
+
+.texas_corners_brewing {
+    background-image: url('Pictures/texas_corners_brewing.jpeg');
 }
