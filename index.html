@@ -14,6 +14,23 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="loading-screen">
+        <div class="loading-container">
+            <div class="loading-icon">
+                <div class="spinner"></div>
+            </div>
+            <div class="loading-text">Loading...</div>
+        </div>
+        <div class="welcome-message">
+            <div class="checkmark-icon">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
+            <div class="welcome-text">Welcome!</div>
+        </div>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container">
             <a class="navbar-brand large-text" href="#">Texas Corners</a>
@@ -278,5 +295,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="js/loading.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

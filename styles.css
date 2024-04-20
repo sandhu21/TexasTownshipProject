@@ -1,24 +1,24 @@
 body {
     font-family: New Century Schoolbook, TeX Gyre Schola, serif;
     color: #ffffff;
-    background-color: #444343;  /* Add this line */
+    background: linear-gradient(135deg, #444343, #2b2b2b);
 }
 
 .navbar-custom {
-    background-color: rgba(255, 1, 1, 0.459);
-    backdrop-filter: blur(5px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-custom .navbar-brand,
 .navbar-custom .nav-link {
-    color: #1a1919;
+    color: #ffffff;
     font-weight: 600;
     transition: color 0.3s;
 }
 
 .navbar-custom .nav-link:hover {
-    color: #ffffff;
+    color: #ff6b6b;
 }
 
 .banner-image {
@@ -39,6 +39,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
     z-index: 1;
 }
 
@@ -51,14 +52,14 @@ body {
 }
 
 .banner-content h1 {
-    font-size: 5rem;
+    font-size: 6rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     animation: fadeInUp 1s ease-in-out;
 }
 
 .banner-content p {
-    font-size: 1.8rem;
+    font-size: 2rem;
     animation: fadeInUp 1.2s ease-in-out;
 }
 
@@ -74,43 +75,58 @@ body {
 }
 
 .section-padding {
-    padding: 120px 0;
+    padding: 150px 0;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 .section-title h2 {
-    font-size: 3.5rem;
+    font-size: 4rem;
     font-weight: 700;
-    margin-bottom: 20px;
-    color: #ffffff;  /* Change the color to white */
+    margin-bottom: 30px;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .section-title p {
-    font-size: 1.4rem;
-    color: #ffffff;  /* Change the color to white */
+    font-size: 1.6rem;
+    color: #ffffff;
 }
 
 .business-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-size: cover;
     background-position: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.business-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+    z-index: 1;
 }
 
 .business-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    transform: translateY(-15px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 .container#food .business-card {
@@ -118,22 +134,23 @@ body {
 }
 
 .business-card h3 {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 600;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     color: #fff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 2;
 }
 
 .business-card p {
-    font-size: 1.2rem;
-    color: #777777;
+    font-size: 1.4rem;
+    color: #ffffff;
+    z-index: 2;
 }
 
 .container#parks-and-facilities .business-card h3 {
-    color: #fff; /* Set the text color to black */
-  }
-
+    color: #fff;
+}
 
 .business-card-link {
     text-decoration: none;
@@ -141,21 +158,21 @@ body {
 }
 
 footer {
-    background-color: #3e4246;
-    padding: 40px 0;
+    background: linear-gradient(135deg, #3e4246, #2b2b2b);
+    padding: 60px 0;
     text-align: center;
-    font-size: 20px;
+    font-size: 22px;
     color: #ffffff;
 }
 
 .large-text {
-    font-size: 38px;
+    font-size: 42px;
     font-family: New Century Schoolbook, TeX Gyre Schola, serif;
 }
 
 .nav-link {
-    color: #333333;
-    font-size: 18px;
+    color: #ffffff;
+    font-size: 20px;
     font-family: New Century Schoolbook, TeX Gyre Schola, serif;
 }
 
@@ -166,9 +183,9 @@ footer {
 }
 
 .navbar-nav .nav-item:not(:last-child) {
-    border-right: 2px solid #333333;
-    padding-right: 15px;
-    margin-right: 15px;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+    padding-right: 20px;
+    margin-right: 20px;
 }
 
 .email {
@@ -191,7 +208,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 300px;
+    height: 350px;
 }
 
 .texas_drive_park {
@@ -272,4 +289,166 @@ footer {
 
 .texas_corners_brewing {
     background-image: url('Pictures/texas_corners_brewing.jpeg');
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1c1c1c;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    perspective: 1000px;
+}
+
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-icon {
+    text-align: center;
+    transform-style: preserve-3d;
+    animation: rotate3d 2s infinite linear;
+}
+
+.spinner {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 10px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #ff6b6b;
+    animation: spin 1s infinite linear;
+    transform-style: preserve-3d;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.4);
+}
+
+.loading-text {
+    color: #fff;
+    font-size: 28px;
+    margin-top: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-screen::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    z-index: -1;
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    }
+}
+
+.welcome-message {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.welcome-message.show {
+    display: flex;
+    opacity: 1;
+}
+
+.checkmark-icon {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.checkmark {
+    width: 100%;
+    height: 100%;
+    stroke-width: 2;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    animation: draw-checkmark 1s ease-in-out;
+}
+
+.checkmark-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #ff6b6b;
+    fill: none;
+    animation: stroke-circle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    stroke: #ff6b6b;
+    animation: stroke-check 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+.welcome-text {
+    color: #fff;
+    font-size: 36px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes stroke-circle {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes stroke-check {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes draw-checkmark {
+    0% {
+        stroke-dashoffset: 100;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
 }
