@@ -19,7 +19,7 @@ function simulateLoading() {
 
   setTimeout(function() {
       showWelcomeMessage();
-  }, 3000);
+  }, 1500); // Change the delay to 1500ms (1.5 seconds)
 }
 
 // Call the simulateLoading function when the page loads

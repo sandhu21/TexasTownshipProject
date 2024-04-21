@@ -24,7 +24,7 @@ body {
 .banner-image {
     background: url('TownshipPicture/image1.jpg') no-repeat center center;
     background-size: cover;
-    height: 800px;
+    height: 100vh;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -101,7 +101,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     padding: 2rem;
-    height: 250px;
+    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -111,6 +111,11 @@ body {
     position: relative;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
+    margin-bottom: 30px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.3s;
 }
 
 .business-card::before {
@@ -122,15 +127,18 @@ body {
     height: 100%;
     background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
     z-index: 1;
+    transition: background 0.3s;
 }
 
 .business-card:hover {
-    transform: translateY(-15px);
+    transform: rotateX(10deg) translateY(-15px);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+    z-index: 2;
 }
 
-.container#food .business-card {
-    background-size: 100%;
+.business-card:hover::before {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
 }
 
 .business-card h3 {
@@ -140,12 +148,21 @@ body {
     color: #fff;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     z-index: 2;
+    text-align: center;
+    transition: transform 0.3s;
 }
 
 .business-card p {
     font-size: 1.4rem;
     color: #ffffff;
     z-index: 2;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.business-card:hover h3,
+.business-card:hover p {
+    transform: translateZ(30px);
 }
 
 .container#parks-and-facilities .business-card h3 {
@@ -324,7 +341,7 @@ footer {
     border-radius: 50%;
     border: 10px solid rgba(255, 255, 255, 0.2);
     border-top-color: #ff6b6b;
-    animation: spin 1s infinite linear;
+    animation: spin 0.5s infinite linear; /* Change the animation duration to 0.5s */
     transform-style: preserve-3d;
     box-shadow: 0 0 20px rgba(255, 107, 107, 0.4);
 }
@@ -452,3 +469,103 @@ footer {
         stroke-dashoffset: 0;
     }
 }
+
+
+.info-widget {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .info-widget h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+  
+  .info-widget p {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 0;
+  }
+  
+  .info-widget ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  
+  .info-widget ul li {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+/* ... (previous styles) */
+
+.banner-image.texas_drive_park {
+    background-image: url('Pictures/texas_drive_park.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .banner-image.sixth_street_park {
+    background-image: url('Pictures/6th_street_park.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.al_sabo_land_preserve {
+    background-image: url('Pictures/al_sabo_land_preserve.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.farmers_market_pavilion {
+    background-image: url('Pictures/farmers_market_provilion.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.maple_hill_splash_pad {
+    background-image: url('Pictures/maple_hill_splash_pad.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.pocket_park {
+    background-image: url('Pictures/pocket_park.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.texas_township_trailway {
+    background-image: url('Pictures/texas_township_trailway.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.woollam_nature_preserve {
+    background-image: url('Pictures/woollam_nature_preserve.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.biggby_coffee {
+    background-image: url('Pictures/biggby_coffee.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
