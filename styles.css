@@ -569,3 +569,73 @@ footer {
     background-size: cover;
     background-position: center;
   }
+
+  .banner-image.fletchers_pub {
+    background-image: url('Pictures/fletchers_pub.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.gusto {
+    background-image: url('Pictures/gusto.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.holy_taco {
+    background-image: url('Pictures/holy_taco.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.hunan_gardens {
+    background-image: url('Pictures/hunan_gardens.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.hungry_howies_pizza {
+    background-image: url('Pictures/hungry_howies_pizza.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.louies_corner_bar {
+    background-image: url('Pictures/louies_corner_bar.webp');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.rykse_and_co {
+    background-image: url('Pictures/rykse_and_co.webp');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.sura {
+    background-image: url('Pictures/sura.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.texas_corners_brewing {
+    background-image: url('Pictures/texas_corners_brewing.jpeg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .banner-image.zebs-trading-company {
+    background-image: url('Pictures/zebs-trading-co.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
