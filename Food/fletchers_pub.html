@@ -1,133 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fletcher's Pub - Texas Corners</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!-- Custom Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-        body {
-            font-family: New Century Schoolbook, TeX Gyre Schola, serif;
-            color: #333;
-        }
-
-        .navbar-custom {
-            background-color: rgba(255, 1, 1, 0.459);
-            backdrop-filter: blur(5px);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar-custom .navbar-brand,
-        .navbar-custom .nav-link {
-            color: #1a1919;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-
-        .navbar-custom .nav-link:hover {
-            color: #ffffff;
-        }
-
-        .business-section {
-            background-color: #ffffff;
-            border-radius: 10px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .business-section:hover {
-            transform: translateY(-5px);
-        }
-
-        .business-section h3 {
-            color: #333333;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .business-section p {
-            color: #555555;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .business-section em {
-            color: #888888;
-            font-size: 16px;
-            font-style: italic;
-            margin-bottom: 0;
-        }
-
-        .btn-custom {
-            background-color: #ff0101;
-            color: #ffffff;
-            transition: background-color 0.3s;
-        }
-
-        .btn-custom:hover {
-            background-color: #cc0000;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fletcher's Pub</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=New+Century+Schoolbook:wght@400;600;700&family=TeX+Gyre+Schola:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="../index.html">Texas Corners</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html#parks-and-facilities">Parks and Facilities</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html#food">Food</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../index.html#business">Businesses</a>
-                    </li>
-                </ul>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <div class="container">
+      <a class="navbar-brand large-text" href="/index.html">Texas Corners</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/index.html">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="businessDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Business
+            </a>
+            <div class="dropdown-menu" aria-labelledby="businessDropdown">
+              <!--ADD BUISNESSES NECESSARY FOR DROP DOWN HERE - SCUPPY -->
             </div>
-        </div>
-    </nav>
-
-    <div class="container mt-5">
-        <div class="business-section">
-            <h3>Fletcher's Pub</h3>
-            <p><strong>Address:</strong> 7177 W Q Ave, Kalamazoo, MI 49009-5951</p>
-            <p><strong>Phone:</strong> 269-544-2927</p>
-            <p><strong>Hours:</strong></p>
-            <ul>
-                <li>Sun: 11:00 AM - 11:00 PM</li>
-                <li>Mon: 11:00 AM - 12:00 AM</li>
-                <li>Tue: 11:00 AM - 12:00 AM</li>
-                <li>Wed: 11:00 AM - 12:00 AM</li>
-                <li>Thu: 11:00 AM - 12:00 AM</li>
-                <li>Fri: 11:00 AM - 02:00 AM</li>
-                <li>Sat: 11:00 AM - 02:00 AM</li>
-            </ul>
-            <p><strong>Website:</strong> <a href="https://www.fletcherspub.com/texas-corners.html" target="_blank">https://www.fletcherspub.com/texas-corners.html</a></p>
-            <p><strong>Yelp:</strong> <a href="https://www.yelp.com/biz/fletchers-pub-kalamazoo" target="_blank">https://www.yelp.com/biz/fletchers-pub-kalamazoo</a></p>
-            <a href="../index.html" class="btn btn-custom mt-3">Go to Homepage</a>
-        </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="parksDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Parks and Facilities
+            </a>
+            <div class="dropdown-menu" aria-labelledby="parksDropdown">
+              <a class="dropdown-item" href="texas_drive_park.html">Texas Drive Park</a>
+              <a class="dropdown-item" href="maple_hill_splash_pad.html">Maple Hill Splash Pad</a>
+              <a class="dropdown-item" href="6th_street_park.html">Sixth Street Park</a>
+              <a class="dropdown-item" href="pocket_park.html">Pocket Park</a>
+              <a class="dropdown-item" href="texas_township_trailway.html">Texas Township Trailway</a>
+              <a class="dropdown-item" href="farmers_market_pavilion.html">Farmers Market Pavilion</a>
+              <a class="dropdown-item" href="al_sabo_land_preserve.html">Al Sabo Land Preserve</a>
+              <a class="dropdown-item" href="woollam_nature_preserve.html">Woollam Nature Preserve</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="foodDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Food
+            </a>
+            <div class="dropdown-menu" aria-labelledby="foodDropdown">
+              <a class="dropdown-item" href="biggby_coffee.html">Biggby Coffee</a>
+              <a class="dropdown-item" href="bold.html">Bold</a>
+              <a class="dropdown-item" href="fletchers_pub.html">Fletcher's Pub</a>
+              <a class="dropdown-item" href="gusto.html">Gusto</a>
+              <a class="dropdown-item" href="holy_taco.html">Holy Taco</a>
+              <a class="dropdown-item" href="hunan_garden.html">Hunan Garden</a>
+              <a class="dropdown-item" href="hungry_howies_pizza.html">Hungry Howie's Pizza</a>
+              <a class="dropdown-item" href="louies_corner_bar.html">Louie's Corner Bar</a>
+              <a class="dropdown-item" href="rykse_and_co.html">Rykse & Co</a>
+              <a class="dropdown-item" href="sura.html">Sura</a>
+              <a class="dropdown-item" href="texas_corners_brewing.html">Texas Corners Brewing</a>
+              <a class="dropdown-item" href="zebs_trading_company.html">Zeb's Trading Company</a>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <!-- Bootstrap JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Banner Section -->
+  <section class="banner-image fletchers_pub">
+    <div class="banner-content">
+      <h1>Fletcher's Pub</h1>
+      <p>Unwind at Fletcher's Pub, a neighborhood favorite.</p>
+    </div>
+  </section>
+
+  <!-- Pub Information Section -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="section-title">
+        <h2>About Fletcher's Pub</h2>
+        <p>Fletcher's Pub is a cozy and welcoming pub offering a wide selection of craft beers, delicious pub fare, and a lively atmosphere.</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="info-widget">
+            <h3>Address</h3>
+            <p>6800 South Westnedge Avenue</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="info-widget">
+            <h3>Menu Highlights</h3>
+            <ul>
+              <li>Craft Beer Selection</li>
+              <li>Burgers and Sandwiches</li>
+              <li>Appetizers and Sharables</li>
+              <li>Weekly Specials</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="info-widget">
+            <h3>Description</h3>
+            <p>Enjoy a relaxed and friendly atmosphere with great food, drinks, and company.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <p>&copy; 2023 Texas Corners. All rights reserved.</p>
+          <p class="email">township@texascorners.org</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="loading.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
