@@ -13,7 +13,7 @@ body {
 .navbar-custom .navbar-brand,
 .navbar-custom .nav-link {
     color: #ffffff;
-    font-weight: 600;
+    font-weight: 500;
     transition: color 0.3s;
 }
 
@@ -229,83 +229,83 @@ footer {
 }
 
 .texas_drive_park {
-    background-image: url('Pictures/texas_drive_park.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/texas_drive_park.jpg');
 }
 
 .maple_hill_splash_pad {
-    background-image: url('Pictures/maple_hill_splash_pad.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/maple_hill_splash_pad.jpg');
 }
 
 .sixth_street_park {
-    background-image: url('Pictures/6th_street_park.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/6th_street_park.jpg');
 }
 
 .pocket_park {
-    background-image: url('Pictures/pocket_park.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/pocket_park.jpg');
 }
 
 .texas_township_trailway {
-    background-image: url('Pictures/texas_township_trailway.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/texas_township_trailway.jpg');
 }
 
 .farmers_market_provilion {
-    background-image: url('Pictures/farmers_market_provilion.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/farmers_market_provilion.jpg');
 }
 
 .al_sabo_land_preserve {
-    background-image: url('Pictures/al_sabo_land_preserve.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/al_sabo_land_preserve.jpg');
 }
 
 .woollam_nature_preserve {
-    background-image: url('Pictures/woollam_nature_preserve.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/woollam_nature_preserve.jpg');
 }
 
 .zebs-trading-company {
-    background-image: url('Pictures/zebs-trading-co.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/zebs_trading_co.jpg');
 }
 
 .bold {
-    background-image: url('Pictures/bold.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/bold.jpg');
 }
 
 .sura {
-    background-image: url('Pictures/sura.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/sura.jpg');
 }
 
 .fletchers_pub {
-    background-image: url('Pictures/fletchers_pub.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/fletchers_pub.jpg');
 }
 
 .hunan_gardens {
-    background-image: url('Pictures/hunan_gardens.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/hunan_gardens.jpg');
 }
 
 .louies_corner_bar {
-    background-image: url('Pictures/louies_corner_bar.webp');
+    background-image: url('/TexasTownshipProject/Pictures/louies_corner_bar.webp');
 }
 
 .rykse_and_co {
-    background-image: url('Pictures/rykse_and_co.webp');
+    background-image: url('/TexasTownshipProject/Pictures/rykse_and_co.webp');
 }
 
 .gusto {
-    background-image: url('Pictures/gusto.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/gusto.jpg');
 }
 
 .biggby_coffee {
-    background-image: url('Pictures/biggby_coffee.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/biggby_coffee.jpg');
 }
 
 .holy_taco {
-    background-image: url('Pictures/holy_taco.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/holy_taco.jpg');
 }
 
 .hungry_howies_pizza {
-    background-image: url('Pictures/hungry_howies_pizza.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/hungry_howies_pizza.jpg');
 }
 
 .texas_corners_brewing {
-    background-image: url('Pictures/texas_corners_brewing.jpeg');
+    background-image: url('/TexasTownshipProject/Pictures/texas_corners_brewing.jpeg');
 }
 
 .loading-screen {
@@ -508,134 +508,253 @@ footer {
 /* ... (previous styles) */
 
 .banner-image.texas_drive_park {
-    background-image: url('Pictures/texas_drive_park.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/texas_drive_park.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
   
   .banner-image.sixth_street_park {
-    background-image: url('Pictures/6th_street_park.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/6th_street_park.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.al_sabo_land_preserve {
-    background-image: url('Pictures/al_sabo_land_preserve.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/al_sabo_land_preserve.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.farmers_market_pavilion {
-    background-image: url('Pictures/farmers_market_provilion.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/farmers_market_provilion.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.maple_hill_splash_pad {
-    background-image: url('Pictures/maple_hill_splash_pad.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/maple_hill_splash_pad.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.pocket_park {
-    background-image: url('Pictures/pocket_park.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/pocket_park.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.texas_township_trailway {
-    background-image: url('Pictures/texas_township_trailway.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/texas_township_trailway.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.woollam_nature_preserve {
-    background-image: url('Pictures/woollam_nature_preserve.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/woollam_nature_preserve.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.biggby_coffee {
-    background-image: url('Pictures/biggby_coffee.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/biggby_coffee.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.fletchers_pub {
-    background-image: url('Pictures/fletchers_pub.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/fletchers_pub.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.gusto {
-    background-image: url('Pictures/gusto.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/gusto.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.holy_taco {
-    background-image: url('Pictures/holy_taco.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/holy_taco.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.hunan_gardens {
-    background-image: url('Pictures/hunan_gardens.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/hunan_gardens.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.hungry_howies_pizza {
-    background-image: url('Pictures/hungry_howies_pizza.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/hungry_howies_pizza.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.louies_corner_bar {
-    background-image: url('Pictures/louies_corner_bar.webp');
+    background-image: url('/TexasTownshipProject/Pictures/louies_corner_bar.webp');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.rykse_and_co {
-    background-image: url('Pictures/rykse_and_co.webp');
+    background-image: url('/TexasTownshipProject/Pictures/rykse_and_co.webp');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.sura {
-    background-image: url('Pictures/sura.jpg');
+    background-image: url('/TexasTownshipProject/Pictures/sura.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
   .banner-image.texas_corners_brewing {
-    background-image: url('Pictures/texas_corners_brewing.jpeg');
+    background-image: url('/TexasTownshipProject/Pictures/texas_corners_brewing.jpeg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
 
-  .banner-image.zebs-trading-company {
-    background-image: url('Pictures/zebs-trading-co.jpg');
+  .business-card.zebs_trading_company {
+    background-image: url('/TexasTownshipProject/Pictures/zebs_trading_company.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .banner-image.zebs_trading_company {
+    background-image: url('/TexasTownshipProject/Pictures/zebs_trading_company.jpg');
     height: 100vh;
     background-size: cover;
     background-position: center;
   }
+
+
+  section.highlight {
+    background-color: #f5f5f5;
+    transition: background-color 0.3s ease;
+  }
+
+  .map-responsive {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+  }
+  
+  .map-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+
+  .banner-image.allure_skin_and_beauty {
+    background-image: url('/TexasTownshipProject/Pictures/allure_skin_and_beauty.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+   .allure_skin_and_beauty {
+    background-image: url('/TexasTownshipProject/Pictures/allure_skin_and_beauty.jpg');
+}
+
+.banner-image.vs_bogeys_and_stogies {
+    background-image: url('/TexasTownshipProject/Pictures/vs_bogeys_and_stogies.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+   .vs_bogeys_and_stogies {
+    background-image: url('/TexasTownshipProject/Pictures/vs_bogeys_and_stogies.jpg');
+}
+
+.banner-image.citgo {
+    background-image: url('/TexasTownshipProject/Pictures/citgo.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+   .citgo {
+    background-image: url('/TexasTownshipProject/Pictures/citgo.jpg');
+}
+
+.banner-image.klh_custom_homes {
+    background-image: url('/TexasTownshipProject/Pictures/klh_custom_homes.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+   .klh_custom_homes {
+    background-image: url('/TexasTownshipProject/Pictures/klh_custom_homes.jpg');
+}
+
+.banner-image.lee_and_birchw {
+    background-image: url('/TexasTownshipProject/Pictures/lee_and_birch_kalamazoo.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+   .lee_and_birch {
+    background-image: url('/TexasTownshipProject/Pictures/lee_and_birch_kalamazoo.jpg');
+}
+
+.banner-image.pink_lemonade {
+    background-image: url('/TexasTownshipProject/Pictures/pink_lemonade.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+   .pink_lemonade {
+    background-image: url('/TexasTownshipProject/Pictures/pink_lemonade.jpg');
+}
+
+.banner-image.refined_mens_grooming {
+    background-image: url('/TexasTownshipProject/Pictures/refined_mens_grooming.jpeg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .refined_mens_grooming {
+    background-image: url('/TexasTownshipProject/Pictures/refined_mens_grooming.jpeg');
+}
+
+.banner-image.texas_corners_ace_hardware {
+    background-image: url('/TexasTownshipProject/Pictures/texas_corners_ace_hardware.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .texas_corners_ace_hardware {
+    background-image: url('/TexasTownshipProject/Pictures/texas_corners_ace_hardware.jpg');
+}
