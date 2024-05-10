@@ -21,6 +21,22 @@ body {
     color: #ff6b6b;
 }
 
+.navbar .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .navbar .dropdown-menu {
+    margin-top: 0;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  .navbar .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+  }
+
 .banner-image {
     background: url('TownshipPicture/image1.jpg') no-repeat center center;
     background-size: cover;
@@ -757,4 +773,37 @@ footer {
 
   .texas_corners_ace_hardware {
     background-image: url('/TexasTownshipProject/Pictures/texas_corners_ace_hardware.jpg');
+}
+
+.banner-image.daves_glass {
+    background-image: url('/TexasTownshipProject/Pictures/daves_glass.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .daves_glass_service {
+    background-image: url('/TexasTownshipProject/Pictures/daves_glass.jpg');
+}
+
+.banner-image.vca_texas_corners_animal_hospital {
+    background-image: url('/TexasTownshipProject/Pictures/vca_texas_corners_animal_hospital.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .vca_texas_corners_animal_hospital {
+    background-image: url('/TexasTownshipProject/Pictures/vca_texas_corners_animal_hospital.jpg');
+}
+
+.banner-image.the_cheese_lady {
+    background-image: url('/TexasTownshipProject/Pictures/the_cheese_lady.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .the_cheese_lady {
+    background-image: url('/TexasTownshipProject/Pictures/the_cheese_lady.jpg');
 }
