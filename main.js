@@ -262,26 +262,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ─── Horizontal Scroll — 3D Card Tilt ─────────────────────────
+  // ─── Horizontal Scroll — Shine Gradient on Hover ──────────────
   document.querySelectorAll('.scroll-track .location-card').forEach(function (card) {
     card.addEventListener('mousemove', function (e) {
       var rect = card.getBoundingClientRect();
       var x = (e.clientX - rect.left) / rect.width;
       var y = (e.clientY - rect.top)  / rect.height;
-      var rotY =  (x - 0.5) * 16;
-      var rotX = -(y - 0.5) * 11;
-      card.style.transform =
-        'perspective(900px) rotateY(' + rotY + 'deg) rotateX(' + rotX + 'deg) translateZ(18px) scale(1.015)';
       card.style.setProperty('--mx', (x * 100) + '%');
       card.style.setProperty('--my', (y * 100) + '%');
     });
     card.addEventListener('mouseleave', function () {
-      card.style.transition = 'transform 0.55s cubic-bezier(0.4,0,0.2,1), box-shadow 0.55s ease';
-      card.style.transform = '';
-      setTimeout(function () { card.style.transition = ''; }, 560);
-    });
-    card.addEventListener('mouseenter', function () {
-      card.style.transition = 'box-shadow 0.2s ease';
+      card.style.setProperty('--mx', '50%');
+      card.style.setProperty('--my', '50%');
     });
   });
 
