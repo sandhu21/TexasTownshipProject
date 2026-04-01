@@ -1401,7 +1401,8 @@ footer {
   overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 28px clamp(40px, 8vw, 120px) 48px;
+  /* Align first card with container content (matches Bootstrap container margins) */
+  padding: 28px 40px 48px calc(max(24px, (100vw - 1140px) / 2 + 12px));
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
@@ -1442,26 +1443,17 @@ footer {
   border-color: rgba(255,255,255,0.18);
 }
 
-/* Fade edges */
-.scroll-row::before,
+/* Fade right edge only — hints there are more cards */
 .scroll-row::after {
   content: '';
   position: absolute;
-  top: 0; bottom: 0;
-  width: 48px;
+  top: 0; bottom: 0; right: 0;
+  width: 80px;
   z-index: 5;
   pointer-events: none;
+  background: linear-gradient(to left, #000000 0%, transparent 100%);
 }
-.scroll-row::before {
-  left: 0;
-  background: linear-gradient(to right, #000000 30%, transparent 100%);
-}
-.scroll-row::after {
-  right: 0;
-  background: linear-gradient(to left, #000000 30%, transparent 100%);
-}
-.section-alt .scroll-row::before { background: linear-gradient(to right, #0a0a0a 30%, transparent 100%); }
-.section-alt .scroll-row::after  { background: linear-gradient(to left,  #0a0a0a 30%, transparent 100%); }
+.section-alt .scroll-row::after { background: linear-gradient(to left, #0a0a0a 0%, transparent 100%); }
 
 /* Scroll arrows */
 .scroll-arrow {
@@ -1491,7 +1483,7 @@ footer {
 .scroll-arrow.arrow-left  { left: 10px; }
 .scroll-arrow.arrow-right { right: 10px; }
 @media (max-width: 767px) {
-  .scroll-track { padding: 20px 28px 36px; }
+  .scroll-track { padding: 20px 32px 36px 20px; }
   .scroll-track .location-card { flex: 0 0 220px; height: 300px; }
   .scroll-arrow { display: none; }
   .scroll-row::before, .scroll-row::after { width: 32px; }
