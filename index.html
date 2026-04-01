@@ -3,373 +3,484 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Texas Corners</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=New+Century+Schoolbook:wght@400;600;700&family=TeX+Gyre+Schola:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <meta name="description" content="Discover Texas Corners Township in Kalamazoo, Michigan — explore local parks, restaurants, and businesses in this vibrant community.">
+  <title>Texas Corners Township — Kalamazoo, Michigan</title>
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <!-- Custom Styles -->
   <link rel="stylesheet" href="/TexasTownshipProject/styles.css">
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+
+  <!-- Scroll Progress -->
+  <div id="scroll-progress"></div>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Texas Corners</div>
+  </div>
+
+  <!-- ─── Navigation ─────────────────────────────────────────── -->
+  <nav id="main-nav" class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand large-text" href="/TexasTownshipProject/index.html">Texas Corners</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="/TexasTownshipProject/index.html">
+        Texas <span>Corners</span>
+      </a>
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false"
+              aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+
           <li class="nav-item">
             <a class="nav-link" href="/TexasTownshipProject/index.html">Home</a>
           </li>
+
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#business" id="businessDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Business
+            <a class="nav-link dropdown-toggle" href="#parks-section"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              Parks &amp; Facilities
             </a>
-            <div class="dropdown-menu" aria-labelledby="businessDropdown">
-              <a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/allure_skin_and_beauty.html">Allure Skin & Beauty</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/citgo.html">Citgo</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/daves_glass_service.html">Dave's Glass Service</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/klh_custom_homes.html">KLH Custom Homes</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/lee_and_birch_kalamazoo.html">Lee & Birch</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/pink_lemonade.html">Pink Lemonade</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/refined_mens_grooming.html">Refined Men's Grooming</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/texas_corners_ace_hardware.html">Texas Corners Ace Hardware</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/the_cheese_lady.html">The Cheese Lady</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/vca_texas_corners_animal_hospital.html">VCA Texas Corners Animal Hospital</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/vs_bogeys_and_stogies.html">VS Bogey's & Stogies</a>
-            </div>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Parks%20and%20Facilities/texas_drive_park.html">Texas Drive Park</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Parks%20and%20Facilities/maple_hill_splash_pad.html">Maple Hill Splash Pad</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Parks%20and%20Facilities/6th_street_park.html">6th Street Park</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Parks%20and%20Facilities/pocket_park.html">Pocket Park</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Parks%20and%20Facilities/texas_township_trailway.html">Texas Township Trailway</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Parks%20and%20Facilities/farmers_market_pavilion.html">Farmers Market Pavilion</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Parks%20and%20Facilities/al_sabo_land_preserve.html">Al Sabo Land Preserve</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Parks%20and%20Facilities/woollam_nature_preserve.html">Woollam Nature Preserve</a></li>
+            </ul>
           </li>
+
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#parks-and-facilities" id="parksDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Parks and Facilities
-            </a>
-            <div class="dropdown-menu" aria-labelledby="parksDropdown">
-              <a class="dropdown-item" href="/TexasTownshipProject/Parks and Facilities/texas_drive_park.html">Texas Drive Park</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Parks and Facilities/maple_hill_splash_pad.html">Maple Hill Splash Pad</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Parks and Facilities/6th_street_park.html">Sixth Street Park</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Parks and Facilities/pocket_park.html">Pocket Park</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Parks and Facilities/texas_township_trailway.html">Texas Township Trailway</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Parks and Facilities/farmers_market_pavilion.html">Farmers Market Pavilion</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Parks and Facilities/al_sabo_land_preserve.html">Al Sabo Land Preserve</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Parks and Facilities/woollam_nature_preserve.html">Woollam Nature Preserve</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#food" id="foodDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#food-section"
+               data-bs-toggle="dropdown" aria-expanded="false">
               Food
             </a>
-            <div class="dropdown-menu" aria-labelledby="foodDropdown">
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/biggby_coffee.html">Biggby Coffee</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/bold.html">Bold</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/fletchers_pub.html">Fletcher's Pub</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/gusto.html">Gusto</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/holy_taco.html">Holy Taco</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/hunan_garden.html">Hunan Garden</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/hungry_howies_pizza.html">Hungry Howie's Pizza</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/louies_corner_bar.html">Louie's Corner Bar</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/rykse_and_co.html">Rykse & Co</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/sura.html">Sura</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/texas_corners_brewing.html">Texas Corners Brewing</a>
-              <a class="dropdown-item" href="/TexasTownshipProject/Food/zebs_trading_company.html">Zeb's Trading Company</a>
-            </div>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/biggby_coffee.html">Biggby Coffee</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/bold.html">Bold</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/fletchers_pub.html">Fletcher's Pub</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/gusto.html">Gusto</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/holy_taco.html">Holy Taco</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/hunan_garden.html">Hunan Garden</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/hungry_howies_pizza.html">Hungry Howie's Pizza</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/louies_corner_bar.html">Louie's Corner Bar</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/rykse_and_co.html">Rykse &amp; Co</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/sura.html">Sura</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/texas_corners_brewing.html">Texas Corners Brewing</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Food/zebs_trading_company.html">Zeb's Trading Company</a></li>
+            </ul>
           </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#business-section"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              Businesses
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/allure_skin_and_beauty.html">Allure Skin &amp; Beauty</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/citgo.html">Citgo</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/daves_glass_service.html">Dave's Glass Service</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/klh_custom_homes.html">KLH Custom Homes</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/lee_and_birch_kalamazoo.html">Lee &amp; Birch</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/pink_lemonade.html">Pink Lemonade</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/refined_mens_grooming.html">Refined Men's Grooming</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/texas_corners_ace_hardware.html">Texas Corners Ace Hardware</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/the_cheese_lady.html">The Cheese Lady</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/vca_texas_corners_animal_hospital.html">VCA Animal Hospital</a></li>
+              <li><a class="dropdown-item" href="/TexasTownshipProject/Buisnesses/vs_bogeys_and_stogies.html">V's Bogeys &amp; Stogies</a></li>
+            </ul>
+          </li>
+
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="loading-screen">
-    <div class="loading-container">
-      <div class="loading-icon">
-        <div class="spinner"></div>
+  <!-- ─── Hero ───────────────────────────────────────────────── -->
+  <section id="home" class="hero-section hero-homepage">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Kalamazoo County, Michigan</span>
+      <h1>Welcome to<br><span>Texas Corners</span></h1>
+      <p>Discover parks, dining, and local businesses in one of Southwest Michigan's most vibrant communities.</p>
+      <div class="hero-buttons">
+        <a href="#parks-section" class="btn-hero-primary">Explore Now</a>
+        <a href="#food-section" class="btn-hero-outline">Find Food</a>
       </div>
-      <div class="loading-text">Loading...</div>
     </div>
-    <div class="welcome-message">
-      <div class="checkmark-icon">
-        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-          <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
-          <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-        </svg>
-      </div>
-      <div class="welcome-text">Welcome To Texas Township!</div>
-    </div>
-  </div>
-
-  <section id="home" class="banner-image">
-    <div class="banner-content">
-      <h1>Welcome to Texas Corners, Kalamazoo, MI</h1>
-      <p>Discover the vibrant community in Kalamazoo, Michigan</p>
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="mouse"></div>
     </div>
   </section>
 
-  <section id="parks-and-facilities" class="section-padding">
+  <!-- ─── Stats Bar ───────────────────────────────────────────── -->
+  <section class="stats-bar">
     <div class="container">
-      <div class="section-title">
-        <h2>Parks and Facilities</h2>
-        <p>Explore the best outdoor spaces and facilities in Texas Corners</p>
-      </div>
-      <div class="row">
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Parks%20and%20Facilities/texas_drive_park.html" class="business-card-link">
-            <div class="business-card texas_drive_park">
-              <h3>Texas Drive Park</h3>
-            </div>
-          </a>
+      <div class="row justify-content-center text-center g-4">
+        <div class="col-6 col-md-3 reveal">
+          <div class="stat-item">
+            <span class="stat-number counter" data-target="8">0</span>
+            <span class="stat-label">Parks &amp; Trails</span>
+          </div>
         </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Parks%20and%20Facilities/maple_hill_splash_pad.html" class="business-card-link">
-            <div class="business-card maple_hill_splash_pad">
-              <h3>Maple Hill Splash Pad</h3>
-            </div>
-          </a>
+        <div class="col-6 col-md-3 reveal delay-1">
+          <div class="stat-item">
+            <span class="stat-number counter" data-target="12">0</span>
+            <span class="stat-label">Restaurants</span>
+          </div>
         </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Parks%20and%20Facilities/6th_street_park.html" class="business-card-link">
-            <div class="business-card sixth_street_park">
-              <h3>6th Street Park</h3>
-            </div>
-          </a>
+        <div class="col-6 col-md-3 reveal delay-2">
+          <div class="stat-item">
+            <span class="stat-number counter" data-target="11">0</span>
+            <span class="stat-label">Local Businesses</span>
+          </div>
         </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Parks%20and%20Facilities/pocket_park.html" class="business-card-link">
-            <div class="business-card pocket_park">
-              <h3>Pocket Park</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Parks%20and%20Facilities/texas_township_trailway.html" class="business-card-link">
-            <div class="business-card texas_township_trailway">
-              <h3>Texas Township Trailway</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Parks%20and%20Facilities/farmers_market_pavilion.html" class="business-card-link">
-            <div class="business-card farmers_market_provilion">
-              <h3>Farmers Market Pavilion</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Parks%20and%20Facilities/al_sabo_land_preserve.html" class="business-card-link">
-            <div class="business-card al_sabo_land_preserve">
-              <h3>Al Sabo Land Preserve</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Parks%20and%20Facilities/woollam_nature_preserve.html" class="business-card-link">
-            <div class="business-card woollam_nature_preserve">
-              <h3>Woollam Nature Preserve</h3>
-            </div>
-          </a>
+        <div class="col-6 col-md-3 reveal delay-3">
+          <div class="stat-item">
+            <span class="stat-number counter" data-target="31">0</span>
+            <span class="stat-label">Total Locations</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="food" class="section-padding">
+  <!-- ─── Parks & Facilities ──────────────────────────────────── -->
+  <section id="parks-section" class="section">
     <div class="container">
-      <div class="section-title">
-        <h2>Food</h2>
-        <p>Discover the best places to eat in Texas Corners</p>
+      <div class="section-header reveal">
+        <div class="section-eyebrow">Outdoors</div>
+        <h2 class="section-title">Parks &amp; Facilities</h2>
+        <p class="section-subtitle">Explore the best outdoor spaces and facilities Texas Corners has to offer.</p>
       </div>
-      <div class="row">
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/zebs_trading_company.html" class="business-card-link">
-            <div class="business-card zebs_trading_company">
-              <h3>Zeb's Trading Company</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/bold.html" class="business-card-link">
-            <div class="business-card bold">
-              <h3>Bold</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/sura.html" class="business-card-link">
-            <div class="business-card sura">
-              <h3>Sura</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/fletchers_pub.html" class="business-card-link">
-            <div class="business-card fletchers_pub">
-              <h3>Fletchers Pub</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/hunan_garden.html" class="business-card-link">
-            <div class="business-card hunan_gardens">
-              <h3>Hunan Gardens</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/louies_corner_bar.html" class="business-card-link">
-            <div class="business-card louies_corner_bar">
-              <h3>Louies Corner Bar</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/rykse_and_co.html" class="business-card-link">
-            <div class="business-card rykse_and_co">
-              <h3>Rykse & Co</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/gusto.html" class="business-card-link">
-            <div class="business-card gusto">
-              <h3>Gusto</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/biggby_coffee.html" class="business-card-link">
-            <div class="business-card biggby_coffee">
-              <h3>Biggby Coffee</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/holy_taco.html" class="business-card-link">
-            <div class="business-card holy_taco">
-              <h3>Holy Taco</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/hungry_howies_pizza.html" class="business-card-link">
-            <div class="business-card hungry_howies_pizza">
-              <h3>Hungry Howies Pizza</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Food/texas_corners_brewing.html" class="business-card-link">
-            <div class="business-card texas_corners_brewing">
-              <h3>Texas Corners Brewing</h3>
-            </div>
-          </a>
-        </div>
+      <div class="cards-grid">
+
+        <a href="/TexasTownshipProject/Parks%20and%20Facilities/texas_drive_park.html" class="location-card bg-texas-drive-park reveal">
+          <div class="card-body-content">
+            <h3 class="card-name">Texas Drive Park</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> Explore</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Parks%20and%20Facilities/maple_hill_splash_pad.html" class="location-card bg-maple-hill-splash reveal delay-1">
+          <div class="card-body-content">
+            <h3 class="card-name">Maple Hill Splash Pad</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> Explore</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Parks%20and%20Facilities/6th_street_park.html" class="location-card bg-sixth-street-park reveal delay-2">
+          <div class="card-body-content">
+            <h3 class="card-name">6th Street Park</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> Explore</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Parks%20and%20Facilities/pocket_park.html" class="location-card bg-pocket-park reveal delay-3">
+          <div class="card-body-content">
+            <h3 class="card-name">Pocket Park</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> Explore</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Parks%20and%20Facilities/texas_township_trailway.html" class="location-card bg-trailway reveal delay-4">
+          <div class="card-body-content">
+            <h3 class="card-name">Texas Township Trailway</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> Explore</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Parks%20and%20Facilities/farmers_market_pavilion.html" class="location-card bg-farmers-market reveal delay-5">
+          <div class="card-body-content">
+            <h3 class="card-name">Farmers Market Pavilion</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> Explore</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Parks%20and%20Facilities/al_sabo_land_preserve.html" class="location-card bg-al-sabo reveal">
+          <div class="card-body-content">
+            <h3 class="card-name">Al Sabo Land Preserve</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> Explore</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Parks%20and%20Facilities/woollam_nature_preserve.html" class="location-card bg-woollam reveal delay-1">
+          <div class="card-body-content">
+            <h3 class="card-name">Woollam Nature Preserve</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> Explore</div>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>
 
-  <section id="business" class="section-padding">
+  <!-- ─── Food ────────────────────────────────────────────────── -->
+  <section id="food-section" class="section section-alt">
     <div class="container">
-      <div class="section-title">
-        <h2>Businesses in Texas Corners</h2>
-        <p>Discover the best Businesses in Texas Corners</p>
+      <div class="section-header reveal">
+        <div class="section-eyebrow">Dining</div>
+        <h2 class="section-title">Food &amp; Drink</h2>
+        <p class="section-subtitle">From craft breweries to Korean BBQ — there's something for every craving.</p>
       </div>
-      <div class="row">
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Buisnesses/vs_bogeys_and_stogies.html" class="business-card-link">
-            <div class="business-card vs_bogeys_and_stogies">
-              <h3>V's Bogeys and Stogies</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Buisnesses/texas_corners_ace_hardware.html" class="business-card-link">
-            <div class="business-card texas_corners_ace_hardware">
-              <h3>Texas Corners Ace Hardware</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Buisnesses/daves_glass_service.html" class="business-card-link">
-            <div class="business-card daves_glass_service">
-              <h3>Daves Glass Service</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Buisnesses/vca_texas_corners_animal_hospital.html" class="business-card-link">
-            <div class="business-card vca_texas_corners_animal_hospital">
-              <h3>VCA Texas Corners Animal Hospital</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Buisnesses/allure_skin_and_beauty.html" class="business-card-link">
-            <div class="business-card allure_skin_and_beauty">
-              <h3>Allure Skin & Beauty</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Buisnesses/lee_and_birch_kalamazoo.html" class="business-card-link">
-            <div class="business-card lee_and_birch">
-              <h3>Lee & Birch Kalamazoo</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Buisnesses/pink_lemonade.html" class="business-card-link">
-            <div class="business-card pink_lemonade">
-              <h3>Pink Lemonade</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Buisnesses/the_cheese_lady.html" class="business-card-link">
-            <div class="business-card the_cheese_lady">
-              <h3>The Cheese Lady</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Buisnesses/citgo.html" class="business-card-link">
-            <div class="business-card citgo">
-              <h3>CITGO</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Buisnesses/klh_custom_homes.html" class="business-card-link">
-            <div class="business-card klh_custom_homes">
-              <h3>KLH Custom Homes</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-lg-6 mb-4">
-          <a href="/TexasTownshipProject/Buisnesses/refined_mens_grooming.html" class="business-card-link">
-            <div class="business-card refined_mens_grooming">
-              <h3>Refined Men's Grooming</h3>
-            </div>
-          </a>
-        </div>
+      <div class="cards-grid">
+
+        <a href="/TexasTownshipProject/Food/texas_corners_brewing.html" class="location-card bg-tx-brewing reveal">
+          <div class="card-body-content">
+            <h3 class="card-name">Texas Corners Brewing</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Food/bold.html" class="location-card bg-bold reveal delay-1">
+          <div class="card-body-content">
+            <h3 class="card-name">Bold</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Food/gusto.html" class="location-card bg-gusto reveal delay-2">
+          <div class="card-body-content">
+            <h3 class="card-name">Gusto</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Food/sura.html" class="location-card bg-sura reveal delay-3">
+          <div class="card-body-content">
+            <h3 class="card-name">Sura Korean BBQ</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Food/fletchers_pub.html" class="location-card bg-fletchers reveal delay-4">
+          <div class="card-body-content">
+            <h3 class="card-name">Fletcher's Pub</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Food/louies_corner_bar.html" class="location-card bg-louies reveal delay-5">
+          <div class="card-body-content">
+            <h3 class="card-name">Louie's Corner Bar</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Food/holy_taco.html" class="location-card bg-holy-taco reveal">
+          <div class="card-body-content">
+            <h3 class="card-name">Holy Taco</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Food/hunan_garden.html" class="location-card bg-hunan reveal delay-1">
+          <div class="card-body-content">
+            <h3 class="card-name">Hunan Garden</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Food/rykse_and_co.html" class="location-card bg-rykse reveal delay-2">
+          <div class="card-body-content">
+            <h3 class="card-name">Rykse &amp; Co</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Food/zebs_trading_company.html" class="location-card bg-zebs reveal delay-3">
+          <div class="card-body-content">
+            <h3 class="card-name">Zeb's Trading Company</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Food/biggby_coffee.html" class="location-card bg-biggby reveal delay-4">
+          <div class="card-body-content">
+            <h3 class="card-name">Biggby Coffee</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Food/hungry_howies_pizza.html" class="location-card bg-hungry-howies reveal delay-5">
+          <div class="card-body-content">
+            <h3 class="card-name">Hungry Howie's Pizza</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>
-  
+
+  <!-- ─── Businesses ──────────────────────────────────────────── -->
+  <section id="business-section" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">Local Commerce</div>
+        <h2 class="section-title">Businesses</h2>
+        <p class="section-subtitle">Shop local and support the businesses that make Texas Corners thrive.</p>
+      </div>
+      <div class="cards-grid">
+
+        <a href="/TexasTownshipProject/Buisnesses/vs_bogeys_and_stogies.html" class="location-card bg-vs-bogeys reveal">
+          <div class="card-body-content">
+            <h3 class="card-name">V's Bogeys &amp; Stogies</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Buisnesses/texas_corners_ace_hardware.html" class="location-card bg-ace-hardware reveal delay-1">
+          <div class="card-body-content">
+            <h3 class="card-name">Texas Corners Ace Hardware</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Buisnesses/allure_skin_and_beauty.html" class="location-card bg-allure reveal delay-2">
+          <div class="card-body-content">
+            <h3 class="card-name">Allure Skin &amp; Beauty</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Buisnesses/lee_and_birch_kalamazoo.html" class="location-card bg-lee-birch reveal delay-3">
+          <div class="card-body-content">
+            <h3 class="card-name">Lee &amp; Birch</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Buisnesses/the_cheese_lady.html" class="location-card bg-cheese-lady reveal delay-4">
+          <div class="card-body-content">
+            <h3 class="card-name">The Cheese Lady</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Buisnesses/pink_lemonade.html" class="location-card bg-pink-lemonade reveal delay-5">
+          <div class="card-body-content">
+            <h3 class="card-name">Pink Lemonade</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Buisnesses/refined_mens_grooming.html" class="location-card bg-refined reveal">
+          <div class="card-body-content">
+            <h3 class="card-name">Refined Men's Grooming</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Buisnesses/vca_texas_corners_animal_hospital.html" class="location-card bg-vca reveal delay-1">
+          <div class="card-body-content">
+            <h3 class="card-name">VCA Animal Hospital</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Buisnesses/klh_custom_homes.html" class="location-card bg-klh reveal delay-2">
+          <div class="card-body-content">
+            <h3 class="card-name">KLH Custom Homes</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Buisnesses/daves_glass_service.html" class="location-card bg-daves-glass reveal delay-3">
+          <div class="card-body-content">
+            <h3 class="card-name">Dave's Glass Service</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+        <a href="/TexasTownshipProject/Buisnesses/citgo.html" class="location-card bg-citgo reveal delay-4">
+          <div class="card-body-content">
+            <h3 class="card-name">Citgo</h3>
+            <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i> View</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ──────────────────────────────────────────────── -->
   <footer>
     <div class="container">
-      <p>Contact: texascornerscontact@gmail.com</p>
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="footer-logo">Texas <span>Corners</span></div>
+          <p class="footer-tagline">A vibrant community in Kalamazoo County, Michigan — explore local parks, restaurants, and businesses.</p>
+          <div class="footer-contact">
+            <i class="fa-solid fa-envelope"></i>
+            <a href="mailto:texascornerscontact@gmail.com">texascornerscontact@gmail.com</a>
+          </div>
+          <div class="footer-contact">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Texas Corners, Kalamazoo County, MI</span>
+          </div>
+        </div>
+        <div class="col-6 col-lg-2 offset-lg-1">
+          <h4 class="footer-heading">Parks</h4>
+          <ul class="footer-links">
+            <li><a href="/TexasTownshipProject/Parks%20and%20Facilities/texas_drive_park.html">Texas Drive Park</a></li>
+            <li><a href="/TexasTownshipProject/Parks%20and%20Facilities/maple_hill_splash_pad.html">Maple Hill Splash Pad</a></li>
+            <li><a href="/TexasTownshipProject/Parks%20and%20Facilities/al_sabo_land_preserve.html">Al Sabo Preserve</a></li>
+            <li><a href="/TexasTownshipProject/Parks%20and%20Facilities/woollam_nature_preserve.html">Woollam Preserve</a></li>
+            <li><a href="/TexasTownshipProject/Parks%20and%20Facilities/texas_township_trailway.html">Township Trailway</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h4 class="footer-heading">Dining</h4>
+          <ul class="footer-links">
+            <li><a href="/TexasTownshipProject/Food/texas_corners_brewing.html">TX Corners Brewing</a></li>
+            <li><a href="/TexasTownshipProject/Food/bold.html">Bold</a></li>
+            <li><a href="/TexasTownshipProject/Food/gusto.html">Gusto</a></li>
+            <li><a href="/TexasTownshipProject/Food/sura.html">Sura</a></li>
+            <li><a href="/TexasTownshipProject/Food/rykse_and_co.html">Rykse &amp; Co</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h4 class="footer-heading">Businesses</h4>
+          <ul class="footer-links">
+            <li><a href="/TexasTownshipProject/Buisnesses/texas_corners_ace_hardware.html">Ace Hardware</a></li>
+            <li><a href="/TexasTownshipProject/Buisnesses/the_cheese_lady.html">The Cheese Lady</a></li>
+            <li><a href="/TexasTownshipProject/Buisnesses/allure_skin_and_beauty.html">Allure Skin &amp; Beauty</a></li>
+            <li><a href="/TexasTownshipProject/Buisnesses/vs_bogeys_and_stogies.html">V's Bogeys &amp; Stogies</a></li>
+            <li><a href="/TexasTownshipProject/Buisnesses/vca_texas_corners_animal_hospital.html">VCA Animal Hospital</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="footer-divider">
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2026 Texas Corners Township, Kalamazoo, Michigan. All rights reserved.</span>
+        <span class="footer-badge"><i class="fa-solid fa-map-pin me-1"></i> Kalamazoo, MI</span>
+      </div>
     </div>
   </footer>
-  
-  <!-- Bootstrap JS, Popper.js, and jQuery -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- Bootstrap 5 Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
   <script src="/TexasTownshipProject/main.js"></script>
 </body>
 </html>

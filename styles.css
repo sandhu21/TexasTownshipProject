@@ -1,895 +1,1035 @@
+/* ============================================================
+   Texas Corners Township — styles.css (2026 Revamp)
+   ============================================================ */
+
+/* ─── Google Fonts (loaded via CDN in HTML) ──────────────────
+   Fonts: Playfair Display (headings) + Outfit (body)
+   ─────────────────────────────────────────────────────────── */
+
+/* ─── CSS Custom Properties ──────────────────────────────────── */
+:root {
+  --primary:        #0a1628;
+  --secondary:      #112240;
+  --accent:         #00c9a7;
+  --accent-dark:    #009b82;
+  --gold:           #f4b942;
+  --danger:         #e74c3c;
+  --text:           #ffffff;
+  --text-muted:     rgba(255, 255, 255, 0.65);
+  --card-bg:        rgba(255, 255, 255, 0.05);
+  --card-border:    rgba(255, 255, 255, 0.10);
+  --shadow-sm:      0 4px 20px rgba(0, 0, 0, 0.25);
+  --shadow-md:      0 12px 40px rgba(0, 0, 0, 0.35);
+  --shadow-lg:      0 24px 64px rgba(0, 0, 0, 0.45);
+  --radius:         14px;
+  --radius-sm:      8px;
+  --transition:     all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-heading:   'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:      'Outfit', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --nav-height:     76px;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
 body {
-    font-family: New Century Schoolbook, TeX Gyre Schola, serif;
-    color: #ffffff;
-    background: linear-gradient(135deg, #444343, #2b2b2b);
+  font-family: var(--font-body);
+  background: var(--primary);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-a:hover {
-  text-decoration: none; /* Get rid of blue underline on links*/
+a { color: inherit; text-decoration: none; transition: var(--transition); }
+a:hover { text-decoration: none; color: var(--accent); }
+
+img { display: block; max-width: 100%; }
+
+/* ─── Scroll Progress Bar ────────────────────────────────────── */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  z-index: 10000;
+  transition: width 0.1s linear;
+  border-radius: 0 2px 2px 0;
 }
 
-.navbar-custom {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    height: 75px; /* Change thickness of nav bar */
+/* ─── Loading Screen ─────────────────────────────────────────── */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  gap: 24px;
+  transition: opacity 0.6s ease;
 }
+#loading-screen.fade-out { opacity: 0; pointer-events: none; }
 
-.navbar-custom .navbar-brand,
-.navbar-custom .nav-link {
-    color: #ffffff;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.navbar-custom .nav-link:hover {
-    color: #ff6b6b;
-}
-
-.navbar .dropdown:hover .dropdown-menu {
-    display: block;
-  
-  }
-  
-  .navbar .dropdown-menu {
-    margin-top: 0;
-    transition: all 0.3s ease;
-    opacity: 0;
-    visibility: hidden;
-    background-color: #ff6b6b; /* Change background color of dropdown menu */
-  }
-  
-  .navbar .dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-  
-  }
-
-  .navbar .dropdown-menu a {
-    color: #ffffff; /* Change the color of the dropdown text */
-}
-
-
-.navbar .dropdown-menu a:hover {
-  color: #000000; /* Change the hover color of dropdown links */
-  background-color:  #e49797;
-}
-
-
-
-
-
-.banner-image {
-    background: url('TownshipPicture/image1.jpg') no-repeat center center;
-    background-size: cover;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.banner-image::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
-    z-index: 1;
-}
-
-.banner-content {
-    text-align: center;
-    color: #fff;
-    z-index: 2;
-    max-width: 800px;
-    padding: 0 20px;
-}
-
-.banner-content h1 {
-    font-size: 6rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    animation: fadeInUp 1s ease-in-out;
-}
-
-.banner-content p {
-    font-size: 2rem;
-    animation: fadeInUp 1.2s ease-in-out;
-}
-
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.section-padding {
-    padding: 150px 0;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 80px;
-}
-
-.section-title h2 {
-    font-size: 4rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.section-title p {
-    font-size: 1.6rem;
-    color: #ffffff;
-}
-
-.business-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    padding: 2rem;
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    margin-bottom: 30px;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    transition: transform 0.3s;
-}
-
-.business-card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
-    z-index: 1;
-    transition: background 0.3s;
-}
-
-.business-card:hover {
-    transform: rotateX(10deg) translateY(-15px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    transform: scale(1.1);
-    z-index: 2;
-}
-
-.business-card:hover::before {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5));
-}
-
-.business-card h3 {
-    font-size: 2.4rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    z-index: 2;
-    text-align: center;
-    transition: transform 0.3s;
-}
-
-.business-card p {
-    font-size: 1.4rem;
-    color: #ffffff;
-    z-index: 2;
-    text-align: center;
-    transition: transform 0.3s;
-}
-
-.business-card:hover h3,
-.business-card:hover p {
-    transform: translateZ(30px);
-    color: #ff6b6b; /* Change color of words when hover in cards */
-}
-
-.container#parks-and-facilities .business-card h3 {
-    color: #fff;
-}
-
-.business-card-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-footer {
-    background: linear-gradient(135deg, #3e4246, #2b2b2b);
-    padding: 60px 0;
-    text-align: center;
-    font-size: 22px;
-    color: #ffffff;
-}
-
-.large-text {
-    font-size: 42px;
-    font-family: New Century Schoolbook, TeX Gyre Schola, serif;
-
-}
-
-.navbar-custom .navbar-brand.large-text:hover {
-  color: #ff6b6b; /* Change hover color of Texas Corners */
-}
-
-.nav-link {
-    color: #ffffff;
-    font-size: 20px;
-    font-family: New Century Schoolbook, TeX Gyre Schola, serif;
-}
-
-.navbar-nav .nav-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.navbar-nav .nav-item:not(:last-child) {
-    border-right: 2px solid rgba(255, 255, 255, 0.3);
-    padding-right: 20px;
-    margin-right: 20px;
-}
-
-.email {
-    text-align: center;
-}
-
-.texas_drive_park,
-.maple_hill_splash_pad,
-.sixth_street_park,
-.pocket_park,
-.texas_township_trailway,
-.farmers_market_provilion,
-.al_sabo_land_preserve,
-.woollam_nature_preserve {
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 350px;
-}
-
-.texas_drive_park {
-    background-image: url('/TexasTownshipProject/Pictures/texas_drive_park.jpg');
-}
-
-.maple_hill_splash_pad {
-    background-image: url('/TexasTownshipProject/Pictures/maple_hill_splash_pad.jpg');
-}
-
-.sixth_street_park {
-    background-image: url('/TexasTownshipProject/Pictures/6th_street_park.jpg');
-}
-
-.pocket_park {
-    background-image: url('/TexasTownshipProject/Pictures/pocket_park.jpg');
-}
-
-.texas_township_trailway {
-    background-image: url('/TexasTownshipProject/Pictures/texas_township_trailway.jpg');
-}
-
-.farmers_market_provilion {
-    background-image: url('/TexasTownshipProject/Pictures/farmers_market_provilion.jpg');
-}
-
-.al_sabo_land_preserve {
-    background-image: url('/TexasTownshipProject/Pictures/al_sabo_land_preserve.jpg');
-}
-
-.woollam_nature_preserve {
-    background-image: url('/TexasTownshipProject/Pictures/woollam_nature_preserve.jpg');
-}
-
-.zebs-trading-company {
-    background-image: url('/TexasTownshipProject/Pictures/zebs_trading_co.jpg');
-}
-
-.bold {
-    background-image: url('/TexasTownshipProject/Pictures/bold.jpg');
-}
-
-.sura {
-    background-image: url('/TexasTownshipProject/Pictures/sura.jpg');
-}
-
-.fletchers_pub {
-    background-image: url('/TexasTownshipProject/Pictures/fletchers_pub.jpg');
-}
-
-.hunan_gardens {
-    background-image: url('/TexasTownshipProject/Pictures/hunan_gardens.jpg');
-}
-
-.louies_corner_bar {
-    background-image: url('/TexasTownshipProject/Pictures/louies_corner_bar.webp');
-}
-
-.rykse_and_co {
-    background-image: url('/TexasTownshipProject/Pictures/rykse_and_co.webp');
-}
-
-.gusto {
-    background-image: url('/TexasTownshipProject/Pictures/gusto.jpg');
-}
-
-.biggby_coffee {
-    background-image: url('/TexasTownshipProject/Pictures/biggby_coffee.jpg');
-}
-
-.holy_taco {
-    background-image: url('/TexasTownshipProject/Pictures/holy_taco.jpg');
-}
-
-.hungry_howies_pizza {
-    background-image: url('/TexasTownshipProject/Pictures/hungry_howies_pizza.jpg');
-}
-
-.texas_corners_brewing {
-    background-image: url('/TexasTownshipProject/Pictures/texas_corners_brewing.jpeg');
-}
-
-.loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #1c1c1c;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    perspective: 1000px;
-}
-
-.loading-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.loading-icon {
-    text-align: center;
-    transform-style: preserve-3d;
-    animation: rotate3d 2s infinite linear;
-}
-
-.spinner {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 10px solid rgba(255, 255, 255, 0.2);
-    border-top-color: #ff6b6b;
-    animation: spin 0.5s infinite linear; /* Change the animation duration to 0.5s */
-    transform-style: preserve-3d;
-    box-shadow: 0 0 20px rgba(255, 107, 107, 0.4);
+.loading-spinner {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.12);
+  border-top-color: var(--accent);
+  animation: spin 0.75s linear infinite;
 }
 
 .loading-text {
-    color: #fff;
-    font-size: 28px;
-    margin-top: 40px;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
 }
-
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  to { transform: rotate(360deg); }
 }
 
-.loading-screen::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    z-index: -1;
-    border-radius: 10px;
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-    animation: pulse 2s infinite;
+/* ─── Navigation ─────────────────────────────────────────────── */
+#main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--nav-height);
+  background: rgba(10, 22, 40, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+  display: flex;
+  align-items: center;
 }
 
-@keyframes pulse {
-    0% {
-        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-    }
-    50% {
-        box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
-    }
-    100% {
-        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-    }
+#main-nav.scrolled {
+  background: rgba(10, 22, 40, 0.97);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
 }
 
-.welcome-message {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+#main-nav .navbar-brand {
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+#main-nav .navbar-brand:hover { color: var(--accent); }
+
+#main-nav .navbar-brand span {
+  color: var(--accent);
 }
 
-.welcome-message.show {
-    display: flex;
-    opacity: 1;
+#main-nav .nav-link {
+  font-family: var(--font-body);
+  font-size: 0.93rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0.4rem 1rem !important;
+  letter-spacing: 0.02em;
+  transition: color 0.25s;
+  position: relative;
+}
+#main-nav .nav-link:hover,
+#main-nav .nav-link:focus { color: var(--accent); }
+
+/* Nav dividers */
+#main-nav .navbar-nav .nav-item:not(:last-child) {
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.checkmark-icon {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
+/* Dropdown */
+#main-nav .dropdown-menu {
+  background: rgba(12, 24, 46, 0.97);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: var(--radius-sm);
+  padding: 8px 0;
+  margin-top: 4px !important;
+  box-shadow: var(--shadow-md);
+  min-width: 220px;
+  animation: dropIn 0.2s ease;
 }
 
-.checkmark {
-    width: 100%;
-    height: 100%;
-    stroke-width: 2;
-    stroke: #fff;
-    stroke-miterlimit: 10;
-    animation: draw-checkmark 1s ease-in-out;
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.checkmark-circle {
-    stroke-dasharray: 166;
-    stroke-dashoffset: 166;
-    stroke-width: 2;
-    stroke-miterlimit: 10;
-    stroke: #ff6b6b;
-    fill: none;
-    animation: stroke-circle 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+#main-nav .dropdown-item {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.82);
+  padding: 9px 18px;
+  transition: var(--transition);
+  border-radius: 0;
+}
+#main-nav .dropdown-item:hover {
+  background: rgba(0, 201, 167, 0.15);
+  color: var(--accent);
+  padding-left: 24px;
 }
 
-.checkmark-check {
-    transform-origin: 50% 50%;
-    stroke-dasharray: 48;
-    stroke-dashoffset: 48;
-    stroke: #ff6b6b;
-    animation: stroke-check 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+/* Hover dropdown on desktop */
+@media (min-width: 992px) {
+  #main-nav .dropdown:hover .dropdown-menu { display: block; }
+  #main-nav .dropdown-menu { display: none; }
 }
 
-.welcome-text {
-    color: #fff;
-    font-size: 36px;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+/* Navbar toggler */
+#main-nav .navbar-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+}
+#main-nav .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-@keyframes stroke-circle {
-    100% {
-        stroke-dashoffset: 0;
-    }
+/* ─── Back to Top ────────────────────────────────────────────── */
+#back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  background: var(--accent);
+  color: var(--primary);
+  border: none;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.3s, transform 0.3s;
+  box-shadow: 0 4px 20px rgba(0, 201, 167, 0.4);
+}
+#back-to-top.visible { opacity: 1; transform: translateY(0); }
+#back-to-top:hover { background: var(--gold); transform: translateY(-3px); }
+
+/* ─── Hero / Banner ──────────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
 
-@keyframes stroke-check {
-    100% {
-        stroke-dashoffset: 0;
-    }
+.hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(10, 22, 40, 0.75) 0%,
+    rgba(10, 22, 40, 0.50) 50%,
+    rgba(10, 22, 40, 0.70) 100%
+  );
+  z-index: 1;
 }
 
-@keyframes draw-checkmark {
-    0% {
-        stroke-dashoffset: 100;
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
+/* Subtle animated overlay */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 60%, rgba(0, 201, 167, 0.06) 0%, transparent 65%);
+  z-index: 1;
+  animation: breathe 6s ease-in-out infinite;
 }
 
+@keyframes breathe {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  padding: 0 24px;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeInUp 0.8s 0.2s ease forwards;
+}
+
+.hero-content h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeInUp 0.9s 0.4s ease forwards;
+}
+
+.hero-content h1 span { color: var(--accent); }
+
+.hero-content p {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.80);
+  margin-bottom: 36px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  animation: fadeInUp 1s 0.6s ease forwards;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeInUp 1s 0.8s ease forwards;
+}
+
+.btn-hero-primary {
+  padding: 14px 36px;
+  background: var(--accent);
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.03em;
+  box-shadow: 0 6px 24px rgba(0, 201, 167, 0.35);
+}
+.btn-hero-primary:hover {
+  background: #00e8bf;
+  color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(0, 201, 167, 0.5);
+}
+
+.btn-hero-outline {
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 50px;
+  border: 1.5px solid rgba(255, 255, 255, 0.40);
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.03em;
+}
+.btn-hero-outline:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.70);
+  transform: translateY(-3px);
+  color: var(--text);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 1s 1.2s ease forwards;
+}
+
+.scroll-indicator span {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.scroll-indicator .mouse {
+  width: 24px;
+  height: 38px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.scroll-indicator .mouse::before {
+  content: '';
+  width: 3px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 2px;
+  animation: scrollBob 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollBob {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50%       { transform: translateY(6px); opacity: 0.4; }
+}
+
+/* ─── Detail page banner ─────────────────────────────────────── */
+.page-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(10,22,40,0.78) 0%, rgba(10,22,40,0.50) 100%);
+  z-index: 1;
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 24px;
+}
+
+.page-hero-content h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+  animation: fadeInUp 0.8s 0.2s ease both;
+}
+
+.page-hero-content p {
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.78);
+  animation: fadeInUp 0.9s 0.4s ease both;
+}
+
+/* ─── Shared Animations ──────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(36px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.active { opacity: 1; transform: translateY(0); }
+.reveal.delay-1 { transition-delay: 0.10s; }
+.reveal.delay-2 { transition-delay: 0.20s; }
+.reveal.delay-3 { transition-delay: 0.30s; }
+.reveal.delay-4 { transition-delay: 0.40s; }
+.reveal.delay-5 { transition-delay: 0.50s; }
+
+/* ─── Stats Bar ──────────────────────────────────────────────── */
+.stats-bar {
+  background: linear-gradient(135deg, var(--secondary), rgba(17, 34, 64, 0.8));
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 48px 0;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.stat-number {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  display: block;
+}
+
+.stat-label {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 6px;
+}
+
+.stat-divider {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  align-self: stretch;
+  margin: 0 auto;
+}
+
+/* ─── Section Layout ─────────────────────────────────────────── */
+.section {
+  padding: 100px 0;
+}
+
+.section-alt {
+  background: rgba(17, 34, 64, 0.35);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.section-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+  padding: 4px 14px;
+  border: 1px solid rgba(0, 201, 167, 0.3);
+  border-radius: 50px;
+  background: rgba(0, 201, 167, 0.07);
+}
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* Section accent bar */
+.section-header::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  margin: 20px auto 0;
+  border-radius: 2px;
+}
+
+/* ─── Cards Grid ─────────────────────────────────────────────── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1199px) { .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 575px)  { .cards-grid { grid-template-columns: 1fr; } }
+
+.location-card {
+  position: relative;
+  height: 300px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--secondary);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1),
+              box-shadow 0.4s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+
+.location-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 22, 40, 0.92) 0%,
+    rgba(10, 22, 40, 0.40) 55%,
+    rgba(10, 22, 40, 0.10) 100%
+  );
+  z-index: 1;
+  transition: background 0.4s ease;
+}
+
+.location-card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 201, 167, 0.25);
+}
+
+.location-card:hover::before {
+  background: linear-gradient(
+    to top,
+    rgba(10, 22, 40, 0.96) 0%,
+    rgba(10, 22, 40, 0.55) 55%,
+    rgba(10, 22, 40, 0.15) 100%
+  );
+}
+
+/* Accent glow on hover */
+.location-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1.5px rgba(0, 201, 167, 0);
+  transition: box-shadow 0.35s ease;
+  z-index: 2;
+}
+.location-card:hover::after {
+  box-shadow: inset 0 0 0 1.5px rgba(0, 201, 167, 0.4);
+}
+
+.card-body-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 22px;
+  z-index: 3;
+}
+
+.card-name {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  margin: 0;
+  transition: color 0.3s;
+}
+
+.location-card:hover .card-name { color: var(--accent); }
+
+.card-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s 0.05s, transform 0.3s 0.05s;
+  margin-top: 6px;
+}
+.location-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+
+/* Background images — Homepage Cards */
+.bg-texas-drive-park     { background-image: url('/TexasTownshipProject/Pictures/texas_drive_park.jpg'); }
+.bg-maple-hill-splash    { background-image: url('/TexasTownshipProject/Pictures/maple_hill_splash_pad.jpg'); }
+.bg-sixth-street-park    { background-image: url('/TexasTownshipProject/Pictures/6th_street_park.jpg'); }
+.bg-pocket-park          { background-image: url('/TexasTownshipProject/Pictures/pocket_park.jpg'); }
+.bg-trailway             { background-image: url('/TexasTownshipProject/Pictures/texas_township_trailway.jpg'); }
+.bg-farmers-market       { background-image: url('/TexasTownshipProject/Pictures/farmers_market_provilion.jpg'); }
+.bg-al-sabo              { background-image: url('/TexasTownshipProject/Pictures/al_sabo_land_preserve.jpg'); }
+.bg-woollam              { background-image: url('/TexasTownshipProject/Pictures/woollam_nature_preserve.jpg'); }
+.bg-zebs                 { background-image: url('/TexasTownshipProject/Pictures/zebs_trading_company.jpg'); }
+.bg-bold                 { background-image: url('/TexasTownshipProject/Pictures/bold.jpg'); }
+.bg-sura                 { background-image: url('/TexasTownshipProject/Pictures/sura.jpg'); }
+.bg-fletchers            { background-image: url('/TexasTownshipProject/Pictures/fletchers_pub.jpg'); }
+.bg-hunan                { background-image: url('/TexasTownshipProject/Pictures/hunan_gardens.jpg'); }
+.bg-louies               { background-image: url('/TexasTownshipProject/Pictures/louies_corner_bar.webp'); }
+.bg-rykse                { background-image: url('/TexasTownshipProject/Pictures/rykse_and_co.webp'); }
+.bg-gusto                { background-image: url('/TexasTownshipProject/Pictures/gusto.jpg'); }
+.bg-biggby               { background-image: url('/TexasTownshipProject/Pictures/biggby_coffee.jpg'); }
+.bg-holy-taco            { background-image: url('/TexasTownshipProject/Pictures/holy_taco.jpg'); }
+.bg-hungry-howies        { background-image: url('/TexasTownshipProject/Pictures/hungry_howies_pizza.jpg'); }
+.bg-tx-brewing           { background-image: url('/TexasTownshipProject/Pictures/texas_corners_brewing.jpeg'); }
+.bg-vs-bogeys            { background-image: url('/TexasTownshipProject/Pictures/vs_bogeys_and_stogies.jpg'); }
+.bg-ace-hardware         { background-image: url('/TexasTownshipProject/Pictures/texas_corners_ace_hardware.jpg'); }
+.bg-daves-glass          { background-image: url('/TexasTownshipProject/Pictures/daves_glass.jpg'); }
+.bg-vca                  { background-image: url('/TexasTownshipProject/Pictures/vca_texas_corners_animal_hospital.jpg'); }
+.bg-allure               { background-image: url('/TexasTownshipProject/Pictures/allure_skin_and_beauty.jpg'); }
+.bg-lee-birch            { background-image: url('/TexasTownshipProject/Pictures/lee_and_birch_kalamazoo.jpg'); }
+.bg-pink-lemonade        { background-image: url('/TexasTownshipProject/Pictures/pink_lemonade.jpg'); }
+.bg-cheese-lady          { background-image: url('/TexasTownshipProject/Pictures/the_cheese_lady.jpg'); }
+.bg-citgo                { background-image: url('/TexasTownshipProject/Pictures/citgo.jpg'); }
+.bg-klh                  { background-image: url('/TexasTownshipProject/Pictures/klh_custom_homes.jpg'); }
+.bg-refined              { background-image: url('/TexasTownshipProject/Pictures/refined_mens_grooming.jpeg'); }
+
+/* ─── Page Hero Background Images (detail pages) ─────────────── */
+.hero-texas-drive-park    { background-image: url('/TexasTownshipProject/Pictures/texas_drive_park.jpg'); }
+.hero-maple-hill-splash   { background-image: url('/TexasTownshipProject/Pictures/maple_hill_splash_pad.jpg'); }
+.hero-sixth-street-park   { background-image: url('/TexasTownshipProject/Pictures/6th_street_park.jpg'); }
+.hero-pocket-park         { background-image: url('/TexasTownshipProject/Pictures/pocket_park.jpg'); }
+.hero-trailway            { background-image: url('/TexasTownshipProject/Pictures/texas_township_trailway.jpg'); }
+.hero-farmers-market      { background-image: url('/TexasTownshipProject/Pictures/farmers_market_provilion.jpg'); }
+.hero-al-sabo             { background-image: url('/TexasTownshipProject/Pictures/al_sabo_land_preserve.jpg'); }
+.hero-woollam             { background-image: url('/TexasTownshipProject/Pictures/woollam_nature_preserve.jpg'); }
+.hero-zebs                { background-image: url('/TexasTownshipProject/Pictures/zebs_trading_company.jpg'); }
+.hero-bold                { background-image: url('/TexasTownshipProject/Pictures/bold.jpg'); }
+.hero-sura                { background-image: url('/TexasTownshipProject/Pictures/sura.jpg'); }
+.hero-fletchers           { background-image: url('/TexasTownshipProject/Pictures/fletchers_pub.jpg'); }
+.hero-hunan               { background-image: url('/TexasTownshipProject/Pictures/hunan_gardens.jpg'); }
+.hero-louies              { background-image: url('/TexasTownshipProject/Pictures/louies_corner_bar.webp'); }
+.hero-rykse               { background-image: url('/TexasTownshipProject/Pictures/rykse_and_co.webp'); }
+.hero-gusto               { background-image: url('/TexasTownshipProject/Pictures/gusto.jpg'); }
+.hero-biggby              { background-image: url('/TexasTownshipProject/Pictures/biggby_coffee.jpg'); }
+.hero-holy-taco           { background-image: url('/TexasTownshipProject/Pictures/holy_taco.jpg'); }
+.hero-hungry-howies       { background-image: url('/TexasTownshipProject/Pictures/hungry_howies_pizza.jpg'); }
+.hero-tx-brewing          { background-image: url('/TexasTownshipProject/Pictures/texas_corners_brewing.jpeg'); }
+.hero-vs-bogeys           { background-image: url('/TexasTownshipProject/Pictures/vs_bogeys_and_stogies.jpg'); }
+.hero-ace-hardware        { background-image: url('/TexasTownshipProject/Pictures/texas_corners_ace_hardware.jpg'); }
+.hero-daves-glass         { background-image: url('/TexasTownshipProject/Pictures/daves_glass.jpg'); }
+.hero-vca                 { background-image: url('/TexasTownshipProject/Pictures/vca_texas_corners_animal_hospital.jpg'); }
+.hero-allure              { background-image: url('/TexasTownshipProject/Pictures/allure_skin_and_beauty.jpg'); }
+.hero-lee-birch           { background-image: url('/TexasTownshipProject/Pictures/lee_and_birch_kalamazoo.jpg'); }
+.hero-pink-lemonade       { background-image: url('/TexasTownshipProject/Pictures/pink_lemonade.jpg'); }
+.hero-cheese-lady         { background-image: url('/TexasTownshipProject/Pictures/the_cheese_lady.jpg'); }
+.hero-citgo               { background-image: url('/TexasTownshipProject/Pictures/citgo.jpg'); }
+.hero-klh                 { background-image: url('/TexasTownshipProject/Pictures/klh_custom_homes.jpg'); }
+.hero-refined             { background-image: url('/TexasTownshipProject/Pictures/refined_mens_grooming.jpeg'); }
+
+/* Homepage hero */
+.hero-homepage { background-image: url('/TexasTownshipProject/TownshipPicture/image1.jpg'); }
+
+/* ─── Info Widgets (Detail Pages) ────────────────────────────── */
+.info-section {
+  padding: 80px 0;
+}
 
 .info-widget {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
-  
-  .info-widget h3 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    color: #ffffff;
-  }
-  
-  .info-widget p {
-    font-size: 18px;
-    color: #ffffff;
-    margin-bottom: 0;
-  }
-  
-  .info-widget ul {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 0;
-  }
-  
-  .info-widget ul li {
-    font-size: 18px;
-    color: #ffffff;
-    margin-bottom: 10px;
-  }
-  
-/* ... (previous styles) */
-
-.banner-image.texas_drive_park {
-    background-image: url('/TexasTownshipProject/Pictures/texas_drive_park.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .banner-image.sixth_street_park {
-    background-image: url('/TexasTownshipProject/Pictures/6th_street_park.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.al_sabo_land_preserve {
-    background-image: url('/TexasTownshipProject/Pictures/al_sabo_land_preserve.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.farmers_market_pavilion {
-    background-image: url('/TexasTownshipProject/Pictures/farmers_market_provilion.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.maple_hill_splash_pad {
-    background-image: url('/TexasTownshipProject/Pictures/maple_hill_splash_pad.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.pocket_park {
-    background-image: url('/TexasTownshipProject/Pictures/pocket_park.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.texas_township_trailway {
-    background-image: url('/TexasTownshipProject/Pictures/texas_township_trailway.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.woollam_nature_preserve {
-    background-image: url('/TexasTownshipProject/Pictures/woollam_nature_preserve.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.biggby_coffee {
-    background-image: url('/TexasTownshipProject/Pictures/biggby_coffee.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.fletchers_pub {
-    background-image: url('/TexasTownshipProject/Pictures/fletchers_pub.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.gusto {
-    background-image: url('/TexasTownshipProject/Pictures/gusto.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.holy_taco {
-    background-image: url('/TexasTownshipProject/Pictures/holy_taco.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.hunan_gardens {
-    background-image: url('/TexasTownshipProject/Pictures/hunan_gardens.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.hungry_howies_pizza {
-    background-image: url('/TexasTownshipProject/Pictures/hungry_howies_pizza.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.louies_corner_bar {
-    background-image: url('/TexasTownshipProject/Pictures/louies_corner_bar.webp');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.rykse_and_co {
-    background-image: url('/TexasTownshipProject/Pictures/rykse_and_co.webp');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.sura {
-    background-image: url('/TexasTownshipProject/Pictures/sura.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .banner-image.texas_corners_brewing {
-    background-image: url('/TexasTownshipProject/Pictures/texas_corners_brewing.jpeg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .business-card.zebs_trading_company {
-    background-image: url('/TexasTownshipProject/Pictures/zebs_trading_company.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 20px;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  }
-
-  .banner-image.zebs_trading_company {
-    background-image: url('/TexasTownshipProject/Pictures/zebs_trading_company.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-
-  section.highlight {
-    background-color: #f5f5f5;
-    transition: background-color 0.3s ease;
-  }
-
-  .map-responsive {
-    overflow: hidden;
-    padding-bottom: 56.25%;
-    position: relative;
-    height: 0;
-  }
-  
-  .map-responsive iframe {
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-  }
-
-  .banner-image.allure_skin_and_beauty {
-    background-image: url('/TexasTownshipProject/Pictures/allure_skin_and_beauty.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-   .allure_skin_and_beauty {
-    background-image: url('/TexasTownshipProject/Pictures/allure_skin_and_beauty.jpg');
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  height: 100%;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
 }
 
-.banner-image.vs_bogeys_and_stogies {
-    background-image: url('/TexasTownshipProject/Pictures/vs_bogeys_and_stogies.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-   .vs_bogeys_and_stogies {
-    background-image: url('/TexasTownshipProject/Pictures/vs_bogeys_and_stogies.jpg');
+.info-widget::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.banner-image.citgo {
-    background-image: url('/TexasTownshipProject/Pictures/citgo.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
+.info-widget:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(0, 201, 167, 0.2);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-sm);
+}
+.info-widget:hover::before { opacity: 1; }
 
-   .citgo {
-    background-image: url('/TexasTownshipProject/Pictures/citgo.jpg');
+.info-widget-icon {
+  font-size: 1.6rem;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: block;
 }
 
-.banner-image.klh_custom_homes {
-    background-image: url('/TexasTownshipProject/Pictures/klh_custom_homes.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-   .klh_custom_homes {
-    background-image: url('/TexasTownshipProject/Pictures/klh_custom_homes.jpg');
+.info-widget h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 14px;
 }
 
-.banner-image.lee_and_birchw {
-    background-image: url('/TexasTownshipProject/Pictures/lee_and_birch_kalamazoo.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-   .lee_and_birch {
-    background-image: url('/TexasTownshipProject/Pictures/lee_and_birch_kalamazoo.jpg');
+.info-widget p, .info-widget a {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  transition: color 0.25s;
 }
 
-.banner-image.pink_lemonade {
-    background-image: url('/TexasTownshipProject/Pictures/pink_lemonade.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
+.info-widget a:hover { color: var(--accent); }
 
-   .pink_lemonade {
-    background-image: url('/TexasTownshipProject/Pictures/pink_lemonade.jpg');
+.info-widget ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.banner-image.refined_mens_grooming {
-    background-image: url('/TexasTownshipProject/Pictures/refined_mens_grooming.jpeg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
+.info-widget ul li {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.info-widget ul li:last-child { border-bottom: none; }
 
-  .refined_mens_grooming {
-    background-image: url('/TexasTownshipProject/Pictures/refined_mens_grooming.jpeg');
+.info-widget ul li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
-.banner-image.texas_corners_ace_hardware {
-    background-image: url('/TexasTownshipProject/Pictures/texas_corners_ace_hardware.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .texas_corners_ace_hardware {
-    background-image: url('/TexasTownshipProject/Pictures/texas_corners_ace_hardware.jpg');
+/* ─── Action Buttons ─────────────────────────────────────────── */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 12px 0 56px;
 }
 
-.banner-image.daves_glass {
-    background-image: url('/TexasTownshipProject/Pictures/daves_glass.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .daves_glass_service {
-    background-image: url('/TexasTownshipProject/Pictures/daves_glass.jpg');
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
 }
 
-.banner-image.vca_texas_corners_animal_hospital {
-    background-image: url('/TexasTownshipProject/Pictures/vca_texas_corners_animal_hospital.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
+.btn-action i { font-size: 1rem; }
 
-  .vca_texas_corners_animal_hospital {
-    background-image: url('/TexasTownshipProject/Pictures/vca_texas_corners_animal_hospital.jpg');
+.btn-yelp {
+  background: #d32323;
+  color: #fff;
+}
+.btn-yelp:hover {
+  background: #b91c1c;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(211, 35, 35, 0.4);
 }
 
-.banner-image.the_cheese_lady {
-    background-image: url('/TexasTownshipProject/Pictures/the_cheese_lady.jpg');
-    height: 100vh;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .the_cheese_lady {
-    background-image: url('/TexasTownshipProject/Pictures/the_cheese_lady.jpg');
+.btn-website {
+  background: var(--secondary);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.btn-website:hover {
+  background: rgba(255,255,255,0.10);
+  color: var(--text);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.3);
 }
 
-.button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .btn-yelp,
-  .btn-website,
-  .btn-menu {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 16px 32px;
-    margin: 0 10px;
-    color: #fff;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .btn-yelp {
-    background-color: #d32323;
-  }
-  
-  .btn-website {
-    background-color: #2c3e50;
-  }
-  
-  .btn-menu {
-    background-color: #007a33;
-  }
-  
-  .btn-yelp:hover,
-  .btn-website:hover,
-  .btn-menu:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  .btn-yelp:active,
-  .btn-website:active,
-  .btn-menu:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-  .btn-yelp i,
-  .btn-website i,
-  .btn-menu i {
-    margin-right: 8px;
-    font-size: 24px;
-  }
+.btn-menu {
+  background: #1a7a45;
+  color: #fff;
+}
+.btn-menu:hover {
+  background: #15623a;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(26, 122, 69, 0.4);
+}
+
+/* ─── Map Section ────────────────────────────────────────────── */
+.map-section {
+  padding: 0 0 80px;
+}
+
+.map-section .section-header { margin-bottom: 32px; }
+
+.map-wrapper {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  padding-bottom: 45%;
+  height: 0;
+}
+
+.map-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: grayscale(20%) contrast(1.05);
+  transition: filter 0.3s;
+}
+.map-wrapper:hover iframe { filter: none; }
+
+@media (max-width: 767px) { .map-wrapper { padding-bottom: 65%; } }
+
+/* ─── Footer ─────────────────────────────────────────────────── */
+footer {
+  background: var(--secondary);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 60px 0 30px;
+}
+
+.footer-logo {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.footer-logo span { color: var(--accent); }
+
+.footer-tagline {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.footer-heading {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li { margin-bottom: 10px; }
+
+.footer-links a {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition: color 0.25s, padding-left 0.25s;
+}
+.footer-links a:hover { color: var(--accent); padding-left: 4px; }
+
+.footer-contact {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.footer-contact i { color: var(--accent); font-size: 0.95rem; }
+
+.footer-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 36px 0 24px;
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.footer-badge {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 50px;
+  padding: 4px 12px;
+}
+
+/* ─── Detail page About Section Title ────────────────────────── */
+.about-section {
+  padding: 80px 0 0;
+}
+
+.about-section .section-header { margin-bottom: 40px; }
+
+/* ─── Utility ────────────────────────────────────────────────── */
+.container-narrow { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+
+.text-accent { color: var(--accent) !important; }
+.text-gold   { color: var(--gold) !important; }
+.text-muted-custom { color: var(--text-muted) !important; }
+
+/* ─── Responsive tweaks ──────────────────────────────────────── */
+@media (max-width: 991px) {
+  .section { padding: 70px 0; }
+  .hero-section { background-attachment: scroll; }
+  .page-hero   { background-attachment: scroll; }
+}
+
+@media (max-width: 767px) {
+  .section { padding: 56px 0; }
+  .stats-bar { padding: 36px 0; }
+  .stat-number { font-size: 2.4rem; }
+  .info-section { padding: 56px 0; }
+  .map-section  { padding: 0 0 56px; }
+  .about-section { padding: 56px 0 0; }
+  .action-buttons { padding: 12px 0 40px; }
+  footer { padding: 48px 0 24px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
