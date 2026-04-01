@@ -3,11 +3,6 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ─── Glassmorphism Background Orb ─────────────────────────────────
-  const orb = document.createElement('div');
-  orb.className = 'orb-cyan';
-  document.body.appendChild(orb);
-
   // ─── Loading Screen ────────────────────────────────────────────────
   const loadingScreen = document.getElementById('loading-screen');
   if (loadingScreen) {
