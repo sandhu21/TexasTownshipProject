@@ -152,6 +152,21 @@ img { display: block; max-width: 100%; }
 }
 #main-nav .navbar-brand:hover { opacity: 1; color: var(--text); }
 
+/* ─── Navbar Brand Letter Animation ─────────────────────────── */
+@keyframes navLetterDrop {
+  0%   { opacity: 0; transform: translateY(-28px) rotate(-10deg) scale(0.6); }
+  60%  { opacity: 1; transform: translateY(5px) rotate(2deg) scale(1.12); }
+  78%  { transform: translateY(-3px) rotate(-1deg) scale(0.97); }
+  92%  { transform: translateY(1.5px) rotate(0.5deg) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+}
+.nav-brand-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: navLetterDrop 0.65s cubic-bezier(0.22, 1.5, 0.36, 1) forwards;
+}
+#main-nav .navbar-brand span .nav-brand-letter { color: rgba(255,255,255,0.70); }
+
 #main-nav .nav-link {
   font-size: 0.84rem;
   font-weight: 500;

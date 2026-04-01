@@ -3,6 +3,46 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  // ─── Navbar Brand Letter Drop ─────────────────────────────────────
+  var brand = document.querySelector('#main-nav .navbar-brand');
+  if (brand) {
+    var delay = 0.05;
+    // Walk child nodes: text nodes and the <span> for "Corners"
+    Array.from(brand.childNodes).forEach(function (node) {
+      if (node.nodeType === 3) {
+        // Plain text node ("Texas ")
+        var text = node.textContent;
+        var frag = document.createDocumentFragment();
+        text.split('').forEach(function (ch) {
+          if (ch === ' ') {
+            frag.appendChild(document.createTextNode('\u00A0'));
+            delay += 0.04;
+          } else {
+            var s = document.createElement('span');
+            s.className = 'nav-brand-letter';
+            s.style.animationDelay = delay + 's';
+            s.textContent = ch;
+            frag.appendChild(s);
+            delay += 0.07;
+          }
+        });
+        node.parentNode.replaceChild(frag, node);
+      } else if (node.nodeName === 'SPAN') {
+        // <span>Corners</span>
+        var inner = node.textContent;
+        node.textContent = '';
+        inner.split('').forEach(function (ch) {
+          var s = document.createElement('span');
+          s.className = 'nav-brand-letter';
+          s.style.animationDelay = delay + 's';
+          s.textContent = ch;
+          node.appendChild(s);
+          delay += 0.07;
+        });
+      }
+    });
+  }
+
   // ─── Hero Title Letter Animation ──────────────────────────────────
   var heroH1 = document.querySelector('.hero-content h1');
   if (heroH1) {
