@@ -262,4 +262,67 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // ─── Horizontal Scroll — 3D Card Tilt ─────────────────────────
+  document.querySelectorAll('.scroll-track .location-card').forEach(function (card) {
+    card.addEventListener('mousemove', function (e) {
+      var rect = card.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width;
+      var y = (e.clientY - rect.top)  / rect.height;
+      var rotY =  (x - 0.5) * 16;
+      var rotX = -(y - 0.5) * 11;
+      card.style.transform =
+        'perspective(900px) rotateY(' + rotY + 'deg) rotateX(' + rotX + 'deg) translateZ(18px) scale(1.015)';
+      card.style.setProperty('--mx', (x * 100) + '%');
+      card.style.setProperty('--my', (y * 100) + '%');
+    });
+    card.addEventListener('mouseleave', function () {
+      card.style.transition = 'transform 0.55s cubic-bezier(0.4,0,0.2,1), box-shadow 0.55s ease';
+      card.style.transform = '';
+      setTimeout(function () { card.style.transition = ''; }, 560);
+    });
+    card.addEventListener('mouseenter', function () {
+      card.style.transition = 'box-shadow 0.2s ease';
+    });
+  });
+
+  // ─── Horizontal Scroll — Arrow Buttons ────────────────────────
+  document.querySelectorAll('.scroll-arrow').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var track = btn.closest('.scroll-row').querySelector('.scroll-track');
+      var card  = track.querySelector('.location-card');
+      var step  = card ? (card.offsetWidth + 14) * 3 : 300;
+      var dir   = btn.classList.contains('arrow-right') ? step : -step;
+      track.scrollBy({ left: dir, behavior: 'smooth' });
+    });
+  });
+
+  // ─── Horizontal Scroll — Drag to Scroll ───────────────────────
+  document.querySelectorAll('.scroll-track').forEach(function (track) {
+    var isDown = false, startX = 0, scrollLeft = 0;
+    track.addEventListener('mousedown', function (e) {
+      isDown = true;
+      track.classList.add('is-dragging');
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+    document.addEventListener('mouseup', function () {
+      isDown = false;
+      track.classList.remove('is-dragging');
+    });
+    track.addEventListener('mousemove', function (e) {
+      if (!isDown) return;
+      e.preventDefault();
+      var x = e.pageX - track.offsetLeft;
+      track.scrollLeft = scrollLeft - (x - startX) * 1.4;
+    });
+    track.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].pageX;
+      scrollLeft = track.scrollLeft;
+    }, { passive: true });
+    track.addEventListener('touchmove', function (e) {
+      var x = e.touches[0].pageX;
+      track.scrollLeft = scrollLeft - (x - startX) * 1.2;
+    }, { passive: true });
+  });
+
 });

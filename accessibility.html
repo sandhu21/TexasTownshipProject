@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Accessibility statement for the Texas Corners Community Guide website.">
+  <title>Accessibility — Texas Corners</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="scroll-progress"></div>
+  <div id="loading-screen"><div class="loading-spinner"></div></div>
+
+  <!-- ─── Navigation ─────────────────────────────────────────── -->
+  <nav id="main-nav" class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html">Texas Corners</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="businessDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Business</a>
+            <ul class="dropdown-menu" aria-labelledby="businessDropdown">
+              <li><a class="dropdown-item" href="/Buisnesses/allure_skin_and_beauty.html">Allure Skin &amp; Beauty</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/citgo.html">Citgo</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/daves_glass_service.html">Dave's Glass Service</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/klh_custom_homes.html">KLH Custom Homes</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/lee_and_birch_kalamazoo.html">Lee &amp; Birch</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/pink_lemonade.html">Pink Lemonade</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/refined_mens_grooming.html">Refined Men's Grooming</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/texas_corners_ace_hardware.html">Texas Corners Ace Hardware</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/the_cheese_lady.html">The Cheese Lady</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/vca_texas_corners_animal_hospital.html">VCA Texas Corners Animal Hospital</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/vs_bogeys_and_stogies.html">VS Bogey's &amp; Stogies</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="parksDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Parks and Facilities</a>
+            <ul class="dropdown-menu" aria-labelledby="parksDropdown">
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/texas_drive_park.html">Texas Drive Park</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/maple_hill_splash_pad.html">Maple Hill Splash Pad</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/6th_street_park.html">Sixth Street Park</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/pocket_park.html">Pocket Park</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/texas_township_trailway.html">Texas Township Trailway</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/farmers_market_pavilion.html">Farmers Market Pavilion</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/al_sabo_land_preserve.html">Al Sabo Land Preserve</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/woollam_nature_preserve.html">Woollam Nature Preserve</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="foodDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Food</a>
+            <ul class="dropdown-menu" aria-labelledby="foodDropdown">
+              <li><a class="dropdown-item" href="/Food/biggby_coffee.html">Biggby Coffee</a></li>
+              <li><a class="dropdown-item" href="/Food/bold.html">Bold</a></li>
+              <li><a class="dropdown-item" href="/Food/fletchers_pub.html">Fletcher's Pub</a></li>
+              <li><a class="dropdown-item" href="/Food/gusto.html">Gusto</a></li>
+              <li><a class="dropdown-item" href="/Food/holy_taco.html">Holy Taco</a></li>
+              <li><a class="dropdown-item" href="/Food/hunan_garden.html">Hunan Garden</a></li>
+              <li><a class="dropdown-item" href="/Food/hungry_howies_pizza.html">Hungry Howie's Pizza</a></li>
+              <li><a class="dropdown-item" href="/Food/louies_corner_bar.html">Louie's Corner Bar</a></li>
+              <li><a class="dropdown-item" href="/Food/rykse_and_co.html">Rykse &amp; Co</a></li>
+              <li><a class="dropdown-item" href="/Food/sura.html">Sura</a></li>
+              <li><a class="dropdown-item" href="/Food/texas_corners_brewing.html">Texas Corners Brewing</a></li>
+              <li><a class="dropdown-item" href="/Food/zebs_trading_company.html">Zeb's Trading Company</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── Hero ───────────────────────────────────────────────── -->
+  <section class="text-hero">
+    <div class="container">
+      <span class="policy-badge" style="display:inline-flex;align-items:center;gap:8px;font-size:0.75rem;color:var(--text-faint);font-weight:400;letter-spacing:0.06em;background:var(--glass);border:1px solid var(--glass-border);border-radius:100px;padding:6px 14px;margin-bottom:36px;"><i class="fa-solid fa-universal-access"></i> Accessibility</span>
+      <h1>Accessibility Statement</h1>
+      <p>We are committed to making the Texas Corners Community Guide usable by everyone. This page explains our accessibility practices, known limitations, and how to get help.</p>
+    </div>
+  </section>
+
+  <!-- ─── Body ────────────────────────────────────────────────── -->
+  <section class="text-body">
+    <div class="container">
+
+      <h2>Our Commitment</h2>
+      <p>The Texas Corners Community Guide strives to conform to the Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA. WCAG 2.1 defines how to make web content more accessible to people with disabilities, including those with visual, auditory, physical, speech, cognitive, language, learning, and neurological disabilities.</p>
+      <p>We actively work to identify and address accessibility barriers, and we treat accessibility as an ongoing commitment rather than a one-time checklist.</p>
+
+      <h2>Keyboard Navigation</h2>
+      <p>This Site is designed to be fully navigable using a keyboard alone. You can use the following keyboard controls:</p>
+      <ul>
+        <li><strong>Tab</strong> — Move forward through focusable elements (links, buttons, form inputs).</li>
+        <li><strong>Shift + Tab</strong> — Move backward through focusable elements.</li>
+        <li><strong>Enter / Space</strong> — Activate the currently focused link or button.</li>
+        <li><strong>Arrow keys</strong> — Navigate within dropdown menus once they are open.</li>
+        <li><strong>Escape</strong> — Close open dropdown menus and dismiss the search results overlay.</li>
+      </ul>
+      <p>All interactive elements — navigation links, dropdown menus, buttons, and the site search — are keyboard accessible and display a visible focus indicator when selected.</p>
+
+      <h2>Screen Reader Compatibility</h2>
+      <p>This Site is built with semantic HTML5 elements to support screen reader users. Key practices include:</p>
+      <ul>
+        <li>Meaningful <code>alt</code> text on informational images.</li>
+        <li>ARIA labels on icon-only buttons and controls (such as the navigation toggle and the "Back to top" button).</li>
+        <li>ARIA <code>expanded</code> states on dropdown navigation items that communicate whether a menu is open or closed.</li>
+        <li>Descriptive link text that makes sense out of context wherever possible.</li>
+        <li>Logical heading hierarchy (<code>h1</code> through <code>h3</code>) on each page to aid navigation by heading.</li>
+        <li>Landmark roles (<code>nav</code>, <code>main</code>, <code>footer</code>, <code>section</code>) to help users jump between page regions.</li>
+      </ul>
+      <p>We have tested this Site with common screen readers including NVDA and VoiceOver. If you encounter a screen reader compatibility issue, please let us know.</p>
+
+      <h2>Color Contrast</h2>
+      <p>This Site uses a high-contrast design: white and light-grey text on a near-black background. This approach generally exceeds the WCAG 2.1 AA minimum contrast ratio requirements of 4.5:1 for normal text and 3:1 for large text throughout the site. The primary text color on the main background achieves a contrast ratio well above this threshold.</p>
+      <p>We avoid conveying information through color alone and supplement color differences with text labels, icons, and other visual cues.</p>
+
+      <h2>Responsive and Mobile Design</h2>
+      <p>This Site is fully responsive and adapts to screens of all sizes, from large desktop monitors to mobile phones. The layout reflows appropriately at smaller breakpoints, ensuring that content remains readable and interactive elements remain tappable without requiring horizontal scrolling. Font sizes use relative units (rem/clamp) that respect your browser or operating system text-size preferences.</p>
+
+      <h2>Skip Navigation</h2>
+      <p>A "skip to main content" link is planned for a future update. This link, which would appear at the very top of the page when activated by keyboard, would allow users who navigate by keyboard or screen reader to bypass the repeated navigation menu and jump directly to the main content area. We recognize this as an important accessibility feature and have prioritized its implementation.</p>
+
+      <h2>Known Limitations</h2>
+      <p>We are transparent about the following known accessibility limitations:</p>
+      <ul>
+        <li><strong>Fixed background images on mobile:</strong> The parallax hero background effect uses <code>background-attachment: fixed</code> on desktop. On mobile devices, this property is disabled for performance reasons, resulting in a static background image instead. This does not affect the readability of the page content.</li>
+        <li><strong>Google Maps embeds:</strong> Some location detail pages include embedded Google Maps iframes. The accessibility of the embedded map interface is determined by Google and is outside our direct control. A text link to Google Maps is always provided alongside any embed so that users who cannot use the interactive map can still access directions.</li>
+        <li><strong>Horizontal scroll rows:</strong> The card scroll tracks on the home page support mouse drag and touch swipe. Keyboard users can Tab through cards sequentially. The arrow buttons at either end of each scroll row are keyboard accessible.</li>
+      </ul>
+
+      <h2>How to Report an Accessibility Issue</h2>
+      <p>We welcome feedback about the accessibility of this Site. If you encounter a barrier that prevents you from accessing any content or functionality, or if you have a suggestion for improvement, please contact us:</p>
+      <ul>
+        <li>Email: <a href="mailto:texascornerscontact@gmail.com">texascornerscontact@gmail.com</a></li>
+      </ul>
+      <p>Please describe the specific page and the nature of the barrier you encountered. We will do our best to respond within five business days and to address the issue promptly.</p>
+
+      <h2>Alternative Access</h2>
+      <p>If you are unable to access information on this Site due to a disability or technical barrier, we are happy to provide assistance in an alternative format. Please reach out to us using the contact information below and we will work with you to provide the information you need.</p>
+      <ul>
+        <li>Email: <a href="mailto:texascornerscontact@gmail.com">texascornerscontact@gmail.com</a></li>
+      </ul>
+      <p>For information about Texas Township parks and facilities that is not available through this community website, you may also contact Texas Township directly by phone or in person at the township offices.</p>
+
+      <h2>Ongoing Efforts</h2>
+      <p>Accessibility is not a destination — it is a continuous process. We regularly review our Site for accessibility issues as we add content and update the design. We appreciate the patience and feedback of all our users as we work to make Texas Corners information available to everyone.</p>
+
+      <p class="text-last-updated">Last Updated: April 1, 2026</p>
+
+    </div>
+  </section>
+
+  <!-- ─── Footer ──────────────────────────────────────────────── -->
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-brand">Texas Corners</div>
+          <p class="footer-tagline">Kalamazoo County's hidden gem — community, nature, and local flavor all in one place.</p>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="/index.html#parks-section">Parks &amp; Facilities</a></li>
+            <li><a href="/index.html#food-section">Dining</a></li>
+            <li><a href="/index.html#business-section">Businesses</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4 class="footer-heading">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:texascornerscontact@gmail.com">texascornerscontact@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Texas Corners Township. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-chevron-up"></i></button>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/main.js"></script>
+</body>
+</html>

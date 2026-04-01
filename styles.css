@@ -1349,6 +1349,197 @@ footer {
 .footer-legal-links a:last-child { border-right: none; }
 .footer-legal-links a:hover { color: var(--text-muted); opacity: 1; }
 
+/* ─── Horizontal Scroll Rows ─────────────────────────────────── */
+.scroll-row {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+.scroll-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 28px clamp(20px, 5vw, 72px) 48px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+.scroll-track::-webkit-scrollbar { display: none; }
+.scroll-track.is-dragging { cursor: grabbing; user-select: none; }
+.scroll-track.is-dragging .location-card { pointer-events: none; }
+
+/* Cards inside scroll track */
+.scroll-track .location-card {
+  flex: 0 0 270px;
+  height: 360px;
+  border-radius: 22px;
+  scroll-snap-align: start;
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: box-shadow 0.4s ease;
+  cursor: pointer;
+}
+.scroll-track .location-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: 22px;
+  background: radial-gradient(
+    circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255,255,255,0.13) 0%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.scroll-track .location-card:hover::after { opacity: 1; }
+.scroll-track .location-card:hover {
+  box-shadow: 0 40px 100px rgba(0,0,0,0.75);
+  background-size: 118% !important;
+  opacity: 1;
+  transform: none; /* JS handles */
+}
+
+/* Fade edges */
+.scroll-row::before,
+.scroll-row::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 72px;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.scroll-row::before {
+  left: 0;
+  background: linear-gradient(to right, #000000 0%, transparent 100%);
+}
+.scroll-row::after {
+  right: 0;
+  background: linear-gradient(to left, #000000 0%, transparent 100%);
+}
+.section-alt .scroll-row::before { background: linear-gradient(to right, #0a0a0a 0%, transparent 100%); }
+.section-alt .scroll-row::after  { background: linear-gradient(to left,  #0a0a0a 0%, transparent 100%); }
+
+/* Scroll arrows */
+.scroll-arrow {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  z-index: 10;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(8,8,8,0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: rgba(255,255,255,0.85);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: all 0.2s ease;
+  opacity: 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.50);
+}
+.scroll-row:hover .scroll-arrow { opacity: 1; }
+.scroll-arrow:hover {
+  background: rgba(30,30,30,0.95);
+  border-color: rgba(255,255,255,0.30);
+  transform: translateY(-50%) scale(1.08);
+}
+.scroll-arrow.arrow-left  { left: 10px; }
+.scroll-arrow.arrow-right { right: 10px; }
+@media (max-width: 767px) {
+  .scroll-track { padding: 20px 16px 36px; }
+  .scroll-track .location-card { flex: 0 0 220px; height: 300px; }
+  .scroll-arrow { display: none; }
+  .scroll-row::before, .scroll-row::after { width: 32px; }
+}
+
+/* ─── Text/Legal Pages ────────────────────────────────────────── */
+.text-hero {
+  padding: 160px 0 72px;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--glass-border);
+}
+.text-hero .container { max-width: 860px; }
+.text-hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.text-hero p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.75;
+  max-width: 620px;
+}
+.text-body { padding: 80px 0 120px; }
+.text-body .container { max-width: 860px; }
+.text-body h2 {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 52px 0 14px;
+  letter-spacing: -0.01em;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.text-body h2:first-child { margin-top: 0; }
+.text-body p {
+  font-size: 0.93rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.85;
+  margin-bottom: 14px;
+}
+.text-body ul, .text-body ol {
+  margin: 0 0 18px 22px;
+  padding: 0;
+}
+.text-body li {
+  font-size: 0.93rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.8;
+  margin-bottom: 7px;
+}
+.text-body a { color: var(--text-soft); text-decoration: underline; text-underline-offset: 3px; }
+.text-body a:hover { color: var(--text); opacity: 1; }
+.text-body .policy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  padding: 6px 14px;
+  margin-bottom: 36px;
+}
+.text-last-updated {
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  font-weight: 300;
+  margin-top: 52px;
+  padding-top: 24px;
+  border-top: 1px solid var(--glass-border);
+}
+
 /* ─── Detail page About Section ──────────────────────────────── */
 .about-section { padding: 80px 0 0; }
 .about-section .section-header { margin-bottom: 40px; }
