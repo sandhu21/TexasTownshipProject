@@ -1363,7 +1363,7 @@ footer {
   overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 28px clamp(20px, 5vw, 72px) 48px;
+  padding: 28px clamp(40px, 8vw, 120px) 48px;
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
@@ -1379,8 +1379,7 @@ footer {
   border-radius: 22px;
   scroll-snap-align: start;
   will-change: transform;
-  transition: transform 0.50s var(--ease), box-shadow 0.50s var(--ease),
-              background-size 0.55s var(--ease), border-color 0.3s;
+  transition: transform 0.50s var(--ease), box-shadow 0.50s var(--ease), border-color 0.3s;
   cursor: pointer;
 }
 .scroll-track .location-card::after {
@@ -1402,7 +1401,6 @@ footer {
 .scroll-track .location-card:hover {
   transform: translateY(-10px) scale(1.025);
   box-shadow: 0 32px 80px rgba(0,0,0,0.70);
-  background-size: 115% !important;
   border-color: rgba(255,255,255,0.18);
 }
 
@@ -1455,7 +1453,7 @@ footer {
 .scroll-arrow.arrow-left  { left: 10px; }
 .scroll-arrow.arrow-right { right: 10px; }
 @media (max-width: 767px) {
-  .scroll-track { padding: 20px 16px 36px; }
+  .scroll-track { padding: 20px 28px 36px; }
   .scroll-track .location-card { flex: 0 0 220px; height: 300px; }
   .scroll-arrow { display: none; }
   .scroll-row::before, .scroll-row::after { width: 32px; }
