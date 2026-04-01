@@ -1401,8 +1401,7 @@ footer {
   overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  /* Align first card with container content (matches Bootstrap container margins) */
-  padding: 28px 40px 48px calc(max(24px, (100vw - 1140px) / 2 + 12px));
+  padding: 28px 80px 48px 40px;
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
@@ -1483,7 +1482,7 @@ footer {
 .scroll-arrow.arrow-left  { left: 10px; }
 .scroll-arrow.arrow-right { right: 10px; }
 @media (max-width: 767px) {
-  .scroll-track { padding: 20px 32px 36px 20px; }
+  .scroll-track { padding: 20px 40px 36px 20px; }
   .scroll-track .location-card { flex: 0 0 220px; height: 300px; }
   .scroll-arrow { display: none; }
   .scroll-row::before, .scroll-row::after { width: 32px; }
