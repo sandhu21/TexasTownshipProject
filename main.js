@@ -116,6 +116,27 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // ─── FAQ Accordion ────────────────────────────────────────────────
+  document.querySelectorAll('.faq-question').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var isOpen = btn.getAttribute('aria-expanded') === 'true';
+      var answer = btn.nextElementSibling;
+
+      // Close all others
+      document.querySelectorAll('.faq-question').forEach(function (other) {
+        other.setAttribute('aria-expanded', 'false');
+        var otherAnswer = other.nextElementSibling;
+        if (otherAnswer) otherAnswer.classList.remove('open');
+      });
+
+      // Toggle current
+      if (!isOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        answer.classList.add('open');
+      }
+    });
+  });
+
   // ─── Hero Search Bar ──────────────────────────────────────────────
   var searchInput  = document.getElementById('hero-search-input');
   var searchResults = document.getElementById('hero-search-results');
