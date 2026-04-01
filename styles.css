@@ -414,6 +414,9 @@ img { display: block; max-width: 100%; }
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
+  padding-left: clamp(24px, 5vw, 72px);
+  padding-right: clamp(24px, 5vw, 72px);
+  padding-bottom: 0;
 }
 .page-hero::before {
   content: '';
@@ -430,9 +433,9 @@ img { display: block; max-width: 100%; }
 .page-hero-content {
   position: relative;
   z-index: 2;
-  padding: 0 clamp(24px, 5vw, 80px) 56px;
+  padding-bottom: 52px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 860px;
 }
 .page-hero-content h1 {
   font-family: var(--font-heading);
