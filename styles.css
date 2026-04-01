@@ -430,13 +430,9 @@ img { display: block; max-width: 100%; }
 .page-hero-content {
   position: relative;
   z-index: 2;
-  padding: 0 0 48px 0;
+  padding: 0 clamp(24px, 5vw, 80px) 56px;
   width: 100%;
-}
-.page-hero-content .container {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
 }
 .page-hero-content h1 {
   font-family: var(--font-heading);
