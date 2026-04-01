@@ -3,6 +3,43 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+  // ─── Hero Title Letter Animation ──────────────────────────────────
+  var heroH1 = document.querySelector('.hero-content h1');
+  if (heroH1) {
+    // "Welcome to" — animate as a single swooping unit
+    var firstNode = heroH1.firstChild;
+    if (firstNode && firstNode.nodeType === 3 && firstNode.textContent.trim()) {
+      var wrapWord = document.createElement('span');
+      wrapWord.className = 'hero-word-anim';
+      wrapWord.style.animationDelay = '0.15s';
+      wrapWord.textContent = firstNode.textContent;
+      heroH1.replaceChild(wrapWord, firstNode);
+    }
+    // "Texas Corners" span — animate letter by letter
+    var titleSpan = heroH1.querySelector('span:not(.hero-word-anim)');
+    if (titleSpan) {
+      var letters = titleSpan.textContent;
+      titleSpan.textContent = '';
+      var delay = 0.42;
+      letters.split('').forEach(function (ch) {
+        if (ch === ' ') {
+          var sp = document.createElement('span');
+          sp.style.display = 'inline-block';
+          sp.innerHTML = '&nbsp;';
+          titleSpan.appendChild(sp);
+          delay += 0.05;
+        } else {
+          var s = document.createElement('span');
+          s.className = 'hero-letter-anim';
+          s.style.animationDelay = delay + 's';
+          s.textContent = ch;
+          titleSpan.appendChild(s);
+          delay += 0.068;
+        }
+      });
+    }
+  }
+
   // ─── Loading Screen ────────────────────────────────────────────────
   const loadingScreen = document.getElementById('loading-screen');
   if (loadingScreen) {

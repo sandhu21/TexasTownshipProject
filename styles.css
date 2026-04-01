@@ -293,9 +293,32 @@ img { display: block; max-width: 100%; }
   line-height: 1.05;
   color: var(--text);
   margin-bottom: 22px;
-  opacity: 0;
-  animation: fadeInUp 0.9s 0.4s ease forwards;
   letter-spacing: -0.02em;
+}
+
+/* ─── Hero Title Letter Animation ───────────────────────────── */
+@keyframes heroLetterDrop {
+  0%   { opacity: 0; transform: translateY(-70px) rotate(-8deg) scale(0.5); filter: blur(4px); }
+  58%  { opacity: 1; transform: translateY(10px)  rotate(2deg)  scale(1.10); filter: blur(0); }
+  76%  { transform: translateY(-5px) rotate(-1deg) scale(0.97); }
+  90%  { transform: translateY(3px)  rotate(0.5deg) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+}
+@keyframes heroWordDrop {
+  0%   { opacity: 0; transform: translateY(-32px); filter: blur(6px); }
+  65%  { opacity: 1; transform: translateY(5px); filter: blur(0); }
+  82%  { transform: translateY(-2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.hero-letter-anim {
+  display: inline-block;
+  opacity: 0;
+  animation: heroLetterDrop 0.75s cubic-bezier(0.22, 1.45, 0.36, 1) forwards;
+}
+.hero-word-anim {
+  display: inline-block;
+  opacity: 0;
+  animation: heroWordDrop 0.60s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
 }
 .hero-content h1 em {
   font-style: italic;
