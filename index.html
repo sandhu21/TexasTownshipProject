@@ -120,6 +120,15 @@
         <a href="#explore" class="btn-hero-primary">Explore</a>
         <a href="#parks-section" class="btn-hero-outline">Find a Park</a>
       </div>
+
+      <div class="hero-search">
+        <div class="hs-wrap">
+          <i class="fa-solid fa-magnifying-glass hs-icon"></i>
+          <input type="text" id="hero-search-input" class="hs-input" placeholder="Search parks, food, businesses…" autocomplete="off" spellcheck="false">
+          <button class="hs-clear" id="hero-search-clear" aria-label="Clear search" style="display:none"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <ul class="hs-results" id="hero-search-results" role="listbox" aria-label="Search results"></ul>
+      </div>
     </div>
     <div class="scroll-indicator" aria-hidden="true">
       <span>Scroll</span>
