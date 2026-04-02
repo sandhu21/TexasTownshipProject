@@ -1514,6 +1514,197 @@ footer {
 .disclaimer-bar a { color: rgba(255, 230, 120, 1); text-decoration: underline; text-underline-offset: 2px; }
 .disclaimer-bar a:hover { color: #fff; }
 
+/* ─── Events & Calendar Section ─────────────────────────────── */
+.events-section { padding: 100px 0; }
+
+.events-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 32px;
+  align-items: start;
+}
+@media (max-width: 991px) { .events-layout { grid-template-columns: 1fr; } }
+
+/* Month blocks */
+.events-month-block { margin-bottom: 28px; }
+.events-month-label {
+  font-family: var(--font-heading);
+  font-size: 0.70rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+/* Event cards */
+.event-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 8px;
+  transition: background 0.2s, border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.event-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+.event-card:hover { background: var(--glass-md); border-color: var(--glass-border-h); }
+
+/* Accent colours per type */
+.event-board::before   { background: rgba(100, 160, 255, 0.70); }
+.event-workshop::before { background: rgba(255, 190, 60, 0.70); }
+.event-planning::before { background: rgba(80, 220, 140, 0.70); }
+
+.event-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.event-board   .event-dot { background: rgba(100, 160, 255, 0.80); box-shadow: 0 0 6px rgba(100,160,255,0.5); }
+.event-workshop .event-dot { background: rgba(255, 190, 60, 0.80);  box-shadow: 0 0 6px rgba(255,190,60,0.5); }
+.event-planning .event-dot { background: rgba(80, 220, 140, 0.80);  box-shadow: 0 0 6px rgba(80,220,140,0.5); }
+
+.event-body { flex: 1; min-width: 0; }
+.event-type {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 3px;
+}
+.event-type i { font-size: 0.78rem; color: var(--text-muted); }
+.event-date {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+.event-time {
+  font-family: var(--font-heading);
+  font-size: 0.80rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--glass-md);
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  padding: 4px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Note + CTA */
+.events-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+}
+.events-note i { flex-shrink: 0; margin-top: 2px; }
+.events-note a { color: var(--text-soft); text-decoration: underline; text-underline-offset: 2px; }
+.events-note a:hover { color: var(--text); }
+
+.events-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  border: 1px solid var(--glass-border-h);
+  border-radius: 100px;
+  padding: 11px 22px;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.events-cta-btn:hover { background: var(--glass-md); color: var(--text); border-color: rgba(255,255,255,0.28); }
+
+/* Services sidebar */
+.events-services {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  backdrop-filter: var(--blur-sm);
+  -webkit-backdrop-filter: var(--blur-sm);
+  position: sticky;
+  top: 130px;
+}
+.events-services-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.events-services-header i {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+.events-services-header h3 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+.events-services-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+.events-services-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.events-services-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--glass-md);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  transition: border-color 0.2s;
+}
+.events-services-list li:hover { border-color: var(--glass-border-h); }
+.events-services-list li > i {
+  font-size: 0.90rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.events-services-list li > div { display: flex; flex-direction: column; gap: 2px; }
+.events-services-list li strong { font-size: 0.84rem; font-weight: 600; color: var(--text-soft); }
+.events-services-list li span   { font-size: 0.75rem; color: var(--text-muted); }
+
+.events-cta-secondary { align-self: flex-start; }
+
 /* ─── Township Info Section ──────────────────────────────────── */
 .township-info { padding: 100px 0; }
 
