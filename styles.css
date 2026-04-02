@@ -1977,17 +1977,17 @@ footer {
 
 .hs-results {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 8px);
   left: 0; right: 0;
-  background: rgba(10, 10, 10, 0.92);
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid rgba(255,255,255,0.11);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(48px) saturate(180%);
+  -webkit-backdrop-filter: blur(48px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
   padding: 8px;
   list-style: none;
   margin: 0;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.70);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.10);
   display: none;
   z-index: 200;
   max-height: 380px;
@@ -2009,12 +2009,18 @@ footer {
   transition: background 0.16s;
 }
 .hs-result-item:hover,
-.hs-result-item.active { background: rgba(255,255,255,0.08); color: var(--text); opacity: 1; }
+.hs-result-item.active {
+  background: rgba(255,255,255,0.10);
+  border-radius: 12px;
+  color: var(--text);
+  opacity: 1;
+}
 
 .hs-result-img {
   width: 46px;
   height: 46px;
   border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.10);
   object-fit: cover;
   flex-shrink: 0;
   background: rgba(255,255,255,0.06);
