@@ -2114,7 +2114,7 @@ footer {
 /* ─── Hero Search Bar ────────────────────────────────────────── */
 .hero-search {
   position: relative;
-  margin-top: 36px;
+  margin: 36px auto 0;
   width: 100%;
   max-width: 540px;
 }

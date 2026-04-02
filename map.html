@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive map of all Texas Corners locations — parks, restaurants, and businesses in Texas Corners Township, Kalamazoo, MI.">
+  <title>Interactive Map — Texas Corners</title>
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="/styles.css">
+
+  <style>
+    /* ── Map page overrides ───────────────────────────────────── */
+    body { overflow: hidden; }
+
+    .map-page-layout {
+      display: flex;
+      height: calc(100vh - 120px);
+      margin-top: 120px;
+    }
+
+    .map-sidebar {
+      width: 380px;
+      flex-shrink: 0;
+      overflow-y: auto;
+      background: rgba(8,8,8,0.95);
+      border-right: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .map-sidebar-head {
+      padding: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .map-sidebar-head h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 4px;
+    }
+
+    .map-sidebar-head p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.45);
+      margin: 0 0 14px;
+    }
+
+    .map-search-input {
+      width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 9px 14px;
+      color: #fff;
+      font-size: 0.84rem;
+      outline: none;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .map-search-input::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .map-filter-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      flex-wrap: wrap;
+    }
+
+    .map-tab {
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: 'Outfit', sans-serif;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: transparent;
+      color: rgba(255,255,255,0.55);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .map-tab.active,
+    .map-tab:hover {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border-color: rgba(255,255,255,0.28);
+    }
+
+    .map-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .map-list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.15s;
+      text-decoration: none;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .map-list-item:hover,
+    .map-list-item.highlighted {
+      background: rgba(255,255,255,0.09);
+      color: #fff;
+    }
+
+    .map-list-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .map-list-dot.food {
+      background: #FFB432;
+      box-shadow: 0 0 6px rgba(255,180,50,0.5);
+    }
+
+    .map-list-dot.business {
+      background: #6AA0FF;
+      box-shadow: 0 0 6px rgba(106,160,255,0.5);
+    }
+
+    .map-list-dot.park {
+      background: #50DC8C;
+      box-shadow: 0 0 6px rgba(80,220,140,0.5);
+    }
+
+    .map-list-name {
+      flex: 1;
+      font-size: 0.86rem;
+      font-weight: 500;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .map-list-cat {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.40);
+      flex-shrink: 0;
+    }
+
+    .map-list-arrow {
+      font-size: 0.70rem;
+      color: rgba(255,255,255,0.25);
+      flex-shrink: 0;
+    }
+
+    .map-container { flex: 1; }
+
+    #map { width: 100%; height: 100%; }
+
+    /* ── Leaflet popup dark skin ─────────────────────────────── */
+    .leaflet-popup-content-wrapper {
+      background: rgba(15,15,15,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      color: #fff;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+
+    .leaflet-popup-tip {
+      background: rgba(15,15,15,0.95);
+    }
+
+    .leaflet-popup-close-button {
+      color: rgba(255,255,255,0.5) !important;
+    }
+
+    .leaflet-popup-close-button:hover {
+      color: #fff !important;
+    }
+
+    .map-popup-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .map-popup-cat {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 10px;
+    }
+
+    .map-popup-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.80rem;
+      font-weight: 600;
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+      border-radius: 100px;
+      padding: 6px 14px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .map-popup-link:hover {
+      background: rgba(255,255,255,0.20);
+      color: #fff;
+    }
+
+    /* ── Hidden items ────────────────────────────────────────── */
+    .map-list-item.hidden { display: none; }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 767px) {
+      .map-page-layout {
+        flex-direction: column;
+        height: auto;
+      }
+      .map-sidebar {
+        width: 100%;
+        max-height: 45vh;
+      }
+      .map-container {
+        height: 55vh;
+      }
+      body { overflow: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress -->
+  <div id="scroll-progress"></div>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Texas Corners</div>
+  </div>
+
+  <!-- ─── Disclaimer Bar ──────────────────────────────────────────── -->
+  <div class="disclaimer-bar">
+    <i class="fa-solid fa-circle-info"></i>
+    <span>This is an independent community guide — <strong>not</strong> the official Texas Township government website. For official township services visit <a href="https://www.texastownship.org" target="_blank" rel="noopener">texastownship.org</a>.</span>
+  </div>
+
+  <!-- ─── Navigation ─────────────────────────────────────────────── -->
+  <nav id="main-nav" class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html">
+        Texas <span>Corners</span>
+      </a>
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+
+          <li class="nav-item">
+            <a class="nav-link" href="/index.html">Home</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              Parks &amp; Facilities
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/texas_drive_park.html">Texas Drive Park</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/maple_hill_splash_pad.html">Maple Hill Splash Pad</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/6th_street_park.html">6th Street Park</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/pocket_park.html">Pocket Park</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/texas_township_trailway.html">Texas Township Trailway</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/farmers_market_pavilion.html">Farmers Market Pavilion</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/al_sabo_land_preserve.html">Al Sabo Land Preserve</a></li>
+              <li><a class="dropdown-item" href="/Parks%20and%20Facilities/woollam_nature_preserve.html">Woollam Nature Preserve</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              Food
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/Food/biggby_coffee.html">Biggby Coffee</a></li>
+              <li><a class="dropdown-item" href="/Food/bold.html">Bold</a></li>
+              <li><a class="dropdown-item" href="/Food/fletchers_pub.html">Fletcher's Pub</a></li>
+              <li><a class="dropdown-item" href="/Food/gusto.html">Gusto</a></li>
+              <li><a class="dropdown-item" href="/Food/holy_taco.html">Holy Taco</a></li>
+              <li><a class="dropdown-item" href="/Food/hunan_garden.html">Hunan Garden</a></li>
+              <li><a class="dropdown-item" href="/Food/hungry_howies_pizza.html">Hungry Howie's Pizza</a></li>
+              <li><a class="dropdown-item" href="/Food/louies_corner_bar.html">Louie's Corner Bar</a></li>
+              <li><a class="dropdown-item" href="/Food/rykse_and_co.html">Rykse &amp; Co</a></li>
+              <li><a class="dropdown-item" href="/Food/sura.html">Sura</a></li>
+              <li><a class="dropdown-item" href="/Food/texas_corners_brewing.html">Texas Corners Brewing</a></li>
+              <li><a class="dropdown-item" href="/Food/zebs_trading_company.html">Zeb's Trading Company</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              Businesses
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/Buisnesses/allure_skin_and_beauty.html">Allure Skin &amp; Beauty</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/citgo.html">Citgo</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/daves_glass_service.html">Dave's Glass Service</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/klh_custom_homes.html">KLH Custom Homes</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/lee_and_birch_kalamazoo.html">Lee &amp; Birch</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/pink_lemonade.html">Pink Lemonade</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/refined_mens_grooming.html">Refined Men's Grooming</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/texas_corners_ace_hardware.html">Texas Corners Ace Hardware</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/the_cheese_lady.html">The Cheese Lady</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/vca_texas_corners_animal_hospital.html">VCA Animal Hospital</a></li>
+              <li><a class="dropdown-item" href="/Buisnesses/vs_bogeys_and_stogies.html">VS Bogey's &amp; Stogies</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/calendar.html">Calendar</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="/map.html">Map</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── Map Page Layout ─────────────────────────────────────────── -->
+  <div class="map-page-layout">
+
+    <!-- Sidebar -->
+    <aside class="map-sidebar">
+
+      <div class="map-sidebar-head">
+        <h2>Explore Texas Corners</h2>
+        <p>Click any location to navigate</p>
+        <input
+          type="text"
+          id="map-search"
+          class="map-search-input"
+          placeholder="Search locations…"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Search locations"
+        >
+      </div>
+
+      <div class="map-filter-tabs">
+        <button class="map-tab active" data-filter="all">All</button>
+        <button class="map-tab" data-filter="food">Food &amp; Drink</button>
+        <button class="map-tab" data-filter="business">Businesses</button>
+        <button class="map-tab" data-filter="park">Parks</button>
+      </div>
+
+      <div class="map-list" id="map-list">
+        <!-- Items injected by JavaScript -->
+      </div>
+
+    </aside>
+
+    <!-- Map -->
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+
+  </div>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────── -->
+  <footer id="contact" style="display:none">
+    <!-- Footer hidden on map page to preserve full-viewport layout.
+         Uncomment and remove style="display:none" if footer is desired. -->
+    <div class="container">
+      <div class="footer-top">
+
+        <div class="footer-col-brand">
+          <div class="footer-brand">Texas Corners</div>
+          <p class="footer-tagline">An independent community guide to the parks, dining, and businesses of Texas Corners — not affiliated with the Charter Township of Texas.</p>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-envelope"></i>
+            <a href="mailto:texascornerscontact@gmail.com">texascornerscontact@gmail.com</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Texas Corners, Kalamazoo County, MI 49009</span>
+          </div>
+          <div class="footer-contact-item footer-twp-contact">
+            <i class="fa-solid fa-building-columns"></i>
+            <div>
+              <strong>Township Office</strong>
+              <a href="tel:2693751591">269-375-1591</a>
+              <a href="mailto:info@texastownship.org">info@texastownship.org</a>
+              <span>Mon–Thu 8–5 &nbsp;|&nbsp; Fri 8–12</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-heading">Parks</h4>
+          <ul class="footer-links">
+            <li><a href="/Parks%20and%20Facilities/texas_drive_park.html">Texas Drive Park</a></li>
+            <li><a href="/Parks%20and%20Facilities/maple_hill_splash_pad.html">Maple Hill Splash Pad</a></li>
+            <li><a href="/Parks%20and%20Facilities/6th_street_park.html">6th Street Park</a></li>
+            <li><a href="/Parks%20and%20Facilities/pocket_park.html">Pocket Park</a></li>
+            <li><a href="/Parks%20and%20Facilities/al_sabo_land_preserve.html">Al Sabo Preserve</a></li>
+            <li><a href="/Parks%20and%20Facilities/woollam_nature_preserve.html">Woollam Preserve</a></li>
+            <li><a href="/Parks%20and%20Facilities/texas_township_trailway.html">Township Trailway</a></li>
+            <li><a href="/Parks%20and%20Facilities/farmers_market_pavilion.html">Farmers Market</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-heading">Dining</h4>
+          <ul class="footer-links">
+            <li><a href="/Food/texas_corners_brewing.html">TX Corners Brewing</a></li>
+            <li><a href="/Food/bold.html">Bold</a></li>
+            <li><a href="/Food/gusto.html">Gusto</a></li>
+            <li><a href="/Food/sura.html">Sura Korean BBQ</a></li>
+            <li><a href="/Food/fletchers_pub.html">Fletcher's Pub</a></li>
+            <li><a href="/Food/louies_corner_bar.html">Louie's Corner Bar</a></li>
+            <li><a href="/Food/rykse_and_co.html">Rykse &amp; Co</a></li>
+            <li><a href="/Food/biggby_coffee.html">Biggby Coffee</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-heading">Businesses</h4>
+          <ul class="footer-links">
+            <li><a href="/Buisnesses/texas_corners_ace_hardware.html">Ace Hardware</a></li>
+            <li><a href="/Buisnesses/the_cheese_lady.html">The Cheese Lady</a></li>
+            <li><a href="/Buisnesses/allure_skin_and_beauty.html">Allure Skin &amp; Beauty</a></li>
+            <li><a href="/Buisnesses/vs_bogeys_and_stogies.html">VS Bogey's &amp; Stogies</a></li>
+            <li><a href="/Buisnesses/vca_texas_corners_animal_hospital.html">VCA Animal Hospital</a></li>
+            <li><a href="/Buisnesses/lee_and_birch_kalamazoo.html">Lee &amp; Birch</a></li>
+            <li><a href="/Buisnesses/klh_custom_homes.html">KLH Custom Homes</a></li>
+            <li><a href="/Buisnesses/refined_mens_grooming.html">Refined Men's Grooming</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-heading">This Site</h4>
+          <ul class="footer-links">
+            <li><a href="/index.html#faq">FAQ</a></li>
+            <li><a href="/index.html#explore">About Texas Corners</a></li>
+            <li><a href="mailto:texascornerscontact@gmail.com">Contact Us</a></li>
+            <li><a href="mailto:texascornerscontact@gmail.com">List Your Business</a></li>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/terms.html">Terms of Use</a></li>
+            <li><a href="/accessibility.html">Accessibility</a></li>
+          </ul>
+          <h4 class="footer-col-heading" style="margin-top:24px">Township Gov.</h4>
+          <ul class="footer-links">
+            <li><a href="https://www.texastownship.org" target="_blank" rel="noopener">Official Website ↗</a></li>
+            <li><a href="https://www.texastownship.org" target="_blank" rel="noopener">Permits &amp; Applications</a></li>
+            <li><a href="https://www.texastownship.org" target="_blank" rel="noopener">Pay Property Taxes</a></li>
+            <li><a href="https://www.texastownship.org" target="_blank" rel="noopener">FOIA Requests</a></li>
+            <li><a href="https://www.texastownship.org" target="_blank" rel="noopener">Meeting Agendas</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-disclaimer">
+        <i class="fa-solid fa-circle-info"></i>
+        <p>This website is an independent community resource and is not affiliated with or endorsed by Texas Township, Kalamazoo County, or any government entity. Business information is provided for informational purposes only and may not reflect current hours or offerings.</p>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy">&copy; 2026 Texas Corners Community Guide. All rights reserved.</span>
+        <div class="footer-legal-links">
+          <a href="/privacy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms of Use</a>
+          <a href="/accessibility.html">Accessibility</a>
+          <a href="mailto:texascornerscontact@gmail.com">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <!-- Bootstrap 5 Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Custom JS -->
+  <script src="/main.js"></script>
+
+  <!-- ─── Map Script ──────────────────────────────────────────────── -->
+  <script>
+    /* ── Location data ───────────────────────────────────────── */
+    const locations = [
+      // Food & Drink
+      { name: "Texas Corners Brewing", cat: "Brewery",           type: "food",     lat: 42.2304, lng: -85.6668, url: "/Food/texas_corners_brewing.html" },
+      { name: "Bold",                  cat: "Restaurant",         type: "food",     lat: 42.2308, lng: -85.6662, url: "/Food/bold.html" },
+      { name: "Gusto",                 cat: "Restaurant",         type: "food",     lat: 42.2311, lng: -85.6658, url: "/Food/gusto.html" },
+      { name: "Sura Korean BBQ",       cat: "Korean BBQ",         type: "food",     lat: 42.2315, lng: -85.6654, url: "/Food/sura.html" },
+      { name: "Fletcher's Pub",        cat: "Bar & Grill",        type: "food",     lat: 42.2318, lng: -85.6650, url: "/Food/fletchers_pub.html" },
+      { name: "Louie's Corner Bar",    cat: "Bar",                type: "food",     lat: 42.2306, lng: -85.6672, url: "/Food/louies_corner_bar.html" },
+      { name: "Rykse & Co",            cat: "Restaurant",         type: "food",     lat: 42.2321, lng: -85.6646, url: "/Food/rykse_and_co.html" },
+      { name: "Biggby Coffee",         cat: "Coffee",             type: "food",     lat: 42.2324, lng: -85.6642, url: "/Food/biggby_coffee.html" },
+      { name: "Holy Taco",             cat: "Restaurant",         type: "food",     lat: 42.2302, lng: -85.6676, url: "/Food/holy_taco.html" },
+      { name: "Hunan Garden",          cat: "Restaurant",         type: "food",     lat: 42.2299, lng: -85.6680, url: "/Food/hunan_garden.html" },
+      { name: "Hungry Howie's Pizza",  cat: "Pizza",              type: "food",     lat: 42.2327, lng: -85.6638, url: "/Food/hungry_howies_pizza.html" },
+      { name: "Zeb's Trading Company", cat: "Restaurant",         type: "food",     lat: 42.2296, lng: -85.6684, url: "/Food/zebs_trading_company.html" },
+      // Businesses
+      { name: "VS Bogey's & Stogies",         cat: "Golf & Cigars",       type: "business", lat: 42.2330, lng: -85.6634, url: "/Buisnesses/vs_bogeys_and_stogies.html" },
+      { name: "Texas Corners Ace Hardware",   cat: "Hardware",            type: "business", lat: 42.2333, lng: -85.6630, url: "/Buisnesses/texas_corners_ace_hardware.html" },
+      { name: "Allure Skin & Beauty",         cat: "Beauty",              type: "business", lat: 42.2336, lng: -85.6626, url: "/Buisnesses/allure_skin_and_beauty.html" },
+      { name: "Lee & Birch",                  cat: "Boutique",            type: "business", lat: 42.2339, lng: -85.6622, url: "/Buisnesses/lee_and_birch_kalamazoo.html" },
+      { name: "The Cheese Lady",              cat: "Specialty Food",      type: "business", lat: 42.2342, lng: -85.6618, url: "/Buisnesses/the_cheese_lady.html" },
+      { name: "Pink Lemonade",                cat: "Children's Boutique", type: "business", lat: 42.2345, lng: -85.6614, url: "/Buisnesses/pink_lemonade.html" },
+      { name: "Refined Men's Grooming",       cat: "Grooming",            type: "business", lat: 42.2293, lng: -85.6688, url: "/Buisnesses/refined_mens_grooming.html" },
+      { name: "VCA Animal Hospital",          cat: "Veterinary",          type: "business", lat: 42.2290, lng: -85.6692, url: "/Buisnesses/vca_texas_corners_animal_hospital.html" },
+      { name: "KLH Custom Homes",             cat: "Home Builder",        type: "business", lat: 42.2287, lng: -85.6696, url: "/Buisnesses/klh_custom_homes.html" },
+      { name: "Dave's Glass Service",         cat: "Glass & Auto",        type: "business", lat: 42.2348, lng: -85.6610, url: "/Buisnesses/daves_glass_service.html" },
+      { name: "Citgo",                        cat: "Gas Station",         type: "business", lat: 42.2284, lng: -85.6700, url: "/Buisnesses/citgo.html" },
+      // Parks
+      { name: "Texas Drive Park",         cat: "Park",     type: "park", lat: 42.2270, lng: -85.6720, url: "/Parks%20and%20Facilities/texas_drive_park.html" },
+      { name: "Maple Hill Splash Pad",    cat: "Park",     type: "park", lat: 42.2355, lng: -85.6600, url: "/Parks%20and%20Facilities/maple_hill_splash_pad.html" },
+      { name: "6th Street Park",          cat: "Park",     type: "park", lat: 42.2360, lng: -85.6590, url: "/Parks%20and%20Facilities/6th_street_park.html" },
+      { name: "Pocket Park",              cat: "Park",     type: "park", lat: 42.2313, lng: -85.6660, url: "/Parks%20and%20Facilities/pocket_park.html" },
+      { name: "Texas Township Trailway",  cat: "Trail",    type: "park", lat: 42.2280, lng: -85.6710, url: "/Parks%20and%20Facilities/texas_township_trailway.html" },
+      { name: "Farmers Market Pavilion",  cat: "Facility", type: "park", lat: 42.2307, lng: -85.6665, url: "/Parks%20and%20Facilities/farmers_market_pavilion.html" },
+      { name: "Al Sabo Land Preserve",    cat: "Preserve", type: "park", lat: 42.2100, lng: -85.6520, url: "/Parks%20and%20Facilities/al_sabo_land_preserve.html" },
+      { name: "Woollam Nature Preserve",  cat: "Preserve", type: "park", lat: 42.2450, lng: -85.6750, url: "/Parks%20and%20Facilities/woollam_nature_preserve.html" }
+    ];
+
+    /* ── Colour config ───────────────────────────────────────── */
+    const typeColors = {
+      food:     '#FFB432',
+      business: '#6AA0FF',
+      park:     '#50DC8C'
+    };
+
+    /* ── Initialize map ──────────────────────────────────────── */
+    const map = L.map('map', {
+      center: [42.2311, -85.6692],
+      zoom: 14,
+      zoomControl: true
+    });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 20
+    }).addTo(map);
+
+    /* ── Build markers & sidebar items ──────────────────────── */
+    const markers = [];
+    const listEl  = document.getElementById('map-list');
+
+    locations.forEach(function(loc, idx) {
+      const color = typeColors[loc.type];
+
+      /* Circle marker */
+      const marker = L.circleMarker([loc.lat, loc.lng], {
+        radius:      8,
+        fillColor:   color,
+        fillOpacity: 0.85,
+        color:       'rgba(255,255,255,0.3)',
+        weight:      2
+      }).addTo(map);
+
+      /* Popup content */
+      const popupHtml =
+        '<div class="map-popup-name">' + loc.name + '</div>' +
+        '<div class="map-popup-cat">' + loc.cat + '</div>' +
+        '<a class="map-popup-link" href="' + loc.url + '">View Page &rarr;</a>';
+
+      marker.bindPopup(popupHtml, {
+        maxWidth: 220,
+        className: 'map-dark-popup'
+      });
+
+      marker.on('click', function() {
+        /* Highlight matching sidebar item */
+        document.querySelectorAll('.map-list-item').forEach(function(el) {
+          el.classList.remove('highlighted');
+        });
+        var sidebarItem = document.querySelector('[data-idx="' + idx + '"]');
+        if (sidebarItem) {
+          sidebarItem.classList.add('highlighted');
+          sidebarItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+
+      markers.push(marker);
+
+      /* Sidebar list item */
+      const item = document.createElement('a');
+      item.className = 'map-list-item';
+      item.href = loc.url;
+      item.setAttribute('data-idx', idx);
+      item.setAttribute('data-type', loc.type);
+      item.setAttribute('data-name', loc.name.toLowerCase());
+      item.setAttribute('data-lat', loc.lat);
+      item.setAttribute('data-lng', loc.lng);
+
+      item.innerHTML =
+        '<span class="map-list-dot ' + loc.type + '"></span>' +
+        '<span class="map-list-name">' + loc.name + '</span>' +
+        '<span class="map-list-cat">' + loc.cat + '</span>' +
+        '<span class="map-list-arrow"><i class="fa-solid fa-chevron-right"></i></span>';
+
+      /* Click: fly to marker and open popup */
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        map.flyTo([loc.lat, loc.lng], 17, { animate: true, duration: 0.8 });
+        setTimeout(function() {
+          markers[idx].openPopup();
+        }, 900);
+
+        /* Highlight */
+        document.querySelectorAll('.map-list-item').forEach(function(el) {
+          el.classList.remove('highlighted');
+        });
+        item.classList.add('highlighted');
+      });
+
+      listEl.appendChild(item);
+    });
+
+    /* ── Filter tabs ─────────────────────────────────────────── */
+    var currentFilter = 'all';
+
+    document.querySelectorAll('.map-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.map-tab').forEach(function(t) {
+          t.classList.remove('active');
+        });
+        tab.classList.add('active');
+        currentFilter = tab.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+
+    /* ── Search ──────────────────────────────────────────────── */
+    var searchQuery = '';
+    document.getElementById('map-search').addEventListener('input', function(e) {
+      searchQuery = e.target.value.toLowerCase().trim();
+      applyFilters();
+    });
+
+    /* ── Apply both filter + search ──────────────────────────── */
+    function applyFilters() {
+      document.querySelectorAll('.map-list-item').forEach(function(item) {
+        var type = item.getAttribute('data-type');
+        var name = item.getAttribute('data-name');
+        var idx  = parseInt(item.getAttribute('data-idx'), 10);
+
+        var passesFilter = (currentFilter === 'all' || type === currentFilter);
+        var passesSearch = (searchQuery === '' || name.indexOf(searchQuery) !== -1);
+        var visible = passesFilter && passesSearch;
+
+        if (visible) {
+          item.classList.remove('hidden');
+          markers[idx].setStyle({ fillOpacity: 0.85, opacity: 1 });
+          if (!map.hasLayer(markers[idx])) {
+            markers[idx].addTo(map);
+          }
+        } else {
+          item.classList.add('hidden');
+          markers[idx].setStyle({ fillOpacity: 0.12, opacity: 0.3 });
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
