@@ -1401,7 +1401,7 @@ footer {
   overflow-y: visible;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 28px 80px 48px 40px;
+  padding: 28px 80px 48px 100px;
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
@@ -1412,7 +1412,7 @@ footer {
 
 /* Cards inside scroll track */
 .scroll-track .location-card {
-  flex: 0 0 270px;
+  flex: 0 0 clamp(240px, 21vw, 310px);
   height: 360px;
   border-radius: 22px;
   scroll-snap-align: start;
