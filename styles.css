@@ -114,7 +114,7 @@ img { display: block; max-width: 100%; }
 /* ─── Navigation ─────────────────────────────────────────────── */
 #main-nav {
   position: fixed;
-  top: 18px;
+  top: 52px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 48px);
@@ -1491,6 +1491,259 @@ footer {
   .scroll-track .location-card:last-child  { margin-right: 20px; }
   .scroll-arrow { display: none; }
 }
+
+/* ─── Disclaimer Bar ─────────────────────────────────────────── */
+.disclaimer-bar {
+  width: 100%;
+  background: rgba(255, 200, 50, 0.08);
+  border-bottom: 1px solid rgba(255, 200, 50, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 9px 20px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: rgba(255, 230, 120, 0.90);
+  text-align: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 200;
+}
+.disclaimer-bar i { font-size: 0.85rem; flex-shrink: 0; }
+.disclaimer-bar a { color: rgba(255, 230, 120, 1); text-decoration: underline; text-underline-offset: 2px; }
+.disclaimer-bar a:hover { color: #fff; }
+
+/* ─── Township Info Section ──────────────────────────────────── */
+.township-info { padding: 100px 0; }
+
+.twp-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgba(255, 200, 50, 0.06);
+  border: 1px solid rgba(255, 200, 50, 0.20);
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+.twp-notice > i {
+  font-size: 1.1rem;
+  color: rgba(255, 210, 70, 0.9);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.twp-notice > div {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.twp-notice strong { font-size: 0.88rem; color: rgba(255, 225, 100, 0.95); font-weight: 600; }
+.twp-notice span   { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+.twp-notice-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255, 225, 100, 0.90);
+  border: 1px solid rgba(255, 200, 50, 0.28);
+  border-radius: 100px;
+  padding: 6px 14px;
+  white-space: nowrap;
+  align-self: center;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+}
+.twp-notice-link:hover { background: rgba(255,200,50,0.12); color: #fff; }
+
+.twp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 36px;
+}
+@media (max-width: 991px) { .twp-grid { grid-template-columns: 1fr; } }
+
+.twp-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  backdrop-filter: var(--blur-sm);
+  -webkit-backdrop-filter: var(--blur-sm);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.twp-card:hover {
+  border-color: var(--glass-border-h);
+  box-shadow: var(--shadow-md);
+}
+.twp-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.twp-card-icon {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: var(--glass-md);
+  border: 1px solid var(--glass-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  color: var(--text-soft);
+  flex-shrink: 0;
+}
+.twp-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.twp-info-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.twp-info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: var(--text-soft);
+}
+.twp-info-list li i {
+  width: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.twp-info-list a { color: var(--text-soft); text-decoration: none; }
+.twp-info-list a:hover { color: var(--text); }
+
+.twp-hours {
+  border-top: 1px solid var(--glass-border);
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.twp-hours-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.twp-hours-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.84rem;
+  color: var(--text-soft);
+}
+.twp-closed { color: var(--text-faint); }
+
+.twp-services-list {
+  list-style: none;
+  padding: 0; margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.twp-services-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.86rem;
+  color: var(--text-soft);
+}
+.twp-services-list li i {
+  width: 16px;
+  text-align: center;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.twp-official-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  border: 1px solid var(--glass-border-h);
+  border-radius: 100px;
+  padding: 10px 18px;
+  margin-top: auto;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  align-self: flex-start;
+}
+.twp-official-btn:hover { background: var(--glass-md); color: var(--text); border-color: rgba(255,255,255,0.3); }
+
+/* Government board strip */
+.twp-gov {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 24px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+.twp-gov-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 160px;
+  padding: 12px 16px;
+  background: var(--glass-md);
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+}
+.twp-gov-item > i {
+  font-size: 1rem;
+  color: var(--text-muted);
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+.twp-gov-item > div {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.twp-gov-item strong { font-size: 0.82rem; font-weight: 600; color: var(--text-soft); }
+.twp-gov-item span   { font-size: 0.72rem; color: var(--text-muted); }
+
+/* Footer township contact block */
+.footer-twp-contact {
+  align-items: flex-start !important;
+  margin-top: 4px;
+}
+.footer-twp-contact > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.footer-twp-contact strong { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.footer-twp-contact a, .footer-twp-contact span { font-size: 0.8rem; color: rgba(255,255,255,0.50); }
+.footer-twp-contact a:hover { color: var(--text); }
 
 /* ─── Text/Legal Pages ────────────────────────────────────────── */
 .text-hero {
