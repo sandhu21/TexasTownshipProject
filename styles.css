@@ -1389,16 +1389,14 @@ footer {
 .scroll-row {
   position: relative;
   width: 100%;
-  overflow: visible;
 }
 .scroll-track {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   overflow-x: auto;
-  overflow-y: visible;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  padding: 28px 80px 48px 80px;
+  scroll-padding-left: 80px;
+  padding: 32px 0 52px;
   scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
@@ -1407,18 +1405,28 @@ footer {
 .scroll-track.is-dragging { cursor: grabbing; user-select: none; }
 .scroll-track.is-dragging .location-card { pointer-events: none; }
 
-/* Cards inside scroll track */
+/* Cards inside scroll track — exactly 4 visible */
 .scroll-track .location-card {
-  flex: 0 0 calc((100vw - 216px) / 4);
-  min-width: 220px;
-  max-width: 340px;
-  height: 360px;
+  flex: 0 0 calc((100vw - 208px) / 4);
+  min-width: 200px;
+  max-width: 360px;
+  height: 380px;
   border-radius: 22px;
   scroll-snap-align: start;
-  will-change: transform;
-  transition: transform 0.50s var(--ease), box-shadow 0.50s var(--ease), border-color 0.3s;
+  transition: box-shadow 0.45s var(--ease), border-color 0.3s;
   cursor: pointer;
 }
+/* Push first card away from edge */
+.scroll-track .location-card:first-child { margin-left: 80px; }
+/* Keep right breathing room */
+.scroll-track .location-card:last-child  { margin-right: 80px; }
+
+.scroll-track .location-card:hover {
+  box-shadow: 0 24px 60px rgba(0,0,0,0.65);
+  border-color: rgba(255,255,255,0.18);
+}
+
+/* Subtle shine on hover */
 .scroll-track .location-card::after {
   content: '';
   position: absolute;
@@ -1427,64 +1435,61 @@ footer {
   border-radius: 22px;
   background: radial-gradient(
     circle at var(--mx, 50%) var(--my, 50%),
-    rgba(255,255,255,0.10) 0%,
+    rgba(255,255,255,0.08) 0%,
     transparent 60%
   );
   opacity: 0;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.3s ease;
   pointer-events: none;
 }
 .scroll-track .location-card:hover::after { opacity: 1; }
-.scroll-track .location-card:hover {
-  transform: translateY(-10px) scale(1.025);
-  box-shadow: 0 32px 80px rgba(0,0,0,0.70);
-  border-color: rgba(255,255,255,0.18);
-}
 
-/* Fade right edge only — hints there are more cards */
+/* Right fade — hint that more cards exist */
 .scroll-row::after {
   content: '';
   position: absolute;
   top: 0; bottom: 0; right: 0;
-  width: 80px;
+  width: 100px;
   z-index: 5;
   pointer-events: none;
-  background: linear-gradient(to left, #000000 0%, transparent 100%);
+  background: linear-gradient(to left, #000 20%, transparent 100%);
 }
-.section-alt .scroll-row::after { background: linear-gradient(to left, #0a0a0a 0%, transparent 100%); }
+.section-alt .scroll-row::after { background: linear-gradient(to left, #0a0a0a 20%, transparent 100%); }
 
 /* Scroll arrows */
 .scroll-arrow {
   position: absolute;
   top: 50%; transform: translateY(-50%);
   z-index: 10;
-  width: 46px; height: 46px;
+  width: 48px; height: 48px;
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.14);
-  background: rgba(8,8,8,0.85);
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(10,10,10,0.90);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.90);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
-  font-size: 0.82rem;
-  transition: all 0.2s ease;
+  font-size: 0.85rem;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
   opacity: 0;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.50);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.60);
 }
 .scroll-row:hover .scroll-arrow { opacity: 1; }
 .scroll-arrow:hover {
-  background: rgba(30,30,30,0.95);
-  border-color: rgba(255,255,255,0.30);
-  transform: translateY(-50%) scale(1.08);
+  background: rgba(30,30,30,1);
+  border-color: rgba(255,255,255,0.35);
+  transform: translateY(-50%) scale(1.1);
 }
-.scroll-arrow.arrow-left  { left: 10px; }
-.scroll-arrow.arrow-right { right: 10px; }
+.scroll-arrow.arrow-left  { left: 20px; }
+.scroll-arrow.arrow-right { right: 20px; }
+
 @media (max-width: 767px) {
-  .scroll-track { padding: 20px 40px 36px 20px; }
-  .scroll-track .location-card { flex: 0 0 220px; height: 300px; }
+  .scroll-track { padding: 20px 0 36px; scroll-padding-left: 20px; }
+  .scroll-track .location-card { flex: 0 0 72vw; min-width: 200px; max-width: 300px; height: 300px; }
+  .scroll-track .location-card:first-child { margin-left: 20px; }
+  .scroll-track .location-card:last-child  { margin-right: 20px; }
   .scroll-arrow { display: none; }
-  .scroll-row::before, .scroll-row::after { width: 32px; }
 }
 
 /* ─── Text/Legal Pages ────────────────────────────────────────── */

@@ -366,24 +366,38 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ─── Horizontal Scroll — Drag to Scroll ───────────────────────
+  // Only enters drag mode after 6px movement — simple clicks still work
   document.querySelectorAll('.scroll-track').forEach(function (track) {
-    var isDown = false, startX = 0, scrollLeft = 0;
+    var isDown = false, isDragging = false, startX = 0, scrollLeft = 0;
+
     track.addEventListener('mousedown', function (e) {
       isDown = true;
-      track.classList.add('is-dragging');
-      startX = e.pageX - track.offsetLeft;
+      isDragging = false;
+      startX = e.pageX;
       scrollLeft = track.scrollLeft;
     });
+
     document.addEventListener('mouseup', function () {
       isDown = false;
+      isDragging = false;
       track.classList.remove('is-dragging');
     });
+
     track.addEventListener('mousemove', function (e) {
       if (!isDown) return;
+      var delta = e.pageX - startX;
+      if (!isDragging && Math.abs(delta) < 6) return; // threshold — not a drag yet
+      isDragging = true;
+      track.classList.add('is-dragging');
       e.preventDefault();
-      var x = e.pageX - track.offsetLeft;
-      track.scrollLeft = scrollLeft - (x - startX) * 1.4;
+      track.scrollLeft = scrollLeft - delta * 1.3;
     });
+
+    // Prevent click navigation after a drag
+    track.addEventListener('click', function (e) {
+      if (isDragging) e.preventDefault();
+    }, true);
+
     track.addEventListener('touchstart', function (e) {
       startX = e.touches[0].pageX;
       scrollLeft = track.scrollLeft;
