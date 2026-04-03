@@ -3,300 +3,471 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Interactive map of all Texas Corners locations — parks, restaurants, and businesses in Texas Corners Township, Kalamazoo, MI.">
-  <title>Interactive Map — Texas Corners</title>
+  <meta name="description" content="Interactive Texas Corners map powered by Google Maps, with searchable parks, restaurants, and local businesses in Texas Township, Michigan.">
+  <title>Interactive Map | Texas Corners</title>
 
-  <!-- Bootstrap 5 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <!-- Custom Styles -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 
   <style>
-    /* ── Map page overrides ───────────────────────────────────── */
-    body { overflow: hidden; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
 
-    .map-page-layout {
-      display: flex;
-      height: calc(100vh - 120px);
-      margin-top: 120px;
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(231, 150, 48, 0.12), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(38, 92, 255, 0.14), transparent 32%),
+        #050505;
+    }
+
+    .map-shell {
+      height: 100vh;
+      padding-top: 112px;
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: 380px minmax(0, 1fr);
+      height: calc(100vh - 112px);
+      min-height: 0;
     }
 
     .map-sidebar {
-      width: 380px;
-      flex-shrink: 0;
-      overflow-y: auto;
-      background: rgba(8,8,8,0.95);
       border-right: 1px solid rgba(255,255,255,0.08);
+      background: rgba(9, 9, 9, 0.9);
+      backdrop-filter: blur(22px);
       display: flex;
       flex-direction: column;
+      min-height: 0;
     }
 
-    .map-sidebar-head {
-      padding: 20px;
+    .map-sidebar-header {
+      padding: 22px 20px 18px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    .map-sidebar-head h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.1rem;
+    .map-sidebar-eyebrow {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.65);
+      font-size: 0.68rem;
       font-weight: 700;
-      color: #fff;
-      margin: 0 0 4px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
     }
 
-    .map-sidebar-head p {
+    .map-sidebar-title {
+      margin: 0 0 6px;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .map-sidebar-copy {
+      margin: 0 0 18px;
+      color: rgba(255,255,255,0.56);
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .map-sidebar-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+      color: rgba(255,255,255,0.62);
       font-size: 0.78rem;
+    }
+
+    .map-search-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      padding: 12px 14px;
+    }
+
+    .map-search-wrap i,
+    .map-search-clear {
       color: rgba(255,255,255,0.45);
-      margin: 0 0 14px;
+      font-size: 0.85rem;
     }
 
     .map-search-input {
       width: 100%;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 10px;
-      padding: 9px 14px;
-      color: #fff;
-      font-size: 0.84rem;
+      background: transparent;
+      border: none;
       outline: none;
-      font-family: 'Outfit', sans-serif;
+      color: #fff;
+      font-size: 0.9rem;
     }
 
     .map-search-input::placeholder {
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.32);
     }
 
-    .map-filter-tabs {
+    .map-search-clear {
+      display: none;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .map-search-clear.visible {
+      display: inline-flex;
+    }
+
+    .map-filter-row {
       display: flex;
-      gap: 6px;
-      padding: 14px 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
       flex-wrap: wrap;
+      gap: 8px;
+      padding: 16px 20px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    .map-tab {
-      font-size: 0.75rem;
-      font-weight: 600;
-      font-family: 'Outfit', sans-serif;
-      padding: 6px 14px;
-      border-radius: 100px;
-      border: 1px solid rgba(255,255,255,0.14);
+    .map-filter,
+    .map-filter-clear {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
       background: transparent;
-      color: rgba(255,255,255,0.55);
-      cursor: pointer;
-      transition: all 0.2s;
+      color: rgba(255,255,255,0.62);
+      padding: 7px 12px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: 0.18s ease;
     }
 
-    .map-tab.active,
-    .map-tab:hover {
-      background: rgba(255,255,255,0.12);
+    .map-filter:hover,
+    .map-filter.active {
       color: #fff;
       border-color: rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.09);
+    }
+
+    .map-filter-clear {
+      display: none;
+    }
+
+    .map-filter-clear.visible {
+      display: inline-flex;
     }
 
     .map-list {
       flex: 1;
-      overflow-y: auto;
-      padding: 8px;
+      overflow: auto;
+      padding: 10px 12px 0;
+    }
+
+    .map-group-heading {
+      padding: 12px 10px 8px;
+      color: rgba(255,255,255,0.34);
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .map-group-heading.hidden,
+    .map-list-item.hidden {
+      display: none;
     }
 
     .map-list-item {
+      width: 100%;
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 11px 14px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background 0.15s;
-      text-decoration: none;
+      margin-bottom: 6px;
+      padding: 12px;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
       color: #fff;
-      margin-bottom: 2px;
+      transition: 0.18s ease;
     }
 
     .map-list-item:hover,
-    .map-list-item.highlighted {
-      background: rgba(255,255,255,0.09);
-      color: #fff;
+    .map-list-item.active {
+      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-1px);
     }
 
-    .map-list-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
+    .map-list-marker {
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 700;
       flex-shrink: 0;
     }
 
-    .map-list-dot.food {
-      background: #FFB432;
-      box-shadow: 0 0 6px rgba(255,180,50,0.5);
-    }
+    .map-list-marker--food { background: #e68a00; }
+    .map-list-marker--business { background: #2962ff; }
+    .map-list-marker--park { background: #118a4b; }
 
-    .map-list-dot.business {
-      background: #6AA0FF;
-      box-shadow: 0 0 6px rgba(106,160,255,0.5);
-    }
-
-    .map-list-dot.park {
-      background: #50DC8C;
-      box-shadow: 0 0 6px rgba(80,220,140,0.5);
+    .map-list-copy {
+      min-width: 0;
+      flex: 1;
     }
 
     .map-list-name {
-      flex: 1;
-      font-size: 0.86rem;
-      font-weight: 500;
-      min-width: 0;
+      display: block;
+      color: #fff;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .map-list-meta,
+    .map-list-address {
+      display: block;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .map-list-cat {
+    .map-list-meta {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .map-list-address {
+      color: rgba(255,255,255,0.36);
+      font-size: 0.78rem;
+      margin-top: 5px;
+    }
+
+    .map-list-chevron {
+      color: rgba(255,255,255,0.2);
+      font-size: 0.75rem;
+    }
+
+    .map-detail {
+      padding: 16px 20px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .detail-badge {
+      display: inline-flex;
+      padding: 5px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      color: #fff;
       font-size: 0.68rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.40);
-      flex-shrink: 0;
-    }
-
-    .map-list-arrow {
-      font-size: 0.70rem;
-      color: rgba(255,255,255,0.25);
-      flex-shrink: 0;
-    }
-
-    .map-container { flex: 1; }
-
-    #map { width: 100%; height: 100%; }
-
-    /* ── Leaflet popup dark skin ─────────────────────────────── */
-    .leaflet-popup-content-wrapper {
-      background: rgba(15,15,15,0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 14px;
-      color: #fff;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-    }
-
-    .leaflet-popup-tip {
-      background: rgba(15,15,15,0.95);
-    }
-
-    .leaflet-popup-close-button {
-      color: rgba(255,255,255,0.5) !important;
-    }
-
-    .leaflet-popup-close-button:hover {
-      color: #fff !important;
-    }
-
-    .map-popup-name {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.95rem;
       font-weight: 700;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-
-    .map-popup-cat {
-      font-size: 0.72rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 10px;
     }
 
-    .map-popup-link {
+    .detail-badge--food { background: rgba(230,138,0,0.18); }
+    .detail-badge--business { background: rgba(41,98,255,0.18); }
+    .detail-badge--park { background: rgba(17,138,75,0.18); }
+
+    .detail-title {
+      margin: 0 0 4px;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .detail-subtitle,
+    .detail-address {
+      margin: 0;
+      color: rgba(255,255,255,0.52);
+      font-size: 0.86rem;
+    }
+
+    .detail-address {
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    .detail-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .detail-btn,
+    .detail-secondary {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.80rem;
+      justify-content: center;
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 10px 12px;
+      color: #fff;
+      background: rgba(255,255,255,0.05);
+      font-size: 0.84rem;
       font-weight: 600;
-      color: #fff;
-      background: rgba(255,255,255,0.12);
-      border-radius: 100px;
-      padding: 6px 14px;
       text-decoration: none;
-      transition: background 0.2s;
+      transition: 0.18s ease;
     }
 
-    .map-popup-link:hover {
-      background: rgba(255,255,255,0.20);
+    .detail-btn:hover,
+    .detail-secondary:hover {
+      background: rgba(255,255,255,0.12);
       color: #fff;
+      opacity: 1;
     }
 
-    /* ── Hidden items ────────────────────────────────────────── */
-    .map-list-item.hidden { display: none; }
+    .detail-btn--primary {
+      background: #fff;
+      color: #050505;
+      border-color: #fff;
+    }
 
-    /* ── Responsive ──────────────────────────────────────────── */
-    @media (max-width: 767px) {
-      .map-page-layout {
-        flex-direction: column;
-        height: auto;
+    .detail-btn--primary:hover {
+      background: rgba(255,255,255,0.88);
+      color: #050505;
+    }
+
+    .detail-secondary {
+      margin-top: 10px;
+    }
+
+    .map-stage {
+      position: relative;
+      min-width: 0;
+      background: #0c0c0c;
+    }
+
+    #google-map {
+      width: 100%;
+      height: 100%;
+    }
+
+    .map-notice {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(5,5,5,0.62), rgba(5,5,5,0.85));
+      z-index: 3;
+    }
+
+    .map-notice.is-visible {
+      display: flex;
+    }
+
+    .map-notice-card {
+      width: min(560px, 100%);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      background: rgba(10,10,10,0.92);
+      padding: 28px;
+      box-shadow: 0 20px 70px rgba(0,0,0,0.45);
+    }
+
+    .map-notice-card h2 {
+      margin: 0 0 10px;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+    }
+
+    .map-notice-card p {
+      margin: 0;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.6;
+    }
+
+    .map-notice-help {
+      margin-top: 14px !important;
+      font-size: 0.88rem;
+    }
+
+    .tc-advanced-marker {
+      transform: scale(1);
+      transition: transform 0.18s ease, filter 0.18s ease;
+    }
+
+    .tc-advanced-marker.is-active {
+      transform: scale(1.18);
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.38));
+    }
+
+    @media (max-width: 991px) {
+      .map-shell {
+        padding-top: 104px;
       }
+
+      .map-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: 44vh minmax(0, 1fr);
+        height: calc(100vh - 104px);
+      }
+
       .map-sidebar {
-        width: 100%;
-        max-height: 45vh;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
       }
-      .map-container {
-        height: 55vh;
+    }
+
+    @media (max-width: 640px) {
+      .map-shell {
+        padding-top: 98px;
       }
-      body { overflow: auto; }
+
+      .map-layout {
+        grid-template-rows: 48vh minmax(0, 1fr);
+        height: calc(100vh - 98px);
+      }
+
+      .map-sidebar-header,
+      .map-filter-row,
+      .map-detail {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- Scroll Progress -->
-  <div id="scroll-progress"></div>
-
-  <!-- Loading Screen -->
-  <div id="loading-screen">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">Texas Corners</div>
-  </div>
-
-  <!-- ─── Disclaimer Bar ──────────────────────────────────────────── -->
   <div class="disclaimer-bar">
     <i class="fa-solid fa-circle-info"></i>
-    <span>This is an independent community guide — <strong>not</strong> the official Texas Township government website. For official township services visit <a href="https://www.texastownship.org" target="_blank" rel="noopener">texastownship.org</a>.</span>
+    <span>This is an independent community guide, not the official Texas Township website. For official township services visit <a href="https://www.texastownship.org" target="_blank" rel="noopener">texastownship.org</a>.</span>
   </div>
 
-  <!-- ─── Navigation ─────────────────────────────────────────────── -->
   <nav id="main-nav" class="navbar navbar-expand-lg">
     <div class="container">
-      <a class="navbar-brand" href="/index.html">
-        Texas <span>Corners</span>
-      </a>
-      <button class="navbar-toggler" type="button"
-              data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false"
-              aria-label="Toggle navigation">
+      <a class="navbar-brand" href="/index.html">Texas <span>Corners</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto align-items-lg-center">
-
-          <li class="nav-item">
-            <a class="nav-link" href="/index.html">Home</a>
-          </li>
-
+          <li class="nav-item"><a class="nav-link" href="/index.html">Home</a></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              Parks &amp; Facilities
-            </a>
+            <a class="nav-link dropdown-toggle" href="#parks-section" data-bs-toggle="dropdown" aria-expanded="false">Parks &amp; Facilities</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/Parks%20and%20Facilities/texas_drive_park.html">Texas Drive Park</a></li>
               <li><a class="dropdown-item" href="/Parks%20and%20Facilities/maple_hill_splash_pad.html">Maple Hill Splash Pad</a></li>
@@ -308,12 +479,8 @@
               <li><a class="dropdown-item" href="/Parks%20and%20Facilities/woollam_nature_preserve.html">Woollam Nature Preserve</a></li>
             </ul>
           </li>
-
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              Food
-            </a>
+            <a class="nav-link dropdown-toggle" href="#food-section" data-bs-toggle="dropdown" aria-expanded="false">Food</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/Food/biggby_coffee.html">Biggby Coffee</a></li>
               <li><a class="dropdown-item" href="/Food/bold.html">Bold</a></li>
@@ -329,12 +496,8 @@
               <li><a class="dropdown-item" href="/Food/zebs_trading_company.html">Zeb's Trading Company</a></li>
             </ul>
           </li>
-
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#"
-               data-bs-toggle="dropdown" aria-expanded="false">
-              Businesses
-            </a>
+            <a class="nav-link dropdown-toggle" href="#business-section" data-bs-toggle="dropdown" aria-expanded="false">Businesses</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/Buisnesses/allure_skin_and_beauty.html">Allure Skin &amp; Beauty</a></li>
               <li><a class="dropdown-item" href="/Buisnesses/citgo.html">Citgo</a></li>
@@ -349,363 +512,64 @@
               <li><a class="dropdown-item" href="/Buisnesses/vs_bogeys_and_stogies.html">VS Bogey's &amp; Stogies</a></li>
             </ul>
           </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="/calendar.html">Calendar</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link active" href="/map.html">Map</a>
-          </li>
-
+          <li class="nav-item"><a class="nav-link active" href="/map.html"><i class="fa-solid fa-map-location-dot"></i> Map</a></li>
+          <li class="nav-item"><a class="nav-link" href="/calendar.html"><i class="fa-regular fa-calendar"></i> Calendar</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <!-- ─── Map Page Layout ─────────────────────────────────────────── -->
-  <div class="map-page-layout">
-
-    <!-- Sidebar -->
-    <aside class="map-sidebar">
-
-      <div class="map-sidebar-head">
-        <h2>Explore Texas Corners</h2>
-        <p>Click any location to navigate</p>
-        <input
-          type="text"
-          id="map-search"
-          class="map-search-input"
-          placeholder="Search locations…"
-          autocomplete="off"
-          spellcheck="false"
-          aria-label="Search locations"
-        >
-      </div>
-
-      <div class="map-filter-tabs">
-        <button class="map-tab active" data-filter="all">All</button>
-        <button class="map-tab" data-filter="food">Food &amp; Drink</button>
-        <button class="map-tab" data-filter="business">Businesses</button>
-        <button class="map-tab" data-filter="park">Parks</button>
-      </div>
-
-      <div class="map-list" id="map-list">
-        <!-- Items injected by JavaScript -->
-      </div>
-
-    </aside>
-
-    <!-- Map -->
-    <div class="map-container">
-      <div id="map"></div>
-    </div>
-
-  </div>
-
-  <!-- ─── Footer ──────────────────────────────────────────────────── -->
-  <footer id="contact" style="display:none">
-    <!-- Footer hidden on map page to preserve full-viewport layout.
-         Uncomment and remove style="display:none" if footer is desired. -->
-    <div class="container">
-      <div class="footer-top">
-
-        <div class="footer-col-brand">
-          <div class="footer-brand">Texas Corners</div>
-          <p class="footer-tagline">An independent community guide to the parks, dining, and businesses of Texas Corners — not affiliated with the Charter Township of Texas.</p>
-          <div class="footer-contact-item">
-            <i class="fa-solid fa-envelope"></i>
-            <a href="mailto:texascornerscontact@gmail.com">texascornerscontact@gmail.com</a>
+  <main class="map-shell">
+    <section class="map-layout">
+      <aside class="map-sidebar">
+        <div class="map-sidebar-header">
+          <span class="map-sidebar-eyebrow">Google Maps</span>
+          <h1 class="map-sidebar-title">Texas Corners Explorer</h1>
+          <p class="map-sidebar-copy">A cleaner searchable map built for exact business addresses, quick filtering, and direct navigation instead of approximate hand-placed pins.</p>
+          <div class="map-sidebar-meta">
+            <span id="sidebar-count">31 locations</span>
+            <span id="map-status">Preparing map</span>
           </div>
-          <div class="footer-contact-item">
-            <i class="fa-solid fa-location-dot"></i>
-            <span>Texas Corners, Kalamazoo County, MI 49009</span>
-          </div>
-          <div class="footer-contact-item footer-twp-contact">
-            <i class="fa-solid fa-building-columns"></i>
-            <div>
-              <strong>Township Office</strong>
-              <a href="tel:2693751591">269-375-1591</a>
-              <a href="mailto:info@texastownship.org">info@texastownship.org</a>
-              <span>Mon–Thu 8–5 &nbsp;|&nbsp; Fri 8–12</span>
-            </div>
+          <div class="map-search-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="map-search" class="map-search-input" type="text" placeholder="Search places, categories, or addresses">
+            <button id="search-clear" class="map-search-clear" type="button" aria-label="Clear search">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
           </div>
         </div>
 
-        <div>
-          <h4 class="footer-col-heading">Parks</h4>
-          <ul class="footer-links">
-            <li><a href="/Parks%20and%20Facilities/texas_drive_park.html">Texas Drive Park</a></li>
-            <li><a href="/Parks%20and%20Facilities/maple_hill_splash_pad.html">Maple Hill Splash Pad</a></li>
-            <li><a href="/Parks%20and%20Facilities/6th_street_park.html">6th Street Park</a></li>
-            <li><a href="/Parks%20and%20Facilities/pocket_park.html">Pocket Park</a></li>
-            <li><a href="/Parks%20and%20Facilities/al_sabo_land_preserve.html">Al Sabo Preserve</a></li>
-            <li><a href="/Parks%20and%20Facilities/woollam_nature_preserve.html">Woollam Preserve</a></li>
-            <li><a href="/Parks%20and%20Facilities/texas_township_trailway.html">Township Trailway</a></li>
-            <li><a href="/Parks%20and%20Facilities/farmers_market_pavilion.html">Farmers Market</a></li>
-          </ul>
+        <div class="map-filter-row">
+          <button type="button" class="map-filter" data-filter="park">Parks</button>
+          <button type="button" class="map-filter" data-filter="food">Food</button>
+          <button type="button" class="map-filter" data-filter="business">Business</button>
+          <button type="button" class="map-filter-clear" id="filter-clear">Clear</button>
         </div>
 
-        <div>
-          <h4 class="footer-col-heading">Dining</h4>
-          <ul class="footer-links">
-            <li><a href="/Food/texas_corners_brewing.html">TX Corners Brewing</a></li>
-            <li><a href="/Food/bold.html">Bold</a></li>
-            <li><a href="/Food/gusto.html">Gusto</a></li>
-            <li><a href="/Food/sura.html">Sura Korean BBQ</a></li>
-            <li><a href="/Food/fletchers_pub.html">Fletcher's Pub</a></li>
-            <li><a href="/Food/louies_corner_bar.html">Louie's Corner Bar</a></li>
-            <li><a href="/Food/rykse_and_co.html">Rykse &amp; Co</a></li>
-            <li><a href="/Food/biggby_coffee.html">Biggby Coffee</a></li>
-          </ul>
+        <div id="map-list" class="map-list"></div>
+
+        <div id="location-detail" class="map-detail">
+          <div class="detail-badge detail-badge--park">Select a location</div>
+          <h2 class="detail-title">Pick a place from the list</h2>
+          <p class="detail-subtitle">The detail panel will show page links, directions, and map focus controls here.</p>
         </div>
+      </aside>
 
-        <div>
-          <h4 class="footer-col-heading">Businesses</h4>
-          <ul class="footer-links">
-            <li><a href="/Buisnesses/texas_corners_ace_hardware.html">Ace Hardware</a></li>
-            <li><a href="/Buisnesses/the_cheese_lady.html">The Cheese Lady</a></li>
-            <li><a href="/Buisnesses/allure_skin_and_beauty.html">Allure Skin &amp; Beauty</a></li>
-            <li><a href="/Buisnesses/vs_bogeys_and_stogies.html">VS Bogey's &amp; Stogies</a></li>
-            <li><a href="/Buisnesses/vca_texas_corners_animal_hospital.html">VCA Animal Hospital</a></li>
-            <li><a href="/Buisnesses/lee_and_birch_kalamazoo.html">Lee &amp; Birch</a></li>
-            <li><a href="/Buisnesses/klh_custom_homes.html">KLH Custom Homes</a></li>
-            <li><a href="/Buisnesses/refined_mens_grooming.html">Refined Men's Grooming</a></li>
-          </ul>
+      <section class="map-stage">
+        <div id="google-map"></div>
+        <div id="map-notice" class="map-notice is-visible">
+          <div class="map-notice-card">
+            <h2>Loading map</h2>
+            <p>The map experience is initializing.</p>
+          </div>
         </div>
+      </section>
+    </section>
+  </main>
 
-        <div>
-          <h4 class="footer-col-heading">This Site</h4>
-          <ul class="footer-links">
-            <li><a href="/index.html#faq">FAQ</a></li>
-            <li><a href="/index.html#explore">About Texas Corners</a></li>
-            <li><a href="mailto:texascornerscontact@gmail.com">Contact Us</a></li>
-            <li><a href="mailto:texascornerscontact@gmail.com">List Your Business</a></li>
-            <li><a href="/privacy.html">Privacy Policy</a></li>
-            <li><a href="/terms.html">Terms of Use</a></li>
-            <li><a href="/accessibility.html">Accessibility</a></li>
-          </ul>
-          <h4 class="footer-col-heading" style="margin-top:24px">Township Gov.</h4>
-          <ul class="footer-links">
-            <li><a href="https://www.texastownship.org" target="_blank" rel="noopener">Official Website ↗</a></li>
-            <li><a href="https://www.texastownship.org" target="_blank" rel="noopener">Permits &amp; Applications</a></li>
-            <li><a href="https://www.texastownship.org" target="_blank" rel="noopener">Pay Property Taxes</a></li>
-            <li><a href="https://www.texastownship.org" target="_blank" rel="noopener">FOIA Requests</a></li>
-            <li><a href="https://www.texastownship.org" target="_blank" rel="noopener">Meeting Agendas</a></li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div class="footer-disclaimer">
-        <i class="fa-solid fa-circle-info"></i>
-        <p>This website is an independent community resource and is not affiliated with or endorsed by Texas Township, Kalamazoo County, or any government entity. Business information is provided for informational purposes only and may not reflect current hours or offerings.</p>
-      </div>
-
-      <div class="footer-bottom">
-        <span class="footer-copy">&copy; 2026 Texas Corners Community Guide. All rights reserved.</span>
-        <div class="footer-legal-links">
-          <a href="/privacy.html">Privacy Policy</a>
-          <a href="/terms.html">Terms of Use</a>
-          <a href="/accessibility.html">Accessibility</a>
-          <a href="mailto:texascornerscontact@gmail.com">Contact</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Back to Top -->
-  <button id="back-to-top" aria-label="Back to top">
-    <i class="fa-solid fa-chevron-up"></i>
-  </button>
-
-  <!-- Bootstrap 5 Bundle (includes Popper) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <!-- Custom JS -->
-  <script src="/main.js"></script>
-
-  <!-- ─── Map Script ──────────────────────────────────────────────── -->
-  <script>
-    /* ── Location data ───────────────────────────────────────── */
-    const locations = [
-      // Food & Drink
-      { name: "Texas Corners Brewing", cat: "Brewery",           type: "food",     lat: 42.2304, lng: -85.6668, url: "/Food/texas_corners_brewing.html" },
-      { name: "Bold",                  cat: "Restaurant",         type: "food",     lat: 42.2308, lng: -85.6662, url: "/Food/bold.html" },
-      { name: "Gusto",                 cat: "Restaurant",         type: "food",     lat: 42.2311, lng: -85.6658, url: "/Food/gusto.html" },
-      { name: "Sura Korean BBQ",       cat: "Korean BBQ",         type: "food",     lat: 42.2315, lng: -85.6654, url: "/Food/sura.html" },
-      { name: "Fletcher's Pub",        cat: "Bar & Grill",        type: "food",     lat: 42.2318, lng: -85.6650, url: "/Food/fletchers_pub.html" },
-      { name: "Louie's Corner Bar",    cat: "Bar",                type: "food",     lat: 42.2306, lng: -85.6672, url: "/Food/louies_corner_bar.html" },
-      { name: "Rykse & Co",            cat: "Restaurant",         type: "food",     lat: 42.2321, lng: -85.6646, url: "/Food/rykse_and_co.html" },
-      { name: "Biggby Coffee",         cat: "Coffee",             type: "food",     lat: 42.2324, lng: -85.6642, url: "/Food/biggby_coffee.html" },
-      { name: "Holy Taco",             cat: "Restaurant",         type: "food",     lat: 42.2302, lng: -85.6676, url: "/Food/holy_taco.html" },
-      { name: "Hunan Garden",          cat: "Restaurant",         type: "food",     lat: 42.2299, lng: -85.6680, url: "/Food/hunan_garden.html" },
-      { name: "Hungry Howie's Pizza",  cat: "Pizza",              type: "food",     lat: 42.2327, lng: -85.6638, url: "/Food/hungry_howies_pizza.html" },
-      { name: "Zeb's Trading Company", cat: "Restaurant",         type: "food",     lat: 42.2296, lng: -85.6684, url: "/Food/zebs_trading_company.html" },
-      // Businesses
-      { name: "VS Bogey's & Stogies",         cat: "Golf & Cigars",       type: "business", lat: 42.2330, lng: -85.6634, url: "/Buisnesses/vs_bogeys_and_stogies.html" },
-      { name: "Texas Corners Ace Hardware",   cat: "Hardware",            type: "business", lat: 42.2333, lng: -85.6630, url: "/Buisnesses/texas_corners_ace_hardware.html" },
-      { name: "Allure Skin & Beauty",         cat: "Beauty",              type: "business", lat: 42.2336, lng: -85.6626, url: "/Buisnesses/allure_skin_and_beauty.html" },
-      { name: "Lee & Birch",                  cat: "Boutique",            type: "business", lat: 42.2339, lng: -85.6622, url: "/Buisnesses/lee_and_birch_kalamazoo.html" },
-      { name: "The Cheese Lady",              cat: "Specialty Food",      type: "business", lat: 42.2342, lng: -85.6618, url: "/Buisnesses/the_cheese_lady.html" },
-      { name: "Pink Lemonade",                cat: "Children's Boutique", type: "business", lat: 42.2345, lng: -85.6614, url: "/Buisnesses/pink_lemonade.html" },
-      { name: "Refined Men's Grooming",       cat: "Grooming",            type: "business", lat: 42.2293, lng: -85.6688, url: "/Buisnesses/refined_mens_grooming.html" },
-      { name: "VCA Animal Hospital",          cat: "Veterinary",          type: "business", lat: 42.2290, lng: -85.6692, url: "/Buisnesses/vca_texas_corners_animal_hospital.html" },
-      { name: "KLH Custom Homes",             cat: "Home Builder",        type: "business", lat: 42.2287, lng: -85.6696, url: "/Buisnesses/klh_custom_homes.html" },
-      { name: "Dave's Glass Service",         cat: "Glass & Auto",        type: "business", lat: 42.2348, lng: -85.6610, url: "/Buisnesses/daves_glass_service.html" },
-      { name: "Citgo",                        cat: "Gas Station",         type: "business", lat: 42.2284, lng: -85.6700, url: "/Buisnesses/citgo.html" },
-      // Parks
-      { name: "Texas Drive Park",         cat: "Park",     type: "park", lat: 42.2270, lng: -85.6720, url: "/Parks%20and%20Facilities/texas_drive_park.html" },
-      { name: "Maple Hill Splash Pad",    cat: "Park",     type: "park", lat: 42.2355, lng: -85.6600, url: "/Parks%20and%20Facilities/maple_hill_splash_pad.html" },
-      { name: "6th Street Park",          cat: "Park",     type: "park", lat: 42.2360, lng: -85.6590, url: "/Parks%20and%20Facilities/6th_street_park.html" },
-      { name: "Pocket Park",              cat: "Park",     type: "park", lat: 42.2313, lng: -85.6660, url: "/Parks%20and%20Facilities/pocket_park.html" },
-      { name: "Texas Township Trailway",  cat: "Trail",    type: "park", lat: 42.2280, lng: -85.6710, url: "/Parks%20and%20Facilities/texas_township_trailway.html" },
-      { name: "Farmers Market Pavilion",  cat: "Facility", type: "park", lat: 42.2307, lng: -85.6665, url: "/Parks%20and%20Facilities/farmers_market_pavilion.html" },
-      { name: "Al Sabo Land Preserve",    cat: "Preserve", type: "park", lat: 42.2100, lng: -85.6520, url: "/Parks%20and%20Facilities/al_sabo_land_preserve.html" },
-      { name: "Woollam Nature Preserve",  cat: "Preserve", type: "park", lat: 42.2450, lng: -85.6750, url: "/Parks%20and%20Facilities/woollam_nature_preserve.html" }
-    ];
-
-    /* ── Colour config ───────────────────────────────────────── */
-    const typeColors = {
-      food:     '#FFB432',
-      business: '#6AA0FF',
-      park:     '#50DC8C'
-    };
-
-    /* ── Initialize map ──────────────────────────────────────── */
-    const map = L.map('map', {
-      center: [42.2311, -85.6692],
-      zoom: 14,
-      zoomControl: true
-    });
-
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: 20
-    }).addTo(map);
-
-    /* ── Build markers & sidebar items ──────────────────────── */
-    const markers = [];
-    const listEl  = document.getElementById('map-list');
-
-    locations.forEach(function(loc, idx) {
-      const color = typeColors[loc.type];
-
-      /* Circle marker */
-      const marker = L.circleMarker([loc.lat, loc.lng], {
-        radius:      8,
-        fillColor:   color,
-        fillOpacity: 0.85,
-        color:       'rgba(255,255,255,0.3)',
-        weight:      2
-      }).addTo(map);
-
-      /* Popup content */
-      const popupHtml =
-        '<div class="map-popup-name">' + loc.name + '</div>' +
-        '<div class="map-popup-cat">' + loc.cat + '</div>' +
-        '<a class="map-popup-link" href="' + loc.url + '">View Page &rarr;</a>';
-
-      marker.bindPopup(popupHtml, {
-        maxWidth: 220,
-        className: 'map-dark-popup'
-      });
-
-      marker.on('click', function() {
-        /* Highlight matching sidebar item */
-        document.querySelectorAll('.map-list-item').forEach(function(el) {
-          el.classList.remove('highlighted');
-        });
-        var sidebarItem = document.querySelector('[data-idx="' + idx + '"]');
-        if (sidebarItem) {
-          sidebarItem.classList.add('highlighted');
-          sidebarItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      });
-
-      markers.push(marker);
-
-      /* Sidebar list item */
-      const item = document.createElement('a');
-      item.className = 'map-list-item';
-      item.href = loc.url;
-      item.setAttribute('data-idx', idx);
-      item.setAttribute('data-type', loc.type);
-      item.setAttribute('data-name', loc.name.toLowerCase());
-      item.setAttribute('data-lat', loc.lat);
-      item.setAttribute('data-lng', loc.lng);
-
-      item.innerHTML =
-        '<span class="map-list-dot ' + loc.type + '"></span>' +
-        '<span class="map-list-name">' + loc.name + '</span>' +
-        '<span class="map-list-cat">' + loc.cat + '</span>' +
-        '<span class="map-list-arrow"><i class="fa-solid fa-chevron-right"></i></span>';
-
-      /* Click: fly to marker and open popup */
-      item.addEventListener('click', function(e) {
-        e.preventDefault();
-        map.flyTo([loc.lat, loc.lng], 17, { animate: true, duration: 0.8 });
-        setTimeout(function() {
-          markers[idx].openPopup();
-        }, 900);
-
-        /* Highlight */
-        document.querySelectorAll('.map-list-item').forEach(function(el) {
-          el.classList.remove('highlighted');
-        });
-        item.classList.add('highlighted');
-      });
-
-      listEl.appendChild(item);
-    });
-
-    /* ── Filter tabs ─────────────────────────────────────────── */
-    var currentFilter = 'all';
-
-    document.querySelectorAll('.map-tab').forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        document.querySelectorAll('.map-tab').forEach(function(t) {
-          t.classList.remove('active');
-        });
-        tab.classList.add('active');
-        currentFilter = tab.getAttribute('data-filter');
-        applyFilters();
-      });
-    });
-
-    /* ── Search ──────────────────────────────────────────────── */
-    var searchQuery = '';
-    document.getElementById('map-search').addEventListener('input', function(e) {
-      searchQuery = e.target.value.toLowerCase().trim();
-      applyFilters();
-    });
-
-    /* ── Apply both filter + search ──────────────────────────── */
-    function applyFilters() {
-      document.querySelectorAll('.map-list-item').forEach(function(item) {
-        var type = item.getAttribute('data-type');
-        var name = item.getAttribute('data-name');
-        var idx  = parseInt(item.getAttribute('data-idx'), 10);
-
-        var passesFilter = (currentFilter === 'all' || type === currentFilter);
-        var passesSearch = (searchQuery === '' || name.indexOf(searchQuery) !== -1);
-        var visible = passesFilter && passesSearch;
-
-        if (visible) {
-          item.classList.remove('hidden');
-          markers[idx].setStyle({ fillOpacity: 0.85, opacity: 1 });
-          if (!map.hasLayer(markers[idx])) {
-            markers[idx].addTo(map);
-          }
-        } else {
-          item.classList.add('hidden');
-          markers[idx].setStyle({ fillOpacity: 0.12, opacity: 0.3 });
-        }
-      });
-    }
-  </script>
-
+  <script src="/locations.js"></script>
+  <script src="/map-config.js"></script>
+  <script src="/map-google.js"></script>
 </body>
 </html>

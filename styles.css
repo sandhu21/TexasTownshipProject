@@ -137,9 +137,8 @@ img { display: block; max-width: 100%; }
   align-items: center;
 }
 #main-nav.scrolled {
-  background: rgba(10, 10, 10, 0.82);
+  background: rgba(10, 10, 10, 0.88);
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.07);
-  top: 12px;
 }
 
 #main-nav .navbar-brand {
@@ -288,7 +287,10 @@ img { display: block; max-width: 100%; }
   position: relative;
   z-index: 2;
   max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
   padding: 0 24px;
+  text-align: center;
 }
 .hero-eyebrow {
   display: inline-block;
@@ -342,7 +344,7 @@ img { display: block; max-width: 100%; }
 .hero-content p {
   font-size: clamp(1rem, 2vw, 1.2rem);
   color: rgba(255, 255, 255, 0.70);
-  margin-bottom: 40px;
+  margin: 0 auto 40px;
   max-width: 540px;
   margin-left: auto;
   margin-right: auto;
@@ -929,7 +931,17 @@ img { display: block; max-width: 100%; }
 .hero-citgo                     { background-image: url('/Pictures/citgo.jpg'); }
 .hero-klh-custom-homes          { background-image: url('/Pictures/klh_custom_homes.jpg'); }
 .hero-refined-mens-grooming     { background-image: url('/Pictures/refined_mens_grooming.jpeg'); }
-.hero-homepage                  { background-image: url('/TownshipPicture/image1.jpg'); }
+.hero-homepage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/TownshipPicture/image1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  filter: saturate(1.6) brightness(1.06) contrast(1.1);
+  z-index: 0;
+}
 
 /* Pillar card images */
 .pillar-parks    { background-image: url('/Pictures/texas_drive_park.jpg'); }
@@ -1161,11 +1173,20 @@ footer {
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
 @media (max-width: 991px) {
   .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
 }
 @media (max-width: 575px) {
   .footer-top { grid-template-columns: 1fr; gap: 28px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
 }
 
 .footer-brand {
@@ -1205,6 +1226,14 @@ footer {
   color: var(--text-faint);
   margin-bottom: 18px;
 }
+.footer-heading {
+  font-size: 0.70rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 18px;
+}
 .footer-links {
   list-style: none;
   padding: 0; margin: 0;
@@ -1225,6 +1254,12 @@ footer {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 10px;
+}
+.footer-bottom p {
+  font-size: 0.80rem;
+  color: var(--text-faint);
+  font-weight: 300;
+  margin: 0;
 }
 .footer-copy {
   font-size: 0.80rem;
@@ -1507,8 +1542,12 @@ footer {
   color: rgba(255, 230, 120, 0.90);
   text-align: center;
   flex-wrap: wrap;
-  position: relative;
-  z-index: 200;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 .disclaimer-bar i { font-size: 0.85rem; flex-shrink: 0; }
 .disclaimer-bar a { color: rgba(255, 230, 120, 1); text-decoration: underline; text-underline-offset: 2px; }
@@ -2326,4 +2365,301 @@ footer {
   .footer-top { grid-template-columns: 1fr; }
   .hero-content h1 { font-size: clamp(2.4rem, 10vw, 3.5rem); }
   .stats-bar .col-6 { flex: 0 0 50%; max-width: 50%; }
+}
+
+/* ─── Comprehensive Mobile Polish ────────────────────────────── */
+
+/* ── Disclaimer bar: tighter on mobile, keep to single line ── */
+@media (max-width: 767px) {
+  .disclaimer-bar {
+    font-size: 0.68rem;
+    padding: 6px 14px;
+    line-height: 1.35;
+    gap: 6px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .disclaimer-bar i { display: none; }
+  .disclaimer-bar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+}
+@media (max-width: 480px) {
+  .disclaimer-bar { font-size: 0.64rem; padding: 5px 12px; }
+}
+
+/* ── Nav pill: resize for smaller viewports ── */
+@media (max-width: 767px) {
+  #main-nav {
+    width: calc(100% - 28px);
+    top: 48px;
+    height: 56px;
+  }
+  /* scrolled: background only, no position change */
+  #main-nav .navbar-brand { font-size: 1.1rem; }
+  .navbar-toggler {
+    border-color: rgba(255,255,255,0.22) !important;
+    padding: 5px 9px;
+  }
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255%2C255%2C255%2C0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  }
+}
+@media (max-width: 480px) {
+  #main-nav {
+    width: calc(100% - 20px);
+    top: 44px;
+    height: 54px;
+  }
+  /* scrolled: background only */
+}
+
+/* ── Hero section ── */
+@media (max-width: 767px) {
+  .hero-section {
+    min-height: 92vh;
+    padding-top: 130px;
+  }
+  .hero-content h1 {
+    font-size: clamp(2.6rem, 10vw, 3.4rem);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  .hero-content .hero-subtitle {
+    font-size: 0.95rem;
+    max-width: 100%;
+    margin-top: 14px;
+  }
+  .hero-badges { gap: 6px; flex-wrap: wrap; justify-content: center; }
+  .hero-badge { font-size: 0.70rem; padding: 6px 12px; }
+  .hero-cta-group { flex-direction: column; align-items: center; gap: 10px; }
+  .hero-cta-group .btn { width: 100%; max-width: 320px; justify-content: center; }
+  .hero-search { max-width: 100%; }
+}
+@media (max-width: 480px) {
+  .hero-content h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
+  .hero-content .hero-subtitle { font-size: 0.88rem; }
+}
+@media (max-width: 375px) {
+  .hero-content h1 { font-size: 2.1rem; }
+}
+
+/* ── Stats bar ── */
+@media (max-width: 767px) {
+  .stats-bar { padding: 32px 0; }
+  .stat-number { font-size: 2.2rem; }
+  .stat-label { font-size: 0.68rem; }
+  .stat-divider { height: 28px; }
+}
+@media (max-width: 480px) {
+  .stat-number { font-size: 1.9rem; }
+}
+
+/* ── Section general ── */
+@media (max-width: 480px) {
+  .section { padding: 48px 0; }
+  .section-header { margin-bottom: 40px; }
+  .section-title { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+  .section-subtitle { font-size: 0.88rem; }
+}
+@media (max-width: 375px) {
+  .section { padding: 40px 0; }
+  .section-title { font-size: 1.65rem; }
+}
+
+/* ── Pillar cards ── */
+@media (max-width: 480px) {
+  .pillar-card { height: 190px; }
+  .pillar-title { font-size: 1.5rem; }
+  .pillar-body { padding: 20px 22px; }
+}
+
+/* ── Scroll row / horizontal cards ── */
+@media (max-width: 480px) {
+  .scroll-track .location-card {
+    flex: 0 0 80vw;
+    height: 260px;
+  }
+  .scroll-track .location-card:first-child { margin-left: 16px; }
+  .scroll-track .location-card:last-child  { margin-right: 16px; }
+  .scroll-track { scroll-padding-left: 16px; }
+  .card-body { padding: 14px 16px; }
+  .card-name { font-size: 0.92rem; }
+  .card-desc { font-size: 0.74rem; }
+}
+@media (max-width: 375px) {
+  .scroll-track .location-card { flex: 0 0 85vw; height: 240px; }
+}
+
+/* ── Location strip (detail pages) ── */
+@media (max-width: 480px) {
+  .location-strip-inner {
+    padding: 24px 18px;
+    gap: 16px;
+  }
+  .ls-address { font-size: 0.84rem; }
+  .ls-hours   { font-size: 0.84rem; }
+}
+
+/* ── About community section ── */
+@media (max-width: 767px) {
+  .about-community { padding: 60px 0; }
+  .about-visual { height: 280px; }
+  .about-copy h2 { font-size: 1.7rem; }
+}
+@media (max-width: 480px) {
+  .about-community { padding: 48px 0; }
+  .about-visual { height: 220px; }
+}
+
+/* ── Feature pillars section ── */
+@media (max-width: 480px) {
+  .feature-pillars { padding: 0 0 60px; }
+}
+
+/* ── Glance / stats cards ── */
+@media (max-width: 767px) {
+  .township-glance { padding: 60px 0; }
+  .glance-card { padding: 24px 20px; }
+  .glance-num { font-size: 2.3rem; }
+}
+@media (max-width: 480px) {
+  .glance-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+  .glance-card { padding: 20px 16px; border-radius: 16px; }
+  .glance-num { font-size: 2rem; }
+  .glance-desc { font-size: 0.80rem; }
+}
+@media (max-width: 375px) {
+  .glance-grid { grid-template-columns: 1fr !important; }
+}
+
+/* ── Events section ── */
+@media (max-width: 767px) {
+  .events-section { padding: 60px 0; }
+  .events-layout { grid-template-columns: 1fr; gap: 24px; }
+}
+@media (max-width: 480px) {
+  .event-card { padding: 12px 14px; gap: 10px; border-radius: 12px; }
+  .event-type { font-size: 0.82rem; }
+  .event-date { font-size: 0.72rem; }
+  .event-time { font-size: 0.74rem; padding: 3px 8px; }
+  .events-services { padding: 20px; gap: 14px; border-radius: 16px; }
+  .events-month-label { padding-left: 14px; }
+}
+
+/* ── Township office section ── */
+@media (max-width: 767px) {
+  .township-info { padding: 60px 0; }
+  .twp-grid { grid-template-columns: 1fr; gap: 16px; }
+}
+@media (max-width: 480px) {
+  .twp-card { padding: 20px; border-radius: 16px; gap: 16px; }
+  .twp-notice { padding: 14px 16px; gap: 12px; margin-bottom: 36px; }
+  .twp-gov { gap: 8px; padding: 16px; }
+  .twp-gov-item { min-width: 140px; padding: 10px 12px; }
+}
+
+/* ── Detail page: page hero ── */
+@media (max-width: 767px) {
+  .page-hero {
+    min-height: 42vh;
+    padding: 110px 0 48px;
+  }
+  .page-hero-content h1 {
+    font-size: clamp(1.9rem, 7vw, 2.8rem);
+  }
+  .page-hero-content p { font-size: 0.92rem; }
+}
+@media (max-width: 480px) {
+  .page-hero {
+    min-height: 38vh;
+    padding: 100px 0 36px;
+  }
+  .page-hero-content h1 { font-size: 1.8rem; }
+}
+
+/* ── Detail page: info widgets (about section) ── */
+@media (max-width: 767px) {
+  .info-section { padding: 48px 0 24px; }
+  .info-widget { padding: 22px 20px; border-radius: 16px; }
+  .info-widget i { font-size: 1.3rem; }
+  .info-widget h3 { font-size: 0.95rem; }
+}
+@media (max-width: 480px) {
+  .info-widget { padding: 18px 16px; border-radius: 14px; }
+}
+
+/* ── Detail page: action buttons ── */
+@media (max-width: 767px) {
+  .action-buttons {
+    gap: 8px;
+    padding: 8px 0 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-action { padding: 10px 18px; font-size: 0.80rem; }
+}
+@media (max-width: 480px) {
+  .btn-action { padding: 9px 15px; font-size: 0.77rem; }
+}
+
+/* ── Detail page: place story ── */
+@media (max-width: 767px) {
+  .place-story { padding: 48px 0 56px; }
+  .place-story h3 { font-size: 1.3rem; }
+}
+@media (max-width: 480px) {
+  .place-story-inner { gap: 28px; }
+  .psf-item { padding: 14px 16px; gap: 12px; border-radius: 12px; }
+  .psf-item strong { font-size: 0.82rem; }
+  .psf-item span { font-size: 0.78rem; }
+}
+
+/* ── Map section (embedded on detail pages) ── */
+@media (max-width: 767px) {
+  .map-section .map-wrapper iframe { height: 280px; }
+}
+@media (max-width: 480px) {
+  .map-section .map-wrapper iframe { height: 240px; border-radius: 12px; }
+}
+
+/* ── Footer ── */
+@media (max-width: 767px) {
+  footer { padding: 48px 0 24px; }
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .footer-brand { font-size: 1.2rem; }
+  .footer-tagline { font-size: 0.82rem; }
+}
+@media (max-width: 480px) {
+  footer { padding: 36px 0 20px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .footer-col-heading { font-size: 0.72rem; }
+  .footer-links li a { font-size: 0.80rem; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-legal-links { flex-wrap: wrap; justify-content: center; gap: 8px 14px; }
+}
+@media (max-width: 375px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { gap: 10px; }
+}
+
+/* ── Back to top button ── */
+@media (max-width: 767px) {
+  #back-to-top {
+    bottom: 20px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ── Container padding on small screens ── */
+@media (max-width: 480px) {
+  .container { padding-left: 18px; padding-right: 18px; }
+}
+@media (max-width: 375px) {
+  .container { padding-left: 14px; padding-right: 14px; }
 }

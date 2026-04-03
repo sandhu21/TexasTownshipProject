@@ -133,6 +133,23 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // ─── Animated Counters ─────────────────────────────────────────────
+  const locationsData = Array.isArray(window.TEXAS_CORNERS_LOCATIONS) ? window.TEXAS_CORNERS_LOCATIONS : [];
+
+  document.querySelectorAll('[data-counter-type]').forEach(function (counter) {
+    var counterType = counter.getAttribute('data-counter-type');
+    var target = 0;
+
+    if (counterType === 'total') {
+      target = locationsData.length;
+    } else if (counterType) {
+      target = locationsData.filter(function (loc) { return loc.type === counterType; }).length;
+    }
+
+    if (target > 0) {
+      counter.setAttribute('data-target', String(target));
+    }
+  });
+
   const counters = document.querySelectorAll('.counter');
   if (counters.length > 0 && 'IntersectionObserver' in window) {
     const counterObserver = new IntersectionObserver(function (entries) {
@@ -220,42 +237,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var searchClear  = document.getElementById('hero-search-clear');
 
   if (searchInput && searchResults) {
-    var locations = [
-      // Parks & Facilities
-      { name: 'Texas Drive Park',          cat: 'Park',     url: '/Parks%20and%20Facilities/texas_drive_park.html',         img: '/Pictures/texas_drive_park.jpg' },
-      { name: 'Maple Hill Splash Pad',     cat: 'Park',     url: '/Parks%20and%20Facilities/maple_hill_splash_pad.html',    img: '/Pictures/maple_hill_splash_pad.jpg' },
-      { name: '6th Street Park',           cat: 'Park',     url: '/Parks%20and%20Facilities/6th_street_park.html',          img: '/Pictures/6th_street_park.jpg' },
-      { name: 'Pocket Park',               cat: 'Park',     url: '/Parks%20and%20Facilities/pocket_park.html',              img: '/Pictures/pocket_park.jpg' },
-      { name: 'Texas Township Trailway',   cat: 'Trail',    url: '/Parks%20and%20Facilities/texas_township_trailway.html',  img: '/Pictures/texas_township_trailway.jpg' },
-      { name: 'Farmers Market Pavilion',   cat: 'Facility', url: '/Parks%20and%20Facilities/farmers_market_pavilion.html',  img: '/Pictures/farmers_market_provilion.jpg' },
-      { name: 'Al Sabo Land Preserve',     cat: 'Preserve', url: '/Parks%20and%20Facilities/al_sabo_land_preserve.html',   img: '/Pictures/al_sabo_land_preserve.jpg' },
-      { name: 'Woollam Nature Preserve',   cat: 'Preserve', url: '/Parks%20and%20Facilities/woollam_nature_preserve.html', img: '/Pictures/woollam_nature_preserve.jpg' },
-      // Food & Drink
-      { name: 'Texas Corners Brewing',     cat: 'Brewery',  url: '/Food/texas_corners_brewing.html',    img: '/Pictures/texas_corners_brewing.jpeg' },
-      { name: 'Bold',                      cat: 'Restaurant', url: '/Food/bold.html',                  img: '/Pictures/bold.jpg' },
-      { name: 'Gusto',                     cat: 'Restaurant', url: '/Food/gusto.html',                 img: '/Pictures/gusto.jpg' },
-      { name: 'Sura Korean BBQ',           cat: 'Restaurant', url: '/Food/sura.html',                  img: '/Pictures/sura.jpg' },
-      { name: "Fletcher's Pub",            cat: 'Bar & Grill', url: '/Food/fletchers_pub.html',        img: '/Pictures/fletchers_pub.jpg' },
-      { name: "Louie's Corner Bar",        cat: 'Bar',      url: '/Food/louies_corner_bar.html',        img: '/Pictures/louies_corner_bar.webp' },
-      { name: 'Holy Taco',                 cat: 'Restaurant', url: '/Food/holy_taco.html',             img: '/Pictures/holy_taco.jpg' },
-      { name: 'Hunan Garden',              cat: 'Restaurant', url: '/Food/hunan_garden.html',          img: '/Pictures/hunan_gardens.jpg' },
-      { name: 'Rykse & Co',               cat: 'Restaurant', url: '/Food/rykse_and_co.html',           img: '/Pictures/rykse_and_co.webp' },
-      { name: "Zeb's Trading Company",    cat: 'Restaurant', url: '/Food/zebs_trading_company.html',   img: '/Pictures/zebs_trading_company.jpg' },
-      { name: 'Biggby Coffee',            cat: 'Coffee',   url: '/Food/biggby_coffee.html',             img: '/Pictures/biggby_coffee.jpg' },
-      { name: "Hungry Howie's Pizza",     cat: 'Pizza',    url: '/Food/hungry_howies_pizza.html',       img: '/Pictures/hungry_howies_pizza.jpg' },
-      // Businesses
-      { name: "VS Bogey's & Stogies",     cat: 'Business', url: '/Buisnesses/vs_bogeys_and_stogies.html',              img: '/Pictures/vs_bogeys_and_stogies.jpg' },
-      { name: 'Texas Corners Ace Hardware', cat: 'Hardware', url: '/Buisnesses/texas_corners_ace_hardware.html',       img: '/Pictures/texas_corners_ace_hardware.jpg' },
-      { name: 'Allure Skin & Beauty',     cat: 'Beauty',   url: '/Buisnesses/allure_skin_and_beauty.html',              img: '/Pictures/allure_skin_and_beauty.jpg' },
-      { name: 'Lee & Birch',              cat: 'Boutique', url: '/Buisnesses/lee_and_birch_kalamazoo.html',             img: '/Pictures/lee_and_birch_kalamazoo.jpg' },
-      { name: 'The Cheese Lady',          cat: 'Specialty Food', url: '/Buisnesses/the_cheese_lady.html',              img: '/Pictures/the_cheese_lady.jpg' },
-      { name: 'Pink Lemonade',            cat: "Children's Boutique", url: '/Buisnesses/pink_lemonade.html',            img: '/Pictures/pink_lemonade.jpg' },
-      { name: "Refined Men's Grooming",   cat: 'Grooming', url: '/Buisnesses/refined_mens_grooming.html',              img: '/Pictures/refined_mens_grooming.jpeg' },
-      { name: 'VCA Animal Hospital',      cat: 'Veterinary', url: '/Buisnesses/vca_texas_corners_animal_hospital.html', img: '/Pictures/vca_texas_corners_animal_hospital.jpg' },
-      { name: 'KLH Custom Homes',         cat: 'Home Builder', url: '/Buisnesses/klh_custom_homes.html',               img: '/Pictures/klh_custom_homes.jpg' },
-      { name: "Dave's Glass Service",     cat: 'Glass & Auto', url: '/Buisnesses/daves_glass_service.html',            img: '/Pictures/daves_glass.jpg' },
-      { name: 'Citgo',                    cat: 'Gas Station', url: '/Buisnesses/citgo.html',                           img: '/Pictures/citgo.jpg' }
-    ];
+    var locations = locationsData;
 
     var activeIndex = -1;
 
