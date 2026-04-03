@@ -10,29 +10,30 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <!-- Custom Styles -->
   <link rel="stylesheet" href="/styles.css">
 
   <style>
     /* ── Page Hero ───────────────────────────────────────────── */
     .page-hero {
-      background-color: #111;
-      min-height: 320px;
+      min-height: 390px;
       display: flex;
       align-items: center;
-      padding: 120px 0 60px;
+      padding: 168px 0 72px;
       position: relative;
       overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(100,160,255,0.16), transparent 32%),
+        radial-gradient(circle at top right, rgba(80,220,140,0.14), transparent 34%),
+        linear-gradient(180deg, #0f1013 0%, #08090c 100%);
     }
     .page-hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(100,160,255,0.10) 0%, transparent 70%);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 88px);
       pointer-events: none;
     }
     .page-hero-content {
@@ -54,19 +55,79 @@
       margin-bottom: 18px;
     }
     .page-hero h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-family: var(--font-heading);
+      font-size: clamp(2.7rem, 6vw, 4.4rem);
       font-weight: 700;
       color: #fff;
-      line-height: 1.1;
+      line-height: 1.02;
       margin-bottom: 16px;
+      letter-spacing: -0.04em;
     }
     .page-hero-subtitle {
       font-size: 1.05rem;
-      color: rgba(255,255,255,0.55);
-      max-width: 580px;
-      line-height: 1.6;
+      color: rgba(255,255,255,0.6);
+      max-width: 660px;
+      line-height: 1.7;
       margin: 0;
+    }
+    .calendar-hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+    .calendar-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.74);
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+    .calendar-meta-pill i {
+      color: rgba(100,160,255,0.92);
+      font-size: 0.88rem;
+    }
+    .calendar-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.95fr);
+      gap: 28px;
+      align-items: start;
+    }
+    .calendar-primary,
+    .calendar-sidebar {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+    }
+    .calendar-primary {
+      padding: 28px;
+    }
+    .calendar-sidebar {
+      padding: 24px;
+      position: sticky;
+      top: 124px;
+    }
+    .calendar-section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.48);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .calendar-section-label i {
+      color: rgba(100,160,255,0.8);
     }
 
     /* ── Calendar Legend ─────────────────────────────────────── */
@@ -83,8 +144,8 @@
       font-size: 0.78rem;
       font-weight: 600;
       padding: 6px 16px;
-      border-radius: 100px;
-      border: 1px solid;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
     }
     .legend-pill-dot {
       width: 8px;
@@ -113,7 +174,7 @@
 
     /* ── Month Block ─────────────────────────────────────────── */
     .calendar-month-heading {
-      font-family: 'Outfit', sans-serif;
+      font-family: var(--font-heading);
       font-size: 1.25rem;
       font-weight: 700;
       color: #fff;
@@ -123,6 +184,9 @@
     }
     .calendar-month-block {
       margin-bottom: 40px;
+    }
+    .calendar-month-block:last-of-type {
+      margin-bottom: 0;
     }
 
     /* ── Calendar Info Box ───────────────────────────────────── */
@@ -211,7 +275,7 @@
 
     .calendar-cta-wrap {
       text-align: center;
-      margin-top: 8px;
+      margin-top: 20px;
     }
     .calendar-cta-btn {
       display: inline-flex;
@@ -231,6 +295,66 @@
       background: rgba(255,255,255,0.14);
       border-color: rgba(255,255,255,0.28);
       color: #fff;
+    }
+    .calendar-rhythm {
+      display: grid;
+      gap: 14px;
+      margin-top: 8px;
+    }
+    .calendar-rhythm-card {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 14px;
+      padding: 16px 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .calendar-rhythm-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: rgba(100,160,255,0.12);
+      border: 1px solid rgba(100,160,255,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6AA0FF;
+      font-size: 0.95rem;
+    }
+    .calendar-rhythm-card h4 {
+      margin: 0 0 5px;
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+    .calendar-rhythm-card p {
+      margin: 0;
+      color: rgba(255,255,255,0.54);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    @media (max-width: 1100px) {
+      .calendar-layout { grid-template-columns: 1fr; }
+      .calendar-sidebar { position: static; }
+    }
+    @media (max-width: 767px) {
+      .page-hero {
+        min-height: 340px;
+        padding: 152px 0 56px;
+      }
+      .calendar-meta-pill {
+        width: 100%;
+      }
+      .calendar-primary,
+      .calendar-sidebar {
+        padding: 22px 18px;
+        border-radius: 20px;
+      }
+      .calendar-info-box {
+        padding: 18px;
+      }
     }
   </style>
 </head>
@@ -329,11 +453,11 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" href="/calendar.html">Calendar</a>
+            <a class="nav-link" href="/map.html">Map</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="/map.html">Map</a>
+            <a class="nav-link active" href="/calendar.html">Calendar</a>
           </li>
 
         </ul>
@@ -348,6 +472,11 @@
         <span class="page-hero-eyebrow">Community Guide</span>
         <h1>Meetings &amp; Events</h1>
         <p class="page-hero-subtitle">Regular township meeting guide and community events for Texas Township. Always confirm official agendas, notices, and changes with the township directly.</p>
+        <div class="calendar-hero-meta">
+          <div class="calendar-meta-pill"><i class="fa-solid fa-building-columns"></i><span>Board meetings usually follow the 2nd Wednesday cadence</span></div>
+          <div class="calendar-meta-pill"><i class="fa-solid fa-gavel"></i><span>Planning meetings usually follow the 2nd and 4th Tuesday cadence</span></div>
+          <div class="calendar-meta-pill"><i class="fa-solid fa-circle-info"></i><span>Always verify agendas and changes on the township site</span></div>
+        </div>
       </div>
     </div>
   </section>
@@ -355,22 +484,25 @@
   <!-- ─── Calendar Main Content ──────────────────────────────────── -->
   <section class="section">
     <div class="container">
+      <div class="calendar-layout">
+        <div class="calendar-primary">
+          <div class="calendar-section-label"><i class="fa-regular fa-calendar"></i><span>Upcoming Schedule</span></div>
 
-      <!-- Legend -->
-      <div class="calendar-legend">
-        <span class="legend-pill board">
-          <span class="legend-pill-dot"></span>
-          Township Board Meeting
-        </span>
-        <span class="legend-pill workshop">
-          <span class="legend-pill-dot"></span>
-          Planning Commission Workshop
-        </span>
-        <span class="legend-pill planning">
-          <span class="legend-pill-dot"></span>
-          Planning Commission Meeting
-        </span>
-      </div>
+          <!-- Legend -->
+          <div class="calendar-legend">
+            <span class="legend-pill board">
+              <span class="legend-pill-dot"></span>
+              Township Board Meeting
+            </span>
+            <span class="legend-pill workshop">
+              <span class="legend-pill-dot"></span>
+              Planning Commission Workshop
+            </span>
+            <span class="legend-pill planning">
+              <span class="legend-pill-dot"></span>
+              Planning Commission Meeting
+            </span>
+          </div>
 
       <!-- April 2026 -->
       <div class="calendar-month-block">
@@ -468,10 +600,44 @@
         </div>
       </div>
 
-      <!-- Info Box -->
-      <div class="calendar-info-box">
-        <i class="fa-solid fa-circle-info"></i>
-        <p>This page reflects the township's regular public meeting cadence (2nd Wednesday for the Board; 2nd and 4th Tuesday for the Planning Commission) as a community reference. For official agendas, minutes, cancellations, and last-minute changes visit <a href="https://www.texastownship.org" target="_blank" rel="noopener">texastownship.org</a>.</p>
+          <!-- Info Box -->
+          <div class="calendar-info-box">
+            <i class="fa-solid fa-circle-info"></i>
+            <p>This page reflects the township's regular public meeting cadence (2nd Wednesday for the Board; 2nd and 4th Tuesday for the Planning Commission) as a community reference. For official agendas, minutes, cancellations, and last-minute changes visit <a href="https://www.texastownship.org" target="_blank" rel="noopener">texastownship.org</a>.</p>
+          </div>
+        </div>
+
+        <aside class="calendar-sidebar">
+          <div class="calendar-section-label"><i class="fa-solid fa-wave-square"></i><span>Regular Rhythm</span></div>
+          <div class="calendar-rhythm">
+            <div class="calendar-rhythm-card">
+              <div class="calendar-rhythm-icon"><i class="fa-solid fa-building-columns"></i></div>
+              <div>
+                <h4>Township Board</h4>
+                <p>Usually the 2nd Wednesday of each month at 7:00 PM.</p>
+              </div>
+            </div>
+            <div class="calendar-rhythm-card">
+              <div class="calendar-rhythm-icon"><i class="fa-solid fa-drafting-compass"></i></div>
+              <div>
+                <h4>Planning Workshop</h4>
+                <p>Usually the 2nd Tuesday of each month at 5:00 PM.</p>
+              </div>
+            </div>
+            <div class="calendar-rhythm-card">
+              <div class="calendar-rhythm-icon"><i class="fa-solid fa-gavel"></i></div>
+              <div>
+                <h4>Planning Meeting</h4>
+                <p>Usually the 4th Tuesday of each month at 6:00 PM.</p>
+              </div>
+            </div>
+          </div>
+          <div class="calendar-cta-wrap">
+            <a href="https://www.texastownship.org" target="_blank" rel="noopener" class="calendar-cta-btn">
+              Visit Official Township Website <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+        </aside>
       </div>
 
     </div>
@@ -537,12 +703,6 @@
           <p>Zoning, planning, and ordinance review hearings open to all township residents.</p>
         </div>
 
-      </div>
-
-      <div class="calendar-cta-wrap">
-        <a href="https://www.texastownship.org" target="_blank" rel="noopener" class="calendar-cta-btn">
-          Visit Official Township Website <i class="fa-solid fa-arrow-up-right-from-square"></i>
-        </a>
       </div>
 
     </div>

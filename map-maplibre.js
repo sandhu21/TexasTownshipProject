@@ -2,8 +2,6 @@
   var locations = Array.isArray(window.TEXAS_CORNERS_LOCATIONS) ? window.TEXAS_CORNERS_LOCATIONS : [];
   var state = {
     map: null,
-    markers: [],
-    markerGroups: [],
     listItems: [],
     activeFilters: new Set(),
     selectedIndex: -1,
@@ -127,43 +125,8 @@
     state.map.addControl(new maplibregl.NavigationControl({ visualizePitch: false }), 'top-right');
 
     state.map.on('load', function () {
-      buildMarkerGroups();
-      createMarkers();
       fitVisibleMarkers();
-      updateStatus('Free map loaded');
-    });
-  }
-
-  function createMarkers() {
-    state.markers = [];
-
-    state.markerGroups.forEach(function (group) {
-      var primary = locations[group.indexes[0]];
-      var markerEl = document.createElement('button');
-      markerEl.type = 'button';
-      markerEl.className = 'tc-map-marker tc-map-marker--' + primary.type;
-      markerEl.setAttribute('aria-label', group.indexes.length === 1 ? primary.name : primary.address);
-      markerEl.innerHTML =
-        '<span class="tc-map-marker-glyph">' + typeMeta[primary.type].glyph + '</span>' +
-        (group.indexes.length > 1 ? '<span class="tc-map-marker-count">' + group.indexes.length + '</span>' : '');
-
-      markerEl.addEventListener('click', function (event) {
-        event.preventDefault();
-        if (group.indexes.length === 1) {
-          selectLocation(group.indexes[0], true);
-        } else {
-          renderGroupDetail(group, true);
-        }
-      });
-
-      var marker = new maplibregl.Marker({ element: markerEl, anchor: 'bottom' })
-        .setLngLat(group.coord)
-        .addTo(state.map);
-
-      group.marker = marker;
-      group.indexes.forEach(function (index) {
-        state.markers[index] = marker;
-      });
+      updateStatus('Click a place to zoom');
     });
   }
 
@@ -178,17 +141,12 @@
       item.classList.toggle('active', itemIndex === index);
     });
 
-    state.markerGroups.forEach(function (group) {
-      if (!group.marker) return;
-      group.marker.getElement().classList.toggle('is-active', group.indexes.indexOf(index) !== -1);
-    });
-
     renderDetail(location, index);
 
-    if (state.map && state.markers[index] && panMap) {
+    if (state.map && panMap) {
       state.map.flyTo({
         center: [location.lng, location.lat],
-        zoom: Math.max(state.map.getZoom(), 16),
+        zoom: 17,
         speed: 0.9,
         essential: true
       });
@@ -216,53 +174,6 @@
     }
   }
 
-  function renderGroupDetail(group, panMap) {
-    var primary = locations[group.indexes[0]];
-    state.selectedIndex = -1;
-
-    state.listItems.forEach(function (item) {
-      if (!item) return;
-      item.classList.remove('active');
-    });
-
-    state.markerGroups.forEach(function (markerGroup) {
-      if (!markerGroup.marker) return;
-      markerGroup.marker.getElement().classList.toggle('is-active', markerGroup === group);
-    });
-
-    ui.detail.innerHTML =
-      '<div class="detail-badge detail-badge--' + primary.type + '">Shared location</div>' +
-      '<h2 class="detail-title">' + group.indexes.length + ' places here</h2>' +
-      '<p class="detail-subtitle">Multiple locations share this address.</p>' +
-      '<p class="detail-address"><i class="fa-solid fa-location-dot"></i> ' + primary.address + '</p>' +
-      '<div class="detail-group-list">' +
-      group.indexes.map(function (index) {
-        var location = locations[index];
-        return (
-          '<button type="button" class="detail-group-item" data-location-index="' + index + '">' +
-            '<span class="detail-group-name">' + location.name + '</span>' +
-            '<span class="detail-group-meta">' + location.cat + '</span>' +
-          '</button>'
-        );
-      }).join('') +
-      '</div>';
-
-    Array.prototype.slice.call(ui.detail.querySelectorAll('[data-location-index]')).forEach(function (button) {
-      button.addEventListener('click', function () {
-        selectLocation(Number(button.getAttribute('data-location-index')), true);
-      });
-    });
-
-    if (state.map && panMap) {
-      state.map.flyTo({
-        center: group.coord,
-        zoom: Math.max(state.map.getZoom(), 16),
-        speed: 0.9,
-        essential: true
-      });
-    }
-  }
-
   function updateVisibleState() {
     var visibleCount = 0;
 
@@ -278,14 +189,6 @@
       if (visible) {
         visibleCount++;
       }
-    });
-
-    state.markerGroups.forEach(function (group) {
-      if (!group.marker) return;
-      var groupVisible = group.indexes.some(function (index) {
-        return state.listItems[index] && !state.listItems[index].classList.contains('hidden');
-      });
-      group.marker.getElement().style.display = groupVisible ? '' : 'none';
     });
 
     document.querySelectorAll('[data-group]').forEach(function (groupHeading) {
@@ -306,25 +209,22 @@
   }
 
   function fitVisibleMarkers() {
-    var visibleGroups = state.markerGroups.reduce(function (groups, group) {
-      var groupVisible = group.indexes.some(function (index) {
-        return state.listItems[index] && !state.listItems[index].classList.contains('hidden');
-      });
-      if (groupVisible) {
-        groups.push(group);
+    var visibleLocations = locations.reduce(function (items, location, index) {
+      if (state.listItems[index] && !state.listItems[index].classList.contains('hidden')) {
+        items.push(location);
       }
-      return groups;
+      return items;
     }, []);
 
-    if (visibleGroups.length > 1) {
+    if (visibleLocations.length > 1) {
       var bounds = new maplibregl.LngLatBounds();
-      visibleGroups.forEach(function (group) {
-        bounds.extend(group.coord);
+      visibleLocations.forEach(function (location) {
+        bounds.extend([location.lng, location.lat]);
       });
       state.map.fitBounds(bounds, { padding: 64, maxZoom: 15, duration: 0 });
-    } else if (visibleGroups.length === 1 && state.selectedIndex === -1) {
+    } else if (visibleLocations.length === 1 && state.selectedIndex === -1) {
       state.map.jumpTo({
-        center: visibleGroups[0].coord,
+        center: [visibleLocations[0].lng, visibleLocations[0].lat],
         zoom: 15
       });
     }
@@ -332,24 +232,5 @@
 
   function updateStatus(message) {
     ui.status.textContent = message;
-  }
-
-  function buildMarkerGroups() {
-    var groupsByCoord = {};
-
-    locations.forEach(function (location, index) {
-      var key = location.lat.toFixed(6) + ',' + location.lng.toFixed(6);
-      if (!groupsByCoord[key]) {
-        groupsByCoord[key] = {
-          coord: [location.lng, location.lat],
-          indexes: []
-        };
-      }
-      groupsByCoord[key].indexes.push(index);
-    });
-
-    state.markerGroups = Object.keys(groupsByCoord).map(function (key) {
-      return groupsByCoord[key];
-    });
   }
 })();
