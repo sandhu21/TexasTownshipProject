@@ -2292,15 +2292,19 @@ footer {
 /* ─── Mobile Nav (collapsed) ──────────────────────────────────── */
 @media (max-width: 991px) {
   #main-nav .navbar-collapse {
+    position: fixed;
+    left: 14px;
+    right: 14px;
+    top: 112px;
+    z-index: 1001;
     background: rgba(8, 8, 8, 0.96);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(255,255,255,0.10);
     border-radius: 20px;
-    margin-top: 12px;
     padding: 12px 8px 16px;
     box-shadow: 0 16px 48px rgba(0,0,0,0.70);
-    max-height: calc(100svh - 128px);
+    max-height: calc(100svh - 126px);
     overflow-y: auto;
     overscroll-behavior: contain;
   }
@@ -2430,7 +2434,10 @@ footer {
     flex-wrap: nowrap;
   }
   #main-nav .navbar-collapse {
-    max-height: calc(100svh - 124px);
+    top: 116px;
+    left: 12px;
+    right: 12px;
+    max-height: calc(100svh - 130px);
     overflow-y: auto;
     padding-bottom: 18px;
   }
@@ -2470,9 +2477,11 @@ footer {
     padding-right: 10px;
   }
   #main-nav .navbar-collapse {
-    margin-top: 10px;
+    top: 108px;
+    left: 8px;
+    right: 8px;
     border-radius: 18px;
-    max-height: calc(100svh - 112px);
+    max-height: calc(100svh - 120px);
     padding-bottom: 20px;
   }
   #main-nav .dropdown-menu {
