@@ -2300,6 +2300,9 @@ footer {
     margin-top: 12px;
     padding: 12px 8px 16px;
     box-shadow: 0 16px 48px rgba(0,0,0,0.70);
+    max-height: calc(100svh - 128px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
   #main-nav .nav-link {
     padding: 10px 14px !important;
@@ -2318,6 +2321,9 @@ footer {
     margin: 4px 0 4px 12px !important;
     padding: 4px 0;
     animation: none;
+    width: calc(100% - 12px);
+    max-height: none;
+    overflow: visible;
   }
   #main-nav .dropdown-item {
     font-size: 0.88rem;
@@ -2424,8 +2430,9 @@ footer {
     flex-wrap: nowrap;
   }
   #main-nav .navbar-collapse {
-    max-height: calc(100vh - 132px);
+    max-height: calc(100svh - 124px);
     overflow-y: auto;
+    padding-bottom: 18px;
   }
   #main-nav .navbar-toggler {
     border-color: rgba(255,255,255,0.22) !important;
@@ -2465,6 +2472,16 @@ footer {
   #main-nav .navbar-collapse {
     margin-top: 10px;
     border-radius: 18px;
+    max-height: calc(100svh - 112px);
+    padding-bottom: 20px;
+  }
+  #main-nav .dropdown-menu {
+    margin-left: 8px !important;
+    width: calc(100% - 8px);
+  }
+  #main-nav .dropdown-item {
+    white-space: normal;
+    line-height: 1.35;
   }
 }
 
