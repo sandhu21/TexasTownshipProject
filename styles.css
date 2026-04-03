@@ -2372,9 +2372,10 @@ footer {
 /* ── Disclaimer bar: tighter on mobile, keep to single line ── */
 @media (max-width: 767px) {
   .disclaimer-bar {
-    font-size: 0.68rem;
-    padding: 6px 14px;
-    line-height: 1.35;
+    min-height: 36px;
+    font-size: 0.66rem;
+    padding: 5px 14px;
+    line-height: 1.2;
     gap: 6px;
     flex-wrap: nowrap;
     white-space: nowrap;
@@ -2385,18 +2386,30 @@ footer {
   .disclaimer-bar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 }
 @media (max-width: 480px) {
-  .disclaimer-bar { font-size: 0.64rem; padding: 5px 12px; }
+  .disclaimer-bar {
+    min-height: 34px;
+    font-size: 0.61rem;
+    padding: 4px 12px;
+  }
 }
 
 /* ── Nav pill: resize for smaller viewports ── */
 @media (max-width: 767px) {
   #main-nav {
     width: calc(100% - 28px);
-    top: 48px;
+    top: 44px;
     height: 56px;
   }
-  /* scrolled: background only, no position change */
+  #main-nav.scrolled { top: 44px; }
   #main-nav .navbar-brand { font-size: 1.1rem; }
+  #main-nav .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  #main-nav .navbar-collapse {
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
   .navbar-toggler {
     border-color: rgba(255,255,255,0.22) !important;
     padding: 5px 9px;
@@ -2408,10 +2421,21 @@ footer {
 @media (max-width: 480px) {
   #main-nav {
     width: calc(100% - 20px);
-    top: 44px;
+    top: 40px;
     height: 54px;
   }
-  /* scrolled: background only */
+  #main-nav.scrolled { top: 40px; }
+  #main-nav .navbar-brand {
+    font-size: 1rem;
+    max-width: calc(100% - 56px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #main-nav .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 /* ── Hero section ── */
