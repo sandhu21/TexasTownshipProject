@@ -405,9 +405,9 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
     var qIdx    = 0;
     var busy    = false;
-    var S_EXIT  = 32;   // ms stagger between letter exits
-    var S_ENTER = 54;   // ms stagger between letter entrances
-    var DUR_EXIT = 390; // ms duration of each letter exit animation
+    var S_EXIT  = 48;   // ms stagger between letter exits
+    var S_ENTER = 76;   // ms stagger between letter entrances
+    var DUR_EXIT = 520; // ms duration of each letter exit animation
     var HOLD    = 4400; // ms to hold each question before cycling
 
     // Walk h1 child nodes to get clean readable text, treating <br> as a space
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function () {
           s.textContent = ch;
           s.style.opacity = '0';
           s.style.animation =
-            'heroLetterDrop 0.72s cubic-bezier(0.22,1.45,0.36,1) ' + delay + 'ms forwards';
+            'heroLetterDrop 0.92s cubic-bezier(0.22,1.45,0.36,1) ' + delay + 'ms forwards';
           delay += S_ENTER;
         }
         h1.appendChild(s);
@@ -482,8 +482,10 @@ document.addEventListener('DOMContentLoaded', function () {
       if (busy) return;
       busy = true;
 
-      // First cycle: flatten the complex initial h1 DOM into simple spans
+      // First cycle: lock to single line and flatten the complex initial h1 DOM
       if (!h1.querySelector('.h1-letter')) {
+        h1.style.whiteSpace = 'nowrap';
+        h1.style.fontSize   = 'clamp(1.8rem, 5.5vw, 4.5rem)';
         flatten(getH1Text());
       }
 
