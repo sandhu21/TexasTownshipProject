@@ -272,8 +272,18 @@ img { display: block; max-width: 100%; }
   background-position: center;
 }
 .hero-homepage {
-  background-image: url('/TownshipPicture/image1.jpg');
-  background-position: center center;
+  background-image: none;
+}
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
 }
 .hero-section::before {
   content: '';
@@ -2371,6 +2381,11 @@ footer {
 @media (hover: hover) and (pointer: fine) and (min-width: 1025px) {
   .hero-section, .page-hero { background-attachment: fixed; }
 }
+/* Tablet: moderate height reduction */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .hero-section { height: 88vh; }
+  .hero-bg-img  { object-position: center 40%; }
+}
 @media (max-width: 767px) {
   .section { padding: 56px 0; }
   .stat-number { font-size: 2.6rem; }
@@ -2379,6 +2394,10 @@ footer {
   .about-section { padding: 56px 0 0; }
   .action-buttons { padding: 12px 0 40px; }
   footer { padding: 52px 0 28px; }
+
+  /* Hero image: shorter section height reduces portrait/landscape mismatch zoom */
+  .hero-section { height: 78vh; min-height: 500px; }
+  .hero-bg-img  { object-position: center 38%; }
 
   /* Hero search full width on mobile */
   .hero-search { max-width: 100%; margin-top: 28px; }
