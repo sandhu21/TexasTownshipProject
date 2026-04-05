@@ -323,8 +323,14 @@ img { display: block; max-width: 100%; }
 /* ─── Hero Title Letter Animation ───────────────────────────── */
 @keyframes heroLetterExit {
   0%   { opacity: 1; transform: translateY(0)    rotate(0deg)  scale(1);    filter: blur(0); }
-  30%  { opacity: 1; transform: translateY(-18px) rotate(-5deg) scale(1.08); }
-  100% { opacity: 0; transform: translateY(65px)  rotate(9deg)  scale(0.58); filter: blur(5px); }
+  25%  { opacity: 1; transform: translateY(-10px) rotate(-2deg) scale(1.04); }
+  100% { opacity: 0; transform: translateY(38px)  rotate(4deg)  scale(0.74); filter: blur(2px); }
+}
+@keyframes carouselLetterDrop {
+  0%   { opacity: 0; transform: translateY(-26px) scale(0.88); filter: blur(2px); }
+  60%  { opacity: 1; transform: translateY(4px)   scale(1.03); filter: blur(0); }
+  80%  { transform: translateY(-2px) scale(0.99); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 @keyframes heroLetterDrop {
   0%   { opacity: 0; transform: translateY(-70px) rotate(-8deg) scale(0.5); filter: blur(4px); }

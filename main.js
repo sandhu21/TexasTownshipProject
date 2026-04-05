@@ -403,51 +403,38 @@ document.addEventListener('DOMContentLoaded', function () {
       'Ready to explore?',
       'Welcome, neighbor.'
     ];
-    var qIdx    = 0;
-    var busy    = false;
-    var S_EXIT  = 48;   // ms stagger between letter exits
-    var S_ENTER = 76;   // ms stagger between letter entrances
-    var DUR_EXIT = 520; // ms duration of each letter exit animation
-    var HOLD    = 4400; // ms to hold each question before cycling
+    var qIdx     = 0;
+    var busy     = false;
+    var firstRun = true;
+    var S_EXIT   = 46;   // ms stagger between letter exits
+    var S_ENTER  = 72;   // ms stagger between letter entrances
+    var DUR_EXIT = 500;  // ms per letter exit animation
 
-    // Walk h1 child nodes to get clean readable text, treating <br> as a space
-    function getH1Text() {
-      var parts = [];
-      h1.childNodes.forEach(function (n) {
-        if (n.nodeName === 'BR') {
-          parts.push(' ');
-        } else {
-          parts.push((n.textContent || '').replace(/\u00a0/g, ' '));
-        }
-      });
-      return parts.join('').replace(/\s+/g, ' ').trim();
+    // First exit: fade the entire h1 out as one unit — no flatten, no double-render
+    function exitFirst(cb) {
+      h1.style.transition = 'opacity 0.55s ease, transform 0.55s cubic-bezier(0.4,0,1,1)';
+      h1.style.opacity    = '0';
+      h1.style.transform  = 'translateY(-20px)';
+      setTimeout(function () {
+        h1.style.transition = 'none';
+        h1.style.opacity    = '';
+        h1.style.transform  = '';
+        // Now safe to apply carousel sizing — h1 is invisible
+        h1.style.whiteSpace = 'nowrap';
+        h1.style.fontSize   = 'clamp(1.8rem, 5.5vw, 4.5rem)';
+        cb();
+      }, 620);
     }
 
-    // Replace h1 content with flat .h1-letter spans (no animation yet)
-    function flatten(text) {
-      h1.innerHTML = '';
-      text.split('').forEach(function (ch) {
-        var s = document.createElement('span');
-        s.style.display = 'inline-block';
-        if (ch === ' ') {
-          s.innerHTML = '&nbsp;';
-        } else {
-          s.className = 'h1-letter';
-          s.textContent = ch;
-        }
-        h1.appendChild(s);
-      });
-    }
-
-    // Stagger-animate every .h1-letter out, then fire cb
-    function exitAll(cb) {
+    // Subsequent exits: stagger each .h1-letter out individually
+    function exitLetters(cb) {
       var letters = h1.querySelectorAll('.h1-letter');
       if (!letters.length) { cb(); return; }
       var maxEnd = 0;
       letters.forEach(function (s, i) {
         var d = i * S_EXIT;
         s.style.animation = 'none';
-        s.getBoundingClientRect(); // force reflow so 'none' takes effect
+        s.getBoundingClientRect(); // force reflow
         s.style.animation =
           'heroLetterExit ' + DUR_EXIT + 'ms cubic-bezier(0.55,0,0.85,0.35) ' + d + 'ms forwards';
         maxEnd = Math.max(maxEnd, d + DUR_EXIT);
@@ -455,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function () {
       setTimeout(cb, maxEnd + 80);
     }
 
-    // Build new h1 with staggered Disney drop-in per letter; returns settle time (ms)
+    // Populate h1 with staggered letter drop-ins; returns settle time (ms)
     function enterNew(text) {
       h1.innerHTML = '';
       var delay = 0;
@@ -464,42 +451,38 @@ document.addEventListener('DOMContentLoaded', function () {
         s.style.display = 'inline-block';
         if (ch === ' ') {
           s.innerHTML = '&nbsp;';
-          delay += Math.round(S_ENTER * 0.4);
+          delay += Math.round(S_ENTER * 0.35);
         } else {
-          s.className = 'h1-letter';
-          s.textContent = ch;
+          s.className    = 'h1-letter';
+          s.textContent  = ch;
           s.style.opacity = '0';
           s.style.animation =
-            'heroLetterDrop 0.92s cubic-bezier(0.22,1.45,0.36,1) ' + delay + 'ms forwards';
+            'carouselLetterDrop 0.78s cubic-bezier(0.22,1.2,0.36,1) ' + delay + 'ms forwards';
           delay += S_ENTER;
         }
         h1.appendChild(s);
       });
-      return delay + 720; // total ms until last letter lands
+      return delay + 780;
     }
 
     function cycle() {
       if (busy) return;
       busy = true;
 
-      // First cycle: lock to single line and flatten the complex initial h1 DOM
-      if (!h1.querySelector('.h1-letter')) {
-        h1.style.whiteSpace = 'nowrap';
-        h1.style.fontSize   = 'clamp(1.8rem, 5.5vw, 4.5rem)';
-        flatten(getH1Text());
-      }
+      var exitFn = firstRun ? exitFirst : exitLetters;
+      firstRun   = false;
 
-      exitAll(function () {
+      exitFn(function () {
         qIdx = (qIdx + 1) % QUESTIONS.length;
         var settleMs = enterNew(QUESTIONS[qIdx]);
         setTimeout(function () {
           busy = false;
-          setTimeout(cycle, HOLD);
+          setTimeout(cycle, 4400);
         }, settleMs);
       });
     }
 
-    // Let the initial letter animation fully settle (2.5s), hold 3s, then start cycling
+    // Let initial animation settle (2.5s) + hold (3s) before first transition
     setTimeout(cycle, 5500);
   }());
 
