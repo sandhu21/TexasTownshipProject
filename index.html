@@ -129,10 +129,29 @@
     <div class="hero-content">
       <span class="hero-eyebrow">Kalamazoo County, Michigan</span>
       <h1>Welcome to<br><span>Texas Corners</span></h1>
-      <p>Discover parks, dining, and local businesses in one of Southwest Michigan's most vibrant communities.</p>
+
+      <!-- Animated rotating tagline -->
+      <div class="hero-tagline-wrap" aria-live="polite" aria-atomic="true">
+        <div id="hero-tagline" class="hero-tagline">Discover parks, dining, and local businesses</div>
+      </div>
+
+      <!-- Animated conversational prompt -->
+      <div class="hero-prompt-wrap" aria-live="polite" aria-atomic="true">
+        <div id="hero-prompt" class="hero-prompt">Hungry? Let's find something to eat.</div>
+      </div>
+
       <div class="hero-buttons">
-        <a href="#explore" class="btn-hero-primary">Explore</a>
-        <a href="#parks-section" class="btn-hero-outline">Find a Park</a>
+        <a href="#explore" class="btn-hero-primary"><i class="fa-solid fa-compass"></i> Explore Now</a>
+        <a href="/map.html" class="btn-hero-outline"><i class="fa-solid fa-map-location-dot"></i> Open the Map</a>
+      </div>
+
+      <!-- Feature navigation chips -->
+      <div class="hero-chips" aria-label="Quick navigation">
+        <a href="#food-section" class="hero-chip"><i class="fa-solid fa-utensils"></i> Food</a>
+        <a href="#parks-section" class="hero-chip"><i class="fa-solid fa-tree"></i> Parks</a>
+        <a href="#business-section" class="hero-chip"><i class="fa-solid fa-store"></i> Businesses</a>
+        <a href="/map.html" class="hero-chip"><i class="fa-solid fa-map-location-dot"></i> Map</a>
+        <a href="/calendar.html" class="hero-chip"><i class="fa-regular fa-calendar"></i> Calendar</a>
       </div>
 
       <div class="hero-search">
@@ -143,6 +162,11 @@
         </div>
         <ul class="hs-results" id="hero-search-results" role="listbox" aria-label="Search results"></ul>
       </div>
+    </div>
+
+    <div class="scroll-indicator" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="mouse"></div>
     </div>
   </section>
 

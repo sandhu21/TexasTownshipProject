@@ -390,4 +390,83 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
   });
 
+  // ─── Hero Rotating Tagline & Prompt Carousel ───────────────────
+  var taglines = [
+    'Discover parks, dining, and local businesses',
+    'See what\'s happening around town',
+    'Find something good to eat',
+    'Browse the town calendar',
+    'Explore parks, places, and more',
+    'Your local guide to Texas Corners'
+  ];
+  var prompts = [
+    'Hungry? Let\'s find something to eat.',
+    'Want to see what\'s going on this week?',
+    'Looking for a park or place to explore?',
+    'Need the town calendar? It\'s right here.',
+    'Discover local spots in just a few taps.'
+  ];
+
+  function runCarousel(el, texts, startDelay, interval, transMs) {
+    if (!el) return;
+    var idx = 0;
+
+    function tick() {
+      // Slide out upward
+      el.style.transition = 'opacity ' + transMs + 'ms ease, transform ' + transMs + 'ms ease';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(-13px)';
+
+      setTimeout(function () {
+        idx = (idx + 1) % texts.length;
+        el.textContent = texts[idx];
+
+        // Snap to entry position without animating
+        el.style.transition = 'none';
+        el.style.transform = 'translateY(16px)';
+
+        // Double rAF ensures the browser registers the snap before transitioning in
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            el.style.transition =
+              'opacity ' + transMs + 'ms ease, transform ' + transMs + 'ms cubic-bezier(0.22, 1.15, 0.36, 1)';
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          });
+        });
+      }, transMs);
+    }
+
+    // Let CSS entry animation finish, then hand off to JS carousel
+    setTimeout(function () {
+      el.style.animation = 'none';
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+      setInterval(tick, interval);
+    }, startDelay);
+  }
+
+  runCarousel(document.getElementById('hero-tagline'), taglines, 4200, 3600, 480);
+  // Offset prompt slightly so both don't transition at the same moment
+  runCarousel(document.getElementById('hero-prompt'),  prompts,  5100, 3600, 420);
+
+  // ─── Search Placeholder Rotation ──────────────────────────────
+  var phTexts = [
+    'Search parks, food, businesses\u2026',
+    'Try \u201ccoffee\u201d, \u201cplayground\u201d, or \u201cpizza\u201d',
+    'Search Texas Corners\u2026',
+    'Looking for something? Start here\u2026',
+    'Search restaurants, parks, and more\u2026'
+  ];
+  var phIdx = 0;
+  var phInput = document.getElementById('hero-search-input');
+  if (phInput) {
+    setInterval(function () {
+      if (document.activeElement !== phInput && !phInput.value) {
+        phIdx = (phIdx + 1) % phTexts.length;
+        phInput.placeholder = phTexts[phIdx];
+      }
+    }, 4000);
+  }
+
 });
