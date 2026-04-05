@@ -390,65 +390,116 @@ document.addEventListener('DOMContentLoaded', function () {
     }, { passive: true });
   });
 
-  // ─── Hero Rotating Tagline & Prompt Carousel ───────────────────
-  var taglines = [
-    'Discover parks, dining, and local businesses',
-    'See what\'s happening around town',
-    'Find something good to eat',
-    'Browse the town calendar',
-    'Explore parks, places, and more',
-    'Your local guide to Texas Corners'
-  ];
-  var prompts = [
-    'Hungry? Let\'s find something to eat.',
-    'Want to see what\'s going on this week?',
-    'Looking for a park or place to explore?',
-    'Need the town calendar? It\'s right here.',
-    'Discover local spots in just a few taps.'
-  ];
+  // ─── Hero H1 Question Carousel (Disney letter animation) ─────────
+  (function () {
+    var h1 = document.querySelector('.hero-content h1');
+    if (!h1) return;
 
-  function runCarousel(el, texts, startDelay, interval, transMs) {
-    if (!el) return;
-    var idx = 0;
+    var QUESTIONS = [
+      'Hungry tonight?',
+      'Looking for a park?',
+      "What's on this week?",
+      'Find your next spot.',
+      'Ready to explore?',
+      'Welcome, neighbor.'
+    ];
+    var qIdx    = 0;
+    var busy    = false;
+    var S_EXIT  = 32;   // ms stagger between letter exits
+    var S_ENTER = 54;   // ms stagger between letter entrances
+    var DUR_EXIT = 390; // ms duration of each letter exit animation
+    var HOLD    = 4400; // ms to hold each question before cycling
 
-    function tick() {
-      // Slide out upward
-      el.style.transition = 'opacity ' + transMs + 'ms ease, transform ' + transMs + 'ms ease';
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(-13px)';
-
-      setTimeout(function () {
-        idx = (idx + 1) % texts.length;
-        el.textContent = texts[idx];
-
-        // Snap to entry position without animating
-        el.style.transition = 'none';
-        el.style.transform = 'translateY(16px)';
-
-        // Double rAF ensures the browser registers the snap before transitioning in
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            el.style.transition =
-              'opacity ' + transMs + 'ms ease, transform ' + transMs + 'ms cubic-bezier(0.22, 1.15, 0.36, 1)';
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-          });
-        });
-      }, transMs);
+    // Walk h1 child nodes to get clean readable text, treating <br> as a space
+    function getH1Text() {
+      var parts = [];
+      h1.childNodes.forEach(function (n) {
+        if (n.nodeName === 'BR') {
+          parts.push(' ');
+        } else {
+          parts.push((n.textContent || '').replace(/\u00a0/g, ' '));
+        }
+      });
+      return parts.join('').replace(/\s+/g, ' ').trim();
     }
 
-    // Let CSS entry animation finish, then hand off to JS carousel
-    setTimeout(function () {
-      el.style.animation = 'none';
-      el.style.opacity = '1';
-      el.style.transform = 'translateY(0)';
-      setInterval(tick, interval);
-    }, startDelay);
-  }
+    // Replace h1 content with flat .h1-letter spans (no animation yet)
+    function flatten(text) {
+      h1.innerHTML = '';
+      text.split('').forEach(function (ch) {
+        var s = document.createElement('span');
+        s.style.display = 'inline-block';
+        if (ch === ' ') {
+          s.innerHTML = '&nbsp;';
+        } else {
+          s.className = 'h1-letter';
+          s.textContent = ch;
+        }
+        h1.appendChild(s);
+      });
+    }
 
-  runCarousel(document.getElementById('hero-tagline'), taglines, 4200, 3600, 480);
-  // Offset prompt slightly so both don't transition at the same moment
-  runCarousel(document.getElementById('hero-prompt'),  prompts,  5100, 3600, 420);
+    // Stagger-animate every .h1-letter out, then fire cb
+    function exitAll(cb) {
+      var letters = h1.querySelectorAll('.h1-letter');
+      if (!letters.length) { cb(); return; }
+      var maxEnd = 0;
+      letters.forEach(function (s, i) {
+        var d = i * S_EXIT;
+        s.style.animation = 'none';
+        s.getBoundingClientRect(); // force reflow so 'none' takes effect
+        s.style.animation =
+          'heroLetterExit ' + DUR_EXIT + 'ms cubic-bezier(0.55,0,0.85,0.35) ' + d + 'ms forwards';
+        maxEnd = Math.max(maxEnd, d + DUR_EXIT);
+      });
+      setTimeout(cb, maxEnd + 80);
+    }
+
+    // Build new h1 with staggered Disney drop-in per letter; returns settle time (ms)
+    function enterNew(text) {
+      h1.innerHTML = '';
+      var delay = 0;
+      text.split('').forEach(function (ch) {
+        var s = document.createElement('span');
+        s.style.display = 'inline-block';
+        if (ch === ' ') {
+          s.innerHTML = '&nbsp;';
+          delay += Math.round(S_ENTER * 0.4);
+        } else {
+          s.className = 'h1-letter';
+          s.textContent = ch;
+          s.style.opacity = '0';
+          s.style.animation =
+            'heroLetterDrop 0.72s cubic-bezier(0.22,1.45,0.36,1) ' + delay + 'ms forwards';
+          delay += S_ENTER;
+        }
+        h1.appendChild(s);
+      });
+      return delay + 720; // total ms until last letter lands
+    }
+
+    function cycle() {
+      if (busy) return;
+      busy = true;
+
+      // First cycle: flatten the complex initial h1 DOM into simple spans
+      if (!h1.querySelector('.h1-letter')) {
+        flatten(getH1Text());
+      }
+
+      exitAll(function () {
+        qIdx = (qIdx + 1) % QUESTIONS.length;
+        var settleMs = enterNew(QUESTIONS[qIdx]);
+        setTimeout(function () {
+          busy = false;
+          setTimeout(cycle, HOLD);
+        }, settleMs);
+      });
+    }
+
+    // Let the initial letter animation fully settle (2.5s), hold 3s, then start cycling
+    setTimeout(cycle, 5500);
+  }());
 
   // ─── Search Placeholder Rotation ──────────────────────────────
   var phTexts = [

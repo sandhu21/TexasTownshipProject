@@ -321,6 +321,11 @@ img { display: block; max-width: 100%; }
 }
 
 /* ─── Hero Title Letter Animation ───────────────────────────── */
+@keyframes heroLetterExit {
+  0%   { opacity: 1; transform: translateY(0)    rotate(0deg)  scale(1);    filter: blur(0); }
+  28%  { opacity: 1; transform: translateY(-16px) rotate(-5deg) scale(1.08); }
+  100% { opacity: 0; transform: translateY(60px)  rotate(9deg)  scale(0.60); filter: blur(4px); }
+}
 @keyframes heroLetterDrop {
   0%   { opacity: 0; transform: translateY(-70px) rotate(-8deg) scale(0.5); filter: blur(4px); }
   58%  { opacity: 1; transform: translateY(10px)  rotate(2deg)  scale(1.10); filter: blur(0); }
@@ -2853,6 +2858,11 @@ footer {
   transform: translateY(10px);
   animation: fadeInUp 0.8s 0.95s ease forwards;
   will-change: opacity, transform;
+}
+
+/* ── H1 spacing — more room below when tagline divs are removed ── */
+.hero-content h1 {
+  margin-bottom: 44px;
 }
 
 /* ── Feature Navigation Chips ────────────────────────────────── */
