@@ -3,357 +3,679 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Regular township meeting guide and community events for Texas Township, Kalamazoo County, Michigan. Verify official agendas and updates with Texas Township directly.">
-  <title>Township Meeting Guide — Texas Corners</title>
+  <meta name="description" content="Events, meetings, and everything happening in Texas Corners — community calendar for Texas Township, Kalamazoo County, Michigan.">
+  <title>Community Calendar — Texas Corners</title>
 
-  <!-- Bootstrap 5 -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <!-- Custom Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 
   <style>
-    /* ── Page Hero ───────────────────────────────────────────── */
-    .page-hero {
-      min-height: 390px;
+    /* ── Cal Hero ─────────────────────────────────────────────── */
+    .cal-hero {
+      min-height: 420px;
       display: flex;
       align-items: center;
-      padding: 168px 0 72px;
+      padding: 160px 0 80px;
       position: relative;
       overflow: hidden;
       background:
-        radial-gradient(circle at top left, rgba(100,160,255,0.16), transparent 32%),
-        radial-gradient(circle at top right, rgba(80,220,140,0.14), transparent 34%),
-        linear-gradient(180deg, #0f1013 0%, #08090c 100%);
+        radial-gradient(ellipse at 20% 60%, rgba(231,150,48,0.18), transparent 40%),
+        radial-gradient(ellipse at 80% 20%, rgba(100,200,120,0.14), transparent 38%),
+        radial-gradient(ellipse at 60% 80%, rgba(90,130,255,0.12), transparent 36%),
+        linear-gradient(160deg, #0d0f12 0%, #07090c 100%);
     }
-    .page-hero::before {
+    .cal-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(255,255,255,0.025) 0,
+        rgba(255,255,255,0.025) 1px,
+        transparent 1px,
+        transparent 80px
+      );
+      pointer-events: none;
+    }
+    .cal-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .cal-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(231,150,48,0.9);
+      background: rgba(231,150,48,0.1);
+      border: 1px solid rgba(231,150,48,0.28);
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 20px;
+    }
+    .cal-hero h1 {
+      font-family: var(--font-heading, 'Playfair Display', serif);
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .cal-hero h1 span {
+      color: #e79630;
+    }
+    .cal-hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.58);
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .cal-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-submit-event {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #e79630;
+      color: #0a0a0a;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 13px 24px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-submit-event:hover {
+      background: #f5a840;
+      color: #0a0a0a;
+      transform: translateY(-1px);
+    }
+    .btn-official-site {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.78);
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 13px 24px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.14);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-official-site:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.24);
+      color: #fff;
+    }
+    .cal-hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .cal-stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.65);
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .cal-stat-pill i {
+      color: rgba(231,150,48,0.85);
+      font-size: 0.82rem;
+    }
+    .cal-stat-pill strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* ── Section Scaffolding ──────────────────────────────────── */
+    .cal-section {
+      padding: 72px 0;
+    }
+    .cal-section-alt {
+      background: rgba(255,255,255,0.018);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .cal-section-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 6px;
+    }
+    .cal-section-title {
+      font-family: var(--font-heading, 'Playfair Display', serif);
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.025em;
+      margin: 0 0 8px;
+    }
+    .cal-section-sub {
+      color: rgba(255,255,255,0.48);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    .cal-section-head {
+      margin-bottom: 36px;
+    }
+    .cal-section-head-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    /* ── Category Filters ─────────────────────────────────────── */
+    .cal-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .cal-filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: transparent;
+      color: rgba(255,255,255,0.58);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: 0.18s ease;
+    }
+    .cal-filter-btn:hover {
+      border-color: rgba(255,255,255,0.22);
+      color: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.06);
+    }
+    .cal-filter-btn.active {
+      color: #fff;
+      border-color: rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.09);
+    }
+    .cal-filter-btn[data-filter="government"].active {
+      background: rgba(100,160,255,0.14);
+      border-color: rgba(100,160,255,0.38);
+      color: #7ab4ff;
+    }
+    .cal-filter-btn[data-filter="community"].active {
+      background: rgba(80,210,130,0.14);
+      border-color: rgba(80,210,130,0.38);
+      color: #50d282;
+    }
+    .cal-filter-btn[data-filter="events"].active {
+      background: rgba(231,150,48,0.14);
+      border-color: rgba(231,150,48,0.38);
+      color: #e79630;
+    }
+    .cal-filter-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-all     { background: rgba(255,255,255,0.45); }
+    .dot-gov     { background: #7ab4ff; }
+    .dot-comm    { background: #50d282; }
+    .dot-events  { background: #e79630; }
+
+    /* ── This Week Cards ──────────────────────────────────────── */
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .week-card {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      text-decoration: none;
+      transition: background 0.18s, border-color 0.18s, transform 0.18s;
+    }
+    .week-card:hover {
+      background: rgba(255,255,255,0.065);
+      border-color: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+    .week-card-date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 52px;
+      height: 56px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+    .week-card-date .day-num {
+      font-family: var(--font-heading, 'Playfair Display', serif);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+    .week-card-date .day-mon {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.46);
+      margin-top: 2px;
+    }
+    .week-card-date.cat-gov    { background: rgba(100,160,255,0.12); border-color: rgba(100,160,255,0.25); }
+    .week-card-date.cat-gov    .day-num { color: #7ab4ff; }
+    .week-card-date.cat-comm   { background: rgba(80,210,130,0.12); border-color: rgba(80,210,130,0.25); }
+    .week-card-date.cat-comm   .day-num { color: #50d282; }
+    .week-card-date.cat-events { background: rgba(231,150,48,0.12); border-color: rgba(231,150,48,0.25); }
+    .week-card-date.cat-events .day-num { color: #e79630; }
+
+    .week-card-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .week-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+    .badge-gov     { background: rgba(100,160,255,0.12); color: #7ab4ff; }
+    .badge-comm    { background: rgba(80,210,130,0.12);  color: #50d282; }
+    .badge-events  { background: rgba(231,150,48,0.12);  color: #e79630; }
+
+    .week-card-title {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 6px;
+      line-height: 1.3;
+    }
+    .week-card-time {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.46);
+    }
+    .week-card-time i {
+      font-size: 0.72rem;
+    }
+
+    /* ── This Weekend Banner ──────────────────────────────────── */
+    .weekend-banner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      border-radius: 20px;
+      border: 1px solid rgba(80,210,130,0.22);
+      background: rgba(80,210,130,0.06);
+      margin-bottom: 40px;
+    }
+    .weekend-banner-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(80,210,130,0.14);
+      border: 1px solid rgba(80,210,130,0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #50d282;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .weekend-banner-body h4 {
+      margin: 0 0 3px;
+      font-family: var(--font-heading, 'Playfair Display', serif);
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .weekend-banner-body p {
+      margin: 0;
+      font-size: 0.84rem;
+      color: rgba(255,255,255,0.52);
+    }
+    .weekend-banner-body p strong {
+      color: #50d282;
+    }
+
+    /* ── Upcoming Events List ─────────────────────────────────── */
+    .events-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .events-month-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 0 12px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.32);
+    }
+    .events-month-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+    }
+    .event-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid transparent;
+      margin-bottom: 6px;
+      transition: background 0.16s, border-color 0.16s;
+      cursor: default;
+    }
+    .event-row:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.08);
+    }
+    .event-row.hidden {
+      display: none;
+    }
+    .event-row-date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 46px;
+      flex-shrink: 0;
+    }
+    .event-row-day {
+      font-family: var(--font-heading, 'Playfair Display', serif);
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+    .event-row-month {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-top: 2px;
+    }
+    .event-row-divider {
+      width: 1px;
+      height: 44px;
+      background: rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .event-row-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.88rem;
+      flex-shrink: 0;
+    }
+    .icon-gov     { background: rgba(100,160,255,0.12); color: #7ab4ff; }
+    .icon-comm    { background: rgba(80,210,130,0.12);  color: #50d282; }
+    .icon-events  { background: rgba(231,150,48,0.12);  color: #e79630; }
+
+    .event-row-body {
+      flex: 1;
+      min-width: 0;
+    }
+    .event-row-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .event-row-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.44);
+    }
+    .event-row-meta i { font-size: 0.7rem; }
+    .event-row-cat {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .event-row-dow {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+      white-space: nowrap;
+    }
+
+    /* ── Featured Event ───────────────────────────────────────── */
+    .featured-card {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(231,150,48,0.22) 0%, rgba(200,80,80,0.15) 50%, rgba(60,30,100,0.3) 100%),
+        linear-gradient(180deg, #141418 0%, #0c0c10 100%);
+      border: 1px solid rgba(231,150,48,0.2);
+      padding: 52px 48px;
+    }
+    .featured-card::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0)),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 88px);
+        radial-gradient(circle at 80% 50%, rgba(231,150,48,0.18), transparent 55%),
+        radial-gradient(circle at 20% 80%, rgba(200,80,80,0.12), transparent 45%);
       pointer-events: none;
     }
-    .page-hero-content {
+    .featured-inner {
       position: relative;
       z-index: 1;
-      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
     }
-    .page-hero-eyebrow {
-      display: inline-block;
-      font-size: 0.72rem;
+    .featured-left {
+      max-width: 600px;
+    }
+    .featured-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(100,160,255,0.85);
-      background: rgba(100,160,255,0.10);
-      border: 1px solid rgba(100,160,255,0.25);
+      color: #e79630;
+      background: rgba(231,150,48,0.14);
+      border: 1px solid rgba(231,150,48,0.3);
       border-radius: 100px;
-      padding: 5px 16px;
+      padding: 5px 14px;
       margin-bottom: 18px;
     }
-    .page-hero h1 {
-      font-family: var(--font-heading);
-      font-size: clamp(2.7rem, 6vw, 4.4rem);
+    .featured-title {
+      font-family: var(--font-heading, 'Playfair Display', serif);
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 700;
       color: #fff;
-      line-height: 1.02;
-      margin-bottom: 16px;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+      line-height: 1.1;
     }
-    .page-hero-subtitle {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.6);
-      max-width: 660px;
+    .featured-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.62);
       line-height: 1.7;
-      margin: 0;
+      margin-bottom: 24px;
+      max-width: 480px;
     }
-    .calendar-hero-meta {
+    .featured-details {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
+      gap: 16px;
+      margin-bottom: 28px;
     }
-    .calendar-meta-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 11px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.74);
-      font-size: 0.82rem;
-      font-weight: 500;
-    }
-    .calendar-meta-pill i {
-      color: rgba(100,160,255,0.92);
-      font-size: 0.88rem;
-    }
-    .calendar-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.95fr);
-      gap: 28px;
-      align-items: start;
-    }
-    .calendar-primary,
-    .calendar-sidebar {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 24px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
-    }
-    .calendar-primary {
-      padding: 28px;
-    }
-    .calendar-sidebar {
-      padding: 24px;
-      position: sticky;
-      top: 124px;
-    }
-    .calendar-section-label {
-      display: inline-flex;
+    .featured-detail {
+      display: flex;
       align-items: center;
       gap: 8px;
-      color: rgba(255,255,255,0.48);
-      font-size: 0.72rem;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.72);
+    }
+    .featured-detail i {
+      color: #e79630;
+      font-size: 0.85rem;
+    }
+    .featured-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .featured-date-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 36px;
+      border-radius: 22px;
+      background: rgba(231,150,48,0.1);
+      border: 1px solid rgba(231,150,48,0.25);
+      text-align: center;
+      min-width: 140px;
+    }
+    .featured-date-month {
+      font-size: 0.78rem;
       font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      margin-bottom: 14px;
+      color: #e79630;
+      margin-bottom: 6px;
     }
-    .calendar-section-label i {
-      color: rgba(100,160,255,0.8);
-    }
-
-    /* ── Calendar Legend ─────────────────────────────────────── */
-    .calendar-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 40px;
-    }
-    .legend-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 6px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-    .legend-pill-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .legend-pill.board {
-      background: rgba(100,160,255,0.10);
-      border-color: rgba(100,160,255,0.30);
-      color: rgba(100,160,255,0.9);
-    }
-    .legend-pill.board .legend-pill-dot { background: #6AA0FF; }
-    .legend-pill.workshop {
-      background: rgba(255,180,50,0.10);
-      border-color: rgba(255,180,50,0.30);
-      color: rgba(255,180,50,0.9);
-    }
-    .legend-pill.workshop .legend-pill-dot { background: #FFB432; }
-    .legend-pill.planning {
-      background: rgba(80,220,140,0.10);
-      border-color: rgba(80,220,140,0.30);
-      color: rgba(80,220,140,0.9);
-    }
-    .legend-pill.planning .legend-pill-dot { background: #50DC8C; }
-
-    /* ── Month Block ─────────────────────────────────────────── */
-    .calendar-month-heading {
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
+    .featured-date-day {
+      font-family: var(--font-heading, 'Playfair Display', serif);
+      font-size: 3.5rem;
       font-weight: 700;
       color: #fff;
-      margin: 0 0 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      line-height: 1;
     }
-    .calendar-month-block {
-      margin-bottom: 40px;
-    }
-    .calendar-month-block:last-of-type {
-      margin-bottom: 0;
+    .featured-date-year {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.42);
+      margin-top: 6px;
     }
 
-    /* ── Calendar Info Box ───────────────────────────────────── */
-    .calendar-info-box {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 16px;
-      padding: 22px 28px;
+    /* ── Disclaimer Box ───────────────────────────────────────── */
+    .cal-disclaimer {
       display: flex;
-      align-items: flex-start;
       gap: 14px;
-      margin-top: 8px;
+      align-items: flex-start;
+      padding: 22px 26px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.09);
+      margin-top: 48px;
     }
-    .calendar-info-box i {
-      color: rgba(100,160,255,0.75);
+    .cal-disclaimer i {
+      color: rgba(100,160,255,0.7);
       font-size: 1rem;
       flex-shrink: 0;
       margin-top: 2px;
     }
-    .calendar-info-box p {
-      font-size: 0.875rem;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.65;
+    .cal-disclaimer p {
       margin: 0;
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.48);
+      line-height: 1.65;
     }
-    .calendar-info-box a {
+    .cal-disclaimer a {
       color: rgba(100,160,255,0.85);
       text-decoration: none;
     }
-    .calendar-info-box a:hover {
+    .cal-disclaimer a:hover {
       text-decoration: underline;
-      color: #6AA0FF;
     }
 
-    /* ── Service Cards ───────────────────────────────────────── */
-    .service-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-    @media (max-width: 991px) {
-      .service-cards-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 575px) {
-      .service-cards-grid { grid-template-columns: 1fr; }
-    }
-    .service-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 18px;
-      padding: 28px 24px;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
-    }
-    .service-card:hover {
-      background: rgba(255,255,255,0.07);
-      border-color: rgba(255,255,255,0.16);
-      transform: translateY(-2px);
-    }
-    .service-card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: rgba(100,160,255,0.12);
-      border: 1px solid rgba(100,160,255,0.20);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      font-size: 1.1rem;
-      color: #6AA0FF;
-    }
-    .service-card h4 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: #fff;
-      margin: 0 0 8px;
-    }
-    .service-card p {
-      font-size: 0.84rem;
-      color: rgba(255,255,255,0.50);
-      line-height: 1.60;
-      margin: 0;
-    }
-
-    .calendar-cta-wrap {
-      text-align: center;
-      margin-top: 20px;
-    }
-    .calendar-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.16);
-      color: #fff;
-      font-size: 0.88rem;
-      font-weight: 600;
-      padding: 13px 28px;
-      border-radius: 100px;
-      text-decoration: none;
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .calendar-cta-btn:hover {
-      background: rgba(255,255,255,0.14);
-      border-color: rgba(255,255,255,0.28);
-      color: #fff;
-    }
-    .calendar-rhythm {
-      display: grid;
-      gap: 14px;
-      margin-top: 8px;
-    }
-    .calendar-rhythm-card {
-      display: grid;
-      grid-template-columns: 42px minmax(0, 1fr);
-      gap: 14px;
-      padding: 16px 16px 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .calendar-rhythm-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 13px;
-      background: rgba(100,160,255,0.12);
-      border: 1px solid rgba(100,160,255,0.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #6AA0FF;
-      font-size: 0.95rem;
-    }
-    .calendar-rhythm-card h4 {
-      margin: 0 0 5px;
-      color: #fff;
-      font-family: var(--font-heading);
-      font-size: 0.92rem;
-      font-weight: 700;
-    }
-    .calendar-rhythm-card p {
-      margin: 0;
-      color: rgba(255,255,255,0.54);
-      font-size: 0.82rem;
-      line-height: 1.6;
-    }
-    @media (max-width: 1100px) {
-      .calendar-layout { grid-template-columns: 1fr; }
-      .calendar-sidebar { position: static; }
-    }
-    @media (max-width: 767px) {
-      .page-hero {
-        min-height: 340px;
-        padding: 152px 0 56px;
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .cal-hero {
+        min-height: 360px;
+        padding: 148px 0 64px;
       }
-      .calendar-meta-pill {
+      .featured-card {
+        padding: 32px 24px;
+      }
+      .featured-right {
         width: 100%;
+        align-items: flex-start;
       }
-      .calendar-primary,
-      .calendar-sidebar {
-        padding: 22px 18px;
-        border-radius: 20px;
+      .event-row-divider {
+        display: none;
       }
-      .calendar-info-box {
-        padding: 18px;
+    }
+    @media (max-width: 480px) {
+      .week-grid {
+        grid-template-columns: 1fr;
+      }
+      .cal-hero h1 {
+        font-size: 2.2rem;
       }
     }
   </style>
@@ -395,7 +717,7 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#"
+            <a class="nav-link dropdown-toggle" href="#parks-section"
                data-bs-toggle="dropdown" aria-expanded="false">
               Parks &amp; Facilities
             </a>
@@ -412,7 +734,7 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#"
+            <a class="nav-link dropdown-toggle" href="#food-section"
                data-bs-toggle="dropdown" aria-expanded="false">
               Food
             </a>
@@ -433,7 +755,7 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#"
+            <a class="nav-link dropdown-toggle" href="#business-section"
                data-bs-toggle="dropdown" aria-expanded="false">
               Businesses
             </a>
@@ -453,11 +775,11 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="/map.html">Map</a>
+            <a class="nav-link" href="/map.html"><i class="fa-solid fa-map-location-dot"></i> Map</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link active" href="/calendar.html">Calendar</a>
+            <a class="nav-link active" href="/calendar.html"><i class="fa-regular fa-calendar"></i> Calendar</a>
           </li>
 
         </ul>
@@ -465,244 +787,399 @@
     </div>
   </nav>
 
-  <!-- ─── Page Hero ───────────────────────────────────────────────── -->
-  <section class="page-hero">
-    <div class="page-hero-content">
-      <div class="container">
-        <span class="page-hero-eyebrow">Community Guide</span>
-        <h1>Meetings &amp; Events</h1>
-        <p class="page-hero-subtitle">Regular township meeting guide and community events for Texas Township. Always confirm official agendas, notices, and changes with the township directly.</p>
-        <div class="calendar-hero-meta">
-          <div class="calendar-meta-pill"><i class="fa-solid fa-building-columns"></i><span>Board meetings usually follow the 2nd Wednesday cadence</span></div>
-          <div class="calendar-meta-pill"><i class="fa-solid fa-gavel"></i><span>Planning meetings usually follow the 2nd and 4th Tuesday cadence</span></div>
-          <div class="calendar-meta-pill"><i class="fa-solid fa-circle-info"></i><span>Always verify agendas and changes on the township site</span></div>
+  <!-- ─── Hero ──────────────────────────────────────────────────────── -->
+  <section class="cal-hero">
+    <div class="container">
+      <div class="cal-hero-inner">
+        <div class="cal-eyebrow">
+          <i class="fa-regular fa-calendar-days"></i>
+          April 2026
+        </div>
+        <h1>What's Happening in<br><span>Texas Corners</span></h1>
+        <p class="cal-hero-sub">Events, meetings, and everything going on this week — your community at a glance.</p>
+        <div class="cal-hero-actions">
+          <a href="mailto:texascornerscontact@gmail.com?subject=Event%20Submission" class="btn-submit-event">
+            <i class="fa-solid fa-plus"></i> Submit an Event
+          </a>
+          <a href="https://www.texastownship.org" target="_blank" rel="noopener" class="btn-official-site">
+            Official Township Site <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
+        <div class="cal-hero-stats">
+          <div class="cal-stat-pill"><i class="fa-solid fa-calendar-week"></i><strong>11</strong> events this month</div>
+          <div class="cal-stat-pill"><i class="fa-solid fa-building-columns"></i><strong>9</strong> government meetings</div>
+          <div class="cal-stat-pill"><i class="fa-solid fa-star"></i><strong>2</strong> community events</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── Calendar Main Content ──────────────────────────────────── -->
-  <section class="section">
+  <!-- ─── This Week ─────────────────────────────────────────────────── -->
+  <section class="cal-section" id="this-week">
     <div class="container">
-      <div class="calendar-layout">
-        <div class="calendar-primary">
-          <div class="calendar-section-label"><i class="fa-regular fa-calendar"></i><span>Upcoming Schedule</span></div>
 
-          <!-- Legend -->
-          <div class="calendar-legend">
-            <span class="legend-pill board">
-              <span class="legend-pill-dot"></span>
-              Township Board Meeting
-            </span>
-            <span class="legend-pill workshop">
-              <span class="legend-pill-dot"></span>
-              Planning Commission Workshop
-            </span>
-            <span class="legend-pill planning">
-              <span class="legend-pill-dot"></span>
-              Planning Commission Meeting
-            </span>
-          </div>
-
-      <!-- April 2026 -->
-      <div class="calendar-month-block">
-        <h2 class="calendar-month-heading">April 2026</h2>
-
-        <div class="event-card event-board">
-          <div class="event-dot"></div>
-          <div class="event-body">
-            <div class="event-type"><i class="fa-solid fa-building-columns"></i> Township Board Meeting</div>
-            <div class="event-date">Wednesday, April 8, 2026</div>
-          </div>
-          <div class="event-time">7:00 PM</div>
-        </div>
-
-        <div class="event-card event-workshop">
-          <div class="event-dot"></div>
-          <div class="event-body">
-            <div class="event-type"><i class="fa-solid fa-drafting-compass"></i> Planning Commission Workshop</div>
-            <div class="event-date">Tuesday, April 14, 2026</div>
-          </div>
-          <div class="event-time">5:00 PM</div>
-        </div>
-
-        <div class="event-card event-planning">
-          <div class="event-dot"></div>
-          <div class="event-body">
-            <div class="event-type"><i class="fa-solid fa-gavel"></i> Planning Commission Meeting</div>
-            <div class="event-date">Tuesday, April 28, 2026</div>
-          </div>
-          <div class="event-time">6:00 PM</div>
+      <div class="cal-section-head-row">
+        <div>
+          <div class="cal-section-eyebrow">Right Now</div>
+          <h2 class="cal-section-title">This Week</h2>
+          <p class="cal-section-sub">April 7 – 13, 2026</p>
         </div>
       </div>
 
-      <!-- May 2026 -->
-      <div class="calendar-month-block">
-        <h2 class="calendar-month-heading">May 2026</h2>
-
-        <div class="event-card event-board">
-          <div class="event-dot"></div>
-          <div class="event-body">
-            <div class="event-type"><i class="fa-solid fa-building-columns"></i> Township Board Meeting</div>
-            <div class="event-date">Wednesday, May 13, 2026</div>
-          </div>
-          <div class="event-time">7:00 PM</div>
+      <!-- This Weekend Banner -->
+      <div class="weekend-banner">
+        <div class="weekend-banner-icon">
+          <i class="fa-solid fa-sun"></i>
         </div>
-
-        <div class="event-card event-workshop">
-          <div class="event-dot"></div>
-          <div class="event-body">
-            <div class="event-type"><i class="fa-solid fa-drafting-compass"></i> Planning Commission Workshop</div>
-            <div class="event-date">Tuesday, May 12, 2026</div>
-          </div>
-          <div class="event-time">5:00 PM</div>
-        </div>
-
-        <div class="event-card event-planning">
-          <div class="event-dot"></div>
-          <div class="event-body">
-            <div class="event-type"><i class="fa-solid fa-gavel"></i> Planning Commission Meeting</div>
-            <div class="event-date">Tuesday, May 26, 2026</div>
-          </div>
-          <div class="event-time">6:00 PM</div>
+        <div class="weekend-banner-body">
+          <h4>This Weekend — April 11 &amp; 12</h4>
+          <p>No events scheduled this weekend. Next weekend: <strong>Electronic Recycling Day</strong> on Saturday, April 18.</p>
         </div>
       </div>
 
-      <!-- June 2026 -->
-      <div class="calendar-month-block">
-        <h2 class="calendar-month-heading">June 2026</h2>
+      <div class="week-grid">
 
-        <div class="event-card event-board">
-          <div class="event-dot"></div>
-          <div class="event-body">
-            <div class="event-type"><i class="fa-solid fa-building-columns"></i> Township Board Meeting</div>
-            <div class="event-date">Wednesday, June 10, 2026</div>
+        <div class="week-card">
+          <div class="week-card-date cat-gov">
+            <span class="day-num">7</span>
+            <span class="day-mon">Apr</span>
           </div>
-          <div class="event-time">7:00 PM</div>
+          <div class="week-card-body">
+            <span class="week-card-badge badge-gov"><i class="fa-solid fa-shield-halved"></i> Government</span>
+            <div class="week-card-title">Public Safety Committee</div>
+            <div class="week-card-time"><i class="fa-regular fa-clock"></i> 4:00 – 5:00 PM &nbsp;·&nbsp; Tuesday</div>
+          </div>
         </div>
 
-        <div class="event-card event-workshop">
-          <div class="event-dot"></div>
-          <div class="event-body">
-            <div class="event-type"><i class="fa-solid fa-drafting-compass"></i> Planning Commission Workshop</div>
-            <div class="event-date">Tuesday, June 9, 2026</div>
+        <div class="week-card">
+          <div class="week-card-date cat-gov">
+            <span class="day-num">9</span>
+            <span class="day-mon">Apr</span>
           </div>
-          <div class="event-time">5:00 PM</div>
+          <div class="week-card-body">
+            <span class="week-card-badge badge-gov"><i class="fa-solid fa-building-columns"></i> Government</span>
+            <div class="week-card-title">Township Special Board Meeting</div>
+            <div class="week-card-time"><i class="fa-regular fa-clock"></i> 6:00 – 8:00 PM &nbsp;·&nbsp; Thursday</div>
+          </div>
         </div>
 
-        <div class="event-card event-planning">
-          <div class="event-dot"></div>
-          <div class="event-body">
-            <div class="event-type"><i class="fa-solid fa-gavel"></i> Planning Commission Meeting</div>
-            <div class="event-date">Tuesday, June 23, 2026</div>
+        <div class="week-card">
+          <div class="week-card-date cat-gov">
+            <span class="day-num">13</span>
+            <span class="day-mon">Apr</span>
           </div>
-          <div class="event-time">6:00 PM</div>
+          <div class="week-card-body">
+            <span class="week-card-badge badge-gov"><i class="fa-solid fa-people-group"></i> Government</span>
+            <div class="week-card-title">Committee of the Whole</div>
+            <div class="week-card-time"><i class="fa-regular fa-clock"></i> 5:00 – 6:00 PM &nbsp;·&nbsp; Monday</div>
+          </div>
         </div>
+
+        <div class="week-card">
+          <div class="week-card-date cat-gov">
+            <span class="day-num">13</span>
+            <span class="day-mon">Apr</span>
+          </div>
+          <div class="week-card-body">
+            <span class="week-card-badge badge-gov"><i class="fa-solid fa-gavel"></i> Government</span>
+            <div class="week-card-title">Township Board Meeting</div>
+            <div class="week-card-time"><i class="fa-regular fa-clock"></i> 6:00 – 7:30 PM &nbsp;·&nbsp; Monday</div>
+          </div>
+        </div>
+
       </div>
+    </div>
+  </section>
 
-          <!-- Info Box -->
-          <div class="calendar-info-box">
-            <i class="fa-solid fa-circle-info"></i>
-            <p>This page reflects the township's regular public meeting cadence (2nd Wednesday for the Board; 2nd and 4th Tuesday for the Planning Commission) as a community reference. For official agendas, minutes, cancellations, and last-minute changes visit <a href="https://www.texastownship.org" target="_blank" rel="noopener">texastownship.org</a>.</p>
-          </div>
-        </div>
-
-        <aside class="calendar-sidebar">
-          <div class="calendar-section-label"><i class="fa-solid fa-wave-square"></i><span>Regular Rhythm</span></div>
-          <div class="calendar-rhythm">
-            <div class="calendar-rhythm-card">
-              <div class="calendar-rhythm-icon"><i class="fa-solid fa-building-columns"></i></div>
-              <div>
-                <h4>Township Board</h4>
-                <p>Usually the 2nd Wednesday of each month at 7:00 PM.</p>
+  <!-- ─── Featured Event ───────────────────────────────────────────── -->
+  <section class="cal-section cal-section-alt" id="featured">
+    <div class="container">
+      <div class="cal-section-head">
+        <div class="cal-section-eyebrow">Don't Miss It</div>
+        <h2 class="cal-section-title">Featured Event</h2>
+      </div>
+      <div class="featured-card">
+        <div class="featured-inner">
+          <div class="featured-left">
+            <div class="featured-eyebrow">
+              <i class="fa-solid fa-music"></i> Community Event
+            </div>
+            <h3 class="featured-title">Concert in the Corners</h3>
+            <p class="featured-desc">An outdoor summer concert held at Texas Drive Park — live music, the outdoors, and your Texas Corners neighbors all in one place. A community tradition not to be missed.</p>
+            <div class="featured-details">
+              <div class="featured-detail">
+                <i class="fa-regular fa-calendar"></i>
+                <span>Sunday, June 7, 2026</span>
+              </div>
+              <div class="featured-detail">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Texas Drive Park</span>
+              </div>
+              <div class="featured-detail">
+                <i class="fa-solid fa-people-group"></i>
+                <span>Open to the Community</span>
               </div>
             </div>
-            <div class="calendar-rhythm-card">
-              <div class="calendar-rhythm-icon"><i class="fa-solid fa-drafting-compass"></i></div>
-              <div>
-                <h4>Planning Workshop</h4>
-                <p>Usually the 2nd Tuesday of each month at 5:00 PM.</p>
-              </div>
-            </div>
-            <div class="calendar-rhythm-card">
-              <div class="calendar-rhythm-icon"><i class="fa-solid fa-gavel"></i></div>
-              <div>
-                <h4>Planning Meeting</h4>
-                <p>Usually the 4th Tuesday of each month at 6:00 PM.</p>
-              </div>
-            </div>
-          </div>
-          <div class="calendar-cta-wrap">
-            <a href="https://www.texastownship.org" target="_blank" rel="noopener" class="calendar-cta-btn">
-              Visit Official Township Website <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <a href="https://www.texastownship.org" target="_blank" rel="noopener" class="btn-official-site" style="display:inline-flex;">
+              Check for Details <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
           </div>
-        </aside>
+          <div class="featured-right">
+            <div class="featured-date-block">
+              <div class="featured-date-month">June</div>
+              <div class="featured-date-day">7</div>
+              <div class="featured-date-year">2026 — Sunday</div>
+            </div>
+          </div>
+        </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ─── Community Services Section ─────────────────────────────── -->
-  <section class="section section-alt">
+  <!-- ─── All Upcoming Events ──────────────────────────────────────── -->
+  <section class="cal-section" id="all-events">
     <div class="container">
 
-      <div class="section-header reveal">
-        <div class="section-eyebrow">Services</div>
-        <h2 class="section-title">Typical Community Services &amp; Seasonal Events</h2>
-        <p class="section-subtitle">Texas Township provides these recurring services throughout the year. Exact dates and sign-ups are announced on the official township website.</p>
+      <div class="cal-section-head-row">
+        <div>
+          <div class="cal-section-eyebrow">Full Schedule</div>
+          <h2 class="cal-section-title">All Upcoming Events</h2>
+          <p class="cal-section-sub">Every meeting and event — organized by date.</p>
+        </div>
+        <div class="cal-filters" id="cal-filters">
+          <button class="cal-filter-btn active" data-filter="all">
+            <span class="cal-filter-dot dot-all"></span> All
+          </button>
+          <button class="cal-filter-btn" data-filter="government">
+            <span class="cal-filter-dot dot-gov"></span> Government
+          </button>
+          <button class="cal-filter-btn" data-filter="community">
+            <span class="cal-filter-dot dot-comm"></span> Community
+          </button>
+          <button class="cal-filter-btn" data-filter="events">
+            <span class="cal-filter-dot dot-events"></span> Events
+          </button>
+        </div>
       </div>
 
-      <div class="service-cards-grid">
+      <div class="events-list" id="events-list">
 
-        <div class="service-card reveal">
-          <div class="service-card-icon">
-            <i class="fa-solid fa-truck"></i>
+        <!-- April 2026 -->
+        <div class="events-month-label" data-month-label>April 2026</div>
+
+        <div class="event-row" data-category="government">
+          <div class="event-row-date">
+            <div class="event-row-day">7</div>
+            <div class="event-row-month">Apr</div>
           </div>
-          <h4>Bulk Trash Pickup</h4>
-          <p>Spring curbside collection for large household items not accepted in regular trash.</p>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-gov"><i class="fa-solid fa-shield-halved"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">Public Safety Committee</div>
+            <div class="event-row-meta">
+              <span><i class="fa-regular fa-clock"></i> 4:00 – 5:00 PM</span>
+              <span class="event-row-dow">Tuesday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-gov">Government</span>
         </div>
 
-        <div class="service-card reveal delay-1">
-          <div class="service-card-icon">
-            <i class="fa-solid fa-recycle"></i>
+        <div class="event-row" data-category="government">
+          <div class="event-row-date">
+            <div class="event-row-day">9</div>
+            <div class="event-row-month">Apr</div>
           </div>
-          <h4>Electronics Recycling</h4>
-          <p>Seasonal drop-off events for TVs, computers, and other e-waste items.</p>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-gov"><i class="fa-solid fa-building-columns"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">Township Special Board Meeting</div>
+            <div class="event-row-meta">
+              <span><i class="fa-regular fa-clock"></i> 6:00 – 8:00 PM</span>
+              <span class="event-row-dow">Thursday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-gov">Government</span>
         </div>
 
-        <div class="service-card reveal delay-2">
-          <div class="service-card-icon">
-            <i class="fa-solid fa-leaf"></i>
+        <div class="event-row" data-category="government">
+          <div class="event-row-date">
+            <div class="event-row-day">13</div>
+            <div class="event-row-month">Apr</div>
           </div>
-          <h4>Leaf &amp; Yard Waste Collection</h4>
-          <p>Curbside pickup of leaves and yard debris in fall and spring seasons.</p>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-gov"><i class="fa-solid fa-people-group"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">Committee of the Whole</div>
+            <div class="event-row-meta">
+              <span><i class="fa-regular fa-clock"></i> 5:00 – 6:00 PM</span>
+              <span class="event-row-dow">Monday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-gov">Government</span>
         </div>
 
-        <div class="service-card reveal delay-3">
-          <div class="service-card-icon">
-            <i class="fa-solid fa-sun"></i>
+        <div class="event-row" data-category="government">
+          <div class="event-row-date">
+            <div class="event-row-day">13</div>
+            <div class="event-row-month">Apr</div>
           </div>
-          <h4>Summer Community Events</h4>
-          <p>Parks programming, farmers market, and local gatherings throughout the summer.</p>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-gov"><i class="fa-solid fa-gavel"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">Township Board Meeting</div>
+            <div class="event-row-meta">
+              <span><i class="fa-regular fa-clock"></i> 6:00 – 7:30 PM</span>
+              <span class="event-row-dow">Monday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-gov">Government</span>
         </div>
 
-        <div class="service-card reveal delay-4">
-          <div class="service-card-icon">
-            <i class="fa-solid fa-person-booth"></i>
+        <div class="event-row" data-category="government">
+          <div class="event-row-date">
+            <div class="event-row-day">14</div>
+            <div class="event-row-month">Apr</div>
           </div>
-          <h4>Election Days</h4>
-          <p>State, county, and local elections held at designated Texas Township polling locations.</p>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-gov"><i class="fa-solid fa-drafting-compass"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">Planning Commission Workshop</div>
+            <div class="event-row-meta">
+              <span><i class="fa-regular fa-clock"></i> 5:00 – 8:00 PM</span>
+              <span class="event-row-dow">Tuesday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-gov">Government</span>
         </div>
 
-        <div class="service-card reveal delay-5">
-          <div class="service-card-icon">
-            <i class="fa-solid fa-landmark"></i>
+        <div class="event-row" data-category="community">
+          <div class="event-row-date">
+            <div class="event-row-day">18</div>
+            <div class="event-row-month">Apr</div>
           </div>
-          <h4>Public Hearings</h4>
-          <p>Zoning, planning, and ordinance review hearings open to all township residents.</p>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-comm"><i class="fa-solid fa-recycle"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">Electronic Recycling Day</div>
+            <div class="event-row-meta">
+              <span><i class="fa-regular fa-clock"></i> 10:00 AM – 1:00 PM</span>
+              <span class="event-row-dow">Saturday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-comm">Community</span>
         </div>
 
+        <div class="event-row" data-category="government">
+          <div class="event-row-date">
+            <div class="event-row-day">21</div>
+            <div class="event-row-month">Apr</div>
+          </div>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-gov"><i class="fa-solid fa-map"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">Master Plan Steering Committee</div>
+            <div class="event-row-meta">
+              <span><i class="fa-regular fa-clock"></i> 4:00 – 6:00 PM</span>
+              <span class="event-row-dow">Tuesday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-gov">Government</span>
+        </div>
+
+        <div class="event-row" data-category="government">
+          <div class="event-row-date">
+            <div class="event-row-day">23</div>
+            <div class="event-row-month">Apr</div>
+          </div>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-gov"><i class="fa-solid fa-briefcase"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">DDA Meeting</div>
+            <div class="event-row-meta">
+              <span><i class="fa-regular fa-clock"></i> 8:30 – 10:00 AM</span>
+              <span class="event-row-dow">Thursday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-gov">Government</span>
+        </div>
+
+        <div class="event-row" data-category="government">
+          <div class="event-row-date">
+            <div class="event-row-day">27</div>
+            <div class="event-row-month">Apr</div>
+          </div>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-gov"><i class="fa-solid fa-people-group"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">Committee of the Whole</div>
+            <div class="event-row-meta">
+              <span><i class="fa-regular fa-clock"></i> 5:00 – 6:00 PM</span>
+              <span class="event-row-dow">Monday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-gov">Government</span>
+        </div>
+
+        <div class="event-row" data-category="government">
+          <div class="event-row-date">
+            <div class="event-row-day">27</div>
+            <div class="event-row-month">Apr</div>
+          </div>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-gov"><i class="fa-solid fa-gavel"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">Township Board Meeting</div>
+            <div class="event-row-meta">
+              <span><i class="fa-regular fa-clock"></i> 6:00 – 7:30 PM</span>
+              <span class="event-row-dow">Monday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-gov">Government</span>
+        </div>
+
+        <div class="event-row" data-category="government">
+          <div class="event-row-date">
+            <div class="event-row-day">28</div>
+            <div class="event-row-month">Apr</div>
+          </div>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-gov"><i class="fa-solid fa-drafting-compass"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">Planning Commission</div>
+            <div class="event-row-meta">
+              <span><i class="fa-regular fa-clock"></i> 6:00 – 9:00 PM</span>
+              <span class="event-row-dow">Tuesday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-gov">Government</span>
+        </div>
+
+        <!-- June 2026 -->
+        <div class="events-month-label" data-month-label>June 2026</div>
+
+        <div class="event-row" data-category="events">
+          <div class="event-row-date">
+            <div class="event-row-day">7</div>
+            <div class="event-row-month">Jun</div>
+          </div>
+          <div class="event-row-divider"></div>
+          <div class="event-row-icon icon-events"><i class="fa-solid fa-music"></i></div>
+          <div class="event-row-body">
+            <div class="event-row-name">Concert in the Corners</div>
+            <div class="event-row-meta">
+              <span><i class="fa-solid fa-location-dot"></i> Texas Drive Park</span>
+              <span class="event-row-dow">Sunday</span>
+            </div>
+          </div>
+          <span class="event-row-cat badge-events">Event</span>
+        </div>
+
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="cal-disclaimer">
+        <i class="fa-solid fa-circle-info"></i>
+        <p>This calendar is maintained as a community reference and may not reflect last-minute cancellations, time changes, or additions. Always verify meeting details, agendas, and changes directly at <a href="https://www.texastownship.org" target="_blank" rel="noopener">texastownship.org</a>.</p>
       </div>
 
     </div>
@@ -800,10 +1277,9 @@
 
       </div>
 
-      <!-- Disclaimer -->
       <div class="footer-disclaimer">
         <i class="fa-solid fa-circle-info"></i>
-        <p>This website is an independent community resource and is not affiliated with or endorsed by Texas Township, Kalamazoo County, or any government entity. Business information is provided for informational purposes only and may not reflect current hours or offerings.</p>
+        <p>This website is an independent community resource and is not affiliated with or endorsed by Texas Township, Kalamazoo County, or any government entity. Event and meeting information is provided for informational purposes only and may not reflect current schedules.</p>
       </div>
 
       <div class="footer-bottom">
@@ -823,9 +1299,46 @@
     <i class="fa-solid fa-chevron-up"></i>
   </button>
 
-  <!-- Bootstrap 5 Bundle (includes Popper) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Custom JS -->
   <script src="/main.js"></script>
+  <script>
+    // ── Category Filter ────────────────────────────────────────────
+    (function () {
+      var filterBtns  = document.querySelectorAll('.cal-filter-btn');
+      var eventRows   = document.querySelectorAll('.event-row');
+      var monthLabels = document.querySelectorAll('[data-month-label]');
+
+      function applyFilter(filter) {
+        filterBtns.forEach(function (btn) {
+          btn.classList.toggle('active', btn.dataset.filter === filter);
+        });
+
+        eventRows.forEach(function (row) {
+          var match = filter === 'all' || row.dataset.category === filter;
+          row.classList.toggle('hidden', !match);
+        });
+
+        // Hide month labels that have no visible events after them
+        monthLabels.forEach(function (label) {
+          var next = label.nextElementSibling;
+          var hasVisible = false;
+          while (next && !next.hasAttribute('data-month-label')) {
+            if (next.classList.contains('event-row') && !next.classList.contains('hidden')) {
+              hasVisible = true;
+              break;
+            }
+            next = next.nextElementSibling;
+          }
+          label.style.display = hasVisible ? '' : 'none';
+        });
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          applyFilter(btn.dataset.filter);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
