@@ -80,17 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // ─── Loading Screen ────────────────────────────────────────────────
-  const loadingScreen = document.getElementById('loading-screen');
-  if (loadingScreen) {
-    window.addEventListener('load', function () {
-      setTimeout(function () {
-        loadingScreen.classList.add('fade-out');
-        setTimeout(function () { loadingScreen.style.display = 'none'; }, 600);
-      }, 800);
-    });
-  }
-
   // ─── Scroll Progress Bar ───────────────────────────────────────────
   const progressBar = document.getElementById('scroll-progress');
   if (progressBar) {
