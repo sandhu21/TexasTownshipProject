@@ -1526,31 +1526,6 @@ footer {
   .scroll-arrow { display: none; }
 }
 
-/* ─── Disclaimer Bar ─────────────────────────────────────────── */
-.disclaimer-bar {
-  width: 100%;
-  background: rgba(255, 200, 50, 0.08);
-  border-bottom: 1px solid rgba(255, 200, 50, 0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 9px 20px;
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  color: rgba(255, 230, 120, 0.90);
-  text-align: center;
-  flex-wrap: wrap;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1100;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-.disclaimer-bar i { font-size: 0.85rem; flex-shrink: 0; }
-.disclaimer-bar a { color: rgba(255, 230, 120, 1); text-decoration: underline; text-underline-offset: 2px; }
-.disclaimer-bar a:hover { color: #fff; }
 
 /* ─── Events & Calendar Section ─────────────────────────────── */
 .events-section { padding: 100px 0; }
@@ -2396,28 +2371,6 @@ footer {
 
 /* ─── Comprehensive Mobile Polish ────────────────────────────── */
 
-/* ── Disclaimer bar: tighter on mobile, keep to single line ── */
-@media (max-width: 767px) {
-  .disclaimer-bar {
-    min-height: 40px;
-    font-size: 0.67rem;
-    padding: 6px 12px;
-    line-height: 1.25;
-    gap: 0;
-    justify-content: center;
-    flex-wrap: nowrap;
-    overflow: hidden;
-  }
-  .disclaimer-bar i { display: none; }
-  .disclaimer-bar span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-}
-@media (max-width: 480px) {
-  .disclaimer-bar {
-    min-height: 38px;
-    font-size: 0.62rem;
-    padding: 5px 10px;
-  }
-}
 
 /* ── Nav pill: resize for smaller viewports ── */
 @media (max-width: 767px) {
