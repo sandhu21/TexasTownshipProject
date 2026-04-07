@@ -121,7 +121,7 @@
       attributionControl: true
     });
 
-    state.map.scrollZoom.disable();
+    state.map.scrollZoom.enable();
     state.map.addControl(new maplibregl.NavigationControl({ visualizePitch: false }), 'top-right');
 
     state.map.on('load', function () {
